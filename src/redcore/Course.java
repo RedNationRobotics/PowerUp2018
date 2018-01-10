@@ -1,52 +1,77 @@
 package redcore;
 
-public class Course implements Runnable{
+import java.util.concurrent.Callable;
+
+public class Course implements Runnable {
 	
 	protected Thread _Thread;
-	protected double _ControllerLeftRight = 0.0;
-	protected Control _Controller = new Control();
-	//The object control has yet to be created
+	protected double _ControllerLeftRight; 
 	protected boolean _Stop = false;
 	public double _Course = 0.0;
-	protected double _Max_deg_per_sec = 1.7;
-	//Number needs to be updated
+	protected double _Max_deg_per_sec = 382.3;
 	protected double _UpdateFrequency_Hz = 100.0;
 	protected double MaxRateOfChange_deg_per_Hz = _Max_deg_per_sec / _UpdateFrequency_Hz;
+	protected Callable<Double> _GetLeftRightFunction;
+	
+	public interface RobotInterface {
+		double FetchJoystickLeftRight();
+	}
+	
+	protected RobotInterface _robotInterface;
+	
+	public Course(RobotInterface robotInterface) {
+		_robotInterface = robotInterface;
+	}
+	
+	public void Demo() {
+		double lr = _robotInterface.FetchJoystickLeftRight();
+		System.out.println(lr);
+	}
+	
+	public Course(Callable<Double> GetLeftRightFunction) {
+		_GetLeftRightFunction = GetLeftRightFunction;
+	}
+	
+
+	public void ControllerValue(double ControllerLeftRight) {
+		_ControllerLeftRight = ControllerLeftRight;
+	}
 	
 	public void CalcCourseThread() {
-		Thread t = new Thread();
 		Thread.start();
 	}
 	
 	public void Stop() {
 		_Stop = true;
-		while(_Thread.isAlive()) WaitTiming();
 	}
 
 	public void run() {
-		System.out.println("Clac thread startd");
+		System.out.println("Clac thread started");
 		_Course = 0.0;
 		while(!_Stop) {
-			ComputeCourse();
+			ComputeCourseError();
 			WaitTiming();
 		}
 		System.out.println("Calc thread existing");
 	}
 	
-	protected void ComputeCourse() {
-		_ControllerLeftRight = (_Controller.nextDouble() * 2.0) - 1.0;
+	public void ComputeCourseError() {
+		try {
+			_ControllerLeftRight = _GetLeftRightFunction.call();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		_Course += _ControllerLeftRight * MaxRateOfChange_deg_per_Hz;
 		if(_Course < 0) _Course += 360.0;
 		if(_Course >= 360.0) _Course -= 360.0;
+		
 	}
 	
-	protected void WaitTiming() {
-		try {
-			Thread.sleep((long) (1000 / _UpdateFrequency_Hz)); 
-		}
-		
-		catch (InterruptedExcpeption e) {
-			e.printStackTrace();
-		}
+	public void WaitTiming() {
+		Thread.sleep((long) (1000 / _UpdateFrequency_Hz));
 	}
+	
+	
+	
 }

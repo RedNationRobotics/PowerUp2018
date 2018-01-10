@@ -3,14 +3,9 @@ package org.usfirst.frc.team4576.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team4576.robot.commands.Agitate;
-import org.usfirst.frc.team4576.robot.commands.Climb;
-import org.usfirst.frc.team4576.robot.commands.ClimbReverse;
+
 import org.usfirst.frc.team4576.robot.commands.ExampleCommand;
-import org.usfirst.frc.team4576.robot.commands.Fire;
-import org.usfirst.frc.team4576.robot.commands.Gear;
 import org.usfirst.frc.team4576.robot.commands.Shift;
-import org.usfirst.frc.team4576.robot.commands.Shoot;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 
 //This class is the glue that binds the controls on the physical operator
