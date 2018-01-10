@@ -8,11 +8,6 @@ import org.usfirst.frc.team4576.robot.Robot;
  *
  */
 public class ExampleCommand extends Command {
-	public ExampleCommand() {
-		// Use requires() here to declare subsystem dependencies
-		requires(Robot.exampleSubsystem);
-	}
-
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
