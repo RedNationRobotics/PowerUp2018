@@ -1,13 +1,7 @@
-import org.usfirst.frc.team4576.robot.commands.AutoBaseline;
-import org.usfirst.frc.team4576.robot.commands.AutoMiddleGear;
-import org.usfirst.frc.team4576.robot.commands.Autonomous;
+
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team4576.robot.subsystems.Agitator;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
-import org.usfirst.frc.team4576.robot.subsystems.Climber;
-import org.usfirst.frc.team4576.robot.subsystems.MoveAuto;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team4576.robot.subsystems.Shooter;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -18,12 +12,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-<<<<<<< HEAD
 import redcore.BNO055;
-=======
 
 import org.usfirst.frc.team4576.robot.commands.ExampleCommand;
->>>>>>> e4f90587f001304518724a62524bf60e2bef6e73
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,12 +25,10 @@ import org.usfirst.frc.team4576.robot.commands.ExampleCommand;
  */
 public class Robot extends IterativeRobot {
 
-<<<<<<< HEAD
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	private static BNO055 imu;
-=======
->>>>>>> e4f90587f001304518724a62524bf60e2bef6e73
+
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
