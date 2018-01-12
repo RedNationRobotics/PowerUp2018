@@ -1,13 +1,7 @@
-import org.usfirst.frc.team4576.robot.commands.AutoBaseline;
-import org.usfirst.frc.team4576.robot.commands.AutoMiddleGear;
-import org.usfirst.frc.team4576.robot.commands.Autonomous;
+
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team4576.robot.subsystems.Agitator;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
-import org.usfirst.frc.team4576.robot.subsystems.Climber;
-import org.usfirst.frc.team4576.robot.subsystems.MoveAuto;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
-import org.usfirst.frc.team4576.robot.subsystems.Shooter;
 
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
@@ -64,8 +58,6 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("Auto Drive 2", new AutoDrive2());
 		// SmartDashboard.putData("Auto Choices:", chooser);
 
-		teleopCommand = new DriveWithJoysticks();
-		autonomousCommand = new Autonomous();
 
 		camera.setFPS(15);
 		camera.setResolution(320, 240);
@@ -98,19 +90,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void autonomousInit() {
 
-		switch (chooser.getSelected()) {
-	
-		case "baselineAuto":
-			autonomousCommand = new AutoBaseline();
-			break;
-		case "timedMiddleGear":
-			autonomousCommand = new AutoMiddleGear();
-			break;
-		default:
-			autonomousCommand = new Autonomous();
-			break;
-			
-		}
+		
 
 		if (autonomousCommand != null)
 
@@ -135,8 +115,8 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder: ", chassis.tsrxL.getEncPosition());
-		SmartDashboard.putNumber("Right Encoder: ", chassis.tsrxR.getEncPosition());	
+		SmartDashboard.putNumber("LAmps: ", Robot.pneumatics.Lcurrent);
+		SmartDashboard.putNumber("RAmps: ", Robot.pneumatics.Rcurrent);
 		SmartDashboard.putNumber("BNO055 Heading :", imu.getHeading());
 	//	SmartDashboard.putNumber("BNO055 Heading :", imu.getTemp());
 		}	
