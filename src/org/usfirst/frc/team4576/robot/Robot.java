@@ -1,8 +1,12 @@
 package org.usfirst.frc.team4576.robot;
+
+import org.usfirst.frc.team4576.robot.commands.AutoCrossBaseline;
+import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
+import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
-import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,62 +15,43 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import redcore.BNO055;
 
-import org.usfirst.frc.team4576.robot.commands.ExampleCommand;
-
-/**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the IterativeRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the manifest file in the resource
- * directory.
- */
 public class Robot extends IterativeRobot {
 
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
-	private static BNO055 imu;
-
+	public static final Intaker intaker = new Intaker();
+	
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
-	public static Joystick secondaryStick = new Joystick(1);
-	UsbCamera camera = new UsbCamera("cam0", 0);
 
 	Command teleopCommand;
 	Command autonomousCommand;
-	final String defaultAuto = "Default";
-	final String baselineAuto = "Baseline Auto";
-	final String timedMiddleGear = "Timed Middle Gear";
+
+	final String autoCrossBaseline = "CrossBaseline";
+	final String autoMiddleGear = "MiddleGear";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
-	// SendableChooser chooser;
 
 	public void robotInit() {
-		chooser = new SendableChooser<>();
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("Baseline Auto", baselineAuto);
-		chooser.addObject("Middle Gear Auto", timedMiddleGear);
-		SmartDashboard.putData("Auto Choices", chooser);
-		
+
 		System.out.println("RNR 2017 Robot Code Initializing...");
 		oi = new OI();
-		// chooser = new SendableChooser();
-		// chooser.addDefault("Auto Drive 1", new AutoDrive1());
-		// chooser.addObject("Auto Drive 2", new AutoDrive2());
-		// SmartDashboard.putData("Auto Choices:", chooser);
 
 		teleopCommand = new DriveWithJoysticks();
-		autonomousCommand = new Autonomous();
 
-		camera.setFPS(15);
-		camera.setResolution(320, 240);
-		CameraServer.getInstance().startAutomaticCapture(camera);
+		// camera.setFPS(15);
+		// camera.setResolution(320, 240);
+		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
+
+		chooser.addDefault("Do Nothing.", null);
+		chooser.addObject("Middle Gear Auto w/ gyro", autoMiddleGear);
+		// chooser.addObject("Right Gear Auto", autoRightGear);
+
+		SmartDashboard.putData("Auto choices", chooser);
 		
-		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-		BNO055.vector_type_t.VECTOR_EULER);
-
 	}
 
 	public void disabledInit() {
@@ -75,66 +60,50 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		autoSelected = chooser.getSelected();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to
-	 * select between different autonomous modes using the dashboard. The
-	 * sendable chooser code works with the Java SmartDashboard. If you
-	 * prefer the LabVIEW Dashboard, remove all of the RPMchooser code and
-	 * uncomment the getString code to get the auto name from the text box below
-	 * the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
 	public void autonomousInit() {
 
-		switch (chooser.getSelected()) {
-	
-		case "baselineAuto":
-			autonomousCommand = new AutoBaseline();
-			break;
-		case "timedMiddleGear":
-			autonomousCommand = new AutoMiddleGear();
-			break;
+		autoSelected = chooser.getSelected();
+
+		switch (autoSelected) {
+		//case autoCrossBaseline:
+			//autonomousCommand = new AutoCrossBaseline();
+			//break;
 		default:
-			autonomousCommand = new Autonomous();
+			autonomousCommand = new AutoCrossBaseline();
 			break;
-			
 		}
 
-		if (autonomousCommand != null)
+		System.out.println("Auto selected: " + autoSelected);
 
-	//	chassis.setFPID(0, .2, 0, 0);
-		chassis.initAuto();
-		autonomousCommand.start();
+		if (autonomousCommand != null)
+			autonomousCommand.start();
 
 	}
 
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-	//	SmartDashboard.putString("Postions: ", chassis.getPositions());
+
 	}
 
 	public void teleopInit() {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
-		chassis.initTeleop();
 		teleopCommand.start();
-		// Robot.chassis.teleopMode();
+
 	}
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder: ",  chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));	
-		SmartDashboard.putNumber("Right Encoder: ", chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));	
-		SmartDashboard.putNumber("BNO055 Heading :", imu.getHeading());
-	//	SmartDashboard.putNumber("BNO055 Heading :", imu.getTemp());
-		}	
+		SmartDashboard.putNumber("Left Encoder", Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
+		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
+	}
 
 	public void testPeriodic() {
-		LiveWindow.setEnabled(true);
+		LiveWindow.run();
 	}
 }
