@@ -1,5 +1,4 @@
-
-import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
+package org.usfirst.frc.team4576.robot;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
@@ -129,13 +128,13 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder: ", chassis.tsrxL.getEncPosition());
-		SmartDashboard.putNumber("Right Encoder: ", chassis.tsrxR.getEncPosition());	
+		SmartDashboard.putNumber("Left Encoder: ",  chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));	
+		SmartDashboard.putNumber("Right Encoder: ", chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));	
 		SmartDashboard.putNumber("BNO055 Heading :", imu.getHeading());
 	//	SmartDashboard.putNumber("BNO055 Heading :", imu.getTemp());
 		}	
 
 	public void testPeriodic() {
-		LiveWindow.run();
+		LiveWindow.setEnabled(true);
 	}
 }
