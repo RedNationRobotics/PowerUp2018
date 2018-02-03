@@ -22,7 +22,6 @@ public class AutoDriveStraight extends Command {
 		while (lencoder < distance)
 
 			Robot.chassis.tsrxL.set(-.3);
-		;
 	}
 
 	public void driveStraightRight(double distance) {

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import redcore.BNO055;
 
 public class Robot extends IterativeRobot {
@@ -22,8 +23,8 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
-	private static BNO055 imu;
-
+	
+	public static BNO055 imu;
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
@@ -107,6 +108,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void testPeriodic() {
-		LiveWindow.run();
+		LiveWindow.setEnabled(true);
 	}
 }
