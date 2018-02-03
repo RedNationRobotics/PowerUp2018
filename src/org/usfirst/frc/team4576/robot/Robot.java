@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 
-		System.out.println("RNR 2017 Robot Code Initializing...");
+		System.out.println("RNR 2018 Robot Code Powering up...");
 		oi = new OI();
 
 		teleopCommand = new DriveWithJoysticks();
@@ -50,9 +50,8 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("Drive straight Encoders", autoDriveStraight);
-		// chooser.addObject("Right Gear Auto", autoRightGear);
 
-		SmartDashboard.putData("Auto choices", chooser);
+		SmartDashboard.putData("Auto Selected:", chooser);
 		
 	}
 
@@ -70,17 +69,16 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 
 		switch (autoSelected) {
-		//case autoCrossBaseline:
-			//autonomousCommand = new AutoCrossBaseline();
-			//break;
+		case autoDriveStraight:
+			autonomousCommand = new AutoDriveStraight();
+			break;
 		default:
 			autonomousCommand = null;
 			break;
-		case autoDriveStraight:
-			autonomousCommand = new AutoDriveStraight();
+		
 		}
 
-		System.out.println("Auto selected: " + autoSelected);
+		System.out.println("Auto Selected: " + autoSelected);
 
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -105,6 +103,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
 		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
+		SmartDashboard.putNumber("BNO Heading", Robot.imu.getHeading());
 	}
 
 	public void testPeriodic() {

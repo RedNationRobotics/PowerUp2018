@@ -36,39 +36,20 @@ public class AutoDriveStraight extends Command {
 		// -,+ for forward, +,- for backwards
 		// -,- to turn right, +,+ to turn left
 
-		// Forward, open gear
-		// Robot.chassis.tsrxL.set(ControlMode.Position, 500);
-		// Robot.chassis.tsrxR.set(ControlMode.Position, 500);
-
 		driveStraightLeft(500);
 	    driveStraightRight(500);
 
 	}
 
-	/*
-	 * private void driveCorrective(double setPoint,long milliseconds) { long
-	 * timeStamp = System.currentTimeMillis(); //This runs this loop for 3000
-	 * milliseconds (3 seconds) while(timeStamp >= System.currentTimeMillis() -
-	 * 3000) { // double angle = Robot.chassis.gyro.getAngle(); // get current
-	 * heading
-	 * 
-	 * //if the robot is correcting itself to the wrong direction //change the
-	 * "0.3 - (angle/100)" to "0.3 + (angle/100)"
-	 * Robot.chassis.setLeftRight(-0.3, 0.3 - ((angle+setPoint)/100));
-	 * Timer.delay(0.004); }
-	 */
-	@Override
 	protected void end() {
 		Robot.chassis.setLeftRight(0, 0);
 
 	}
 
-	@Override
 	protected void interrupted() {
 
 	}
 
-	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
