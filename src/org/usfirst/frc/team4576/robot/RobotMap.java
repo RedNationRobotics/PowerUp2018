@@ -7,7 +7,6 @@ package org.usfirst.frc.team4576.robot;
  * floating around.
  */
 public class RobotMap {
-<<<<<<< HEAD
 
 	// Talon IDs:
 	public static int LEFT_MASTER = 0;
@@ -34,10 +33,8 @@ public class RobotMap {
 	 */
 	public static final int kTimeoutMs = 10;
 
-=======
 	
 	public static final int SHIFT_SOLENOID = 0;
 	
->>>>>>> 741e3260c5eee36a95f1a3419adcbbbbbca873c7
 }
 
