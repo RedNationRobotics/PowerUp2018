@@ -73,8 +73,10 @@ public class Robot extends IterativeRobot {
 			//autonomousCommand = new AutoCrossBaseline();
 			//break;
 		default:
-			autonomousCommand = new AutoDriveStraight();
+			autonomousCommand = null;
 			break;
+		case autoDriveStraight:
+			autonomousCommand = new AutoDriveStraight();
 		}
 
 		System.out.println("Auto selected: " + autoSelected);
