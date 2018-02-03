@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 public class Chassis extends Subsystem {
 
 	double rpm = 0;
-
+	
 	public Chassis() {
 		tsrxL2.follow(tsrxL);
 		tsrxR2.follow(tsrxR);	
@@ -37,6 +37,9 @@ public class Chassis extends Subsystem {
 	// These lines declare the axes for turning
 	public static final int FORWARD_AXIS = 1;
 	public static final int TURN_AXIS = 4;
+	
+	public int absolutePositionL = tsrxL.getSelectedSensorPosition(RobotMap.kTimeoutMs) & 0xFFF; /* mask out the bottom12 bits, we don't care about the wrap arounds */	
+	public int absolutePositionR = tsrxR.getSelectedSensorPosition(RobotMap.kTimeoutMs) & 0xFFF; /* mask out the bottom12 bits, we don't care about the wrap arounds */
 
 	PowerDistributionPanel pdp = new PowerDistributionPanel();
 
@@ -60,9 +63,7 @@ public class Chassis extends Subsystem {
 	public void initAuto() {
 		drive.setSafetyEnabled(false);
 		/* lets grab the 360 degree position of the MagEncoder's absolute position */
-		int absolutePositionL = tsrxL.getSelectedSensorPosition(RobotMap.kTimeoutMs) & 0xFFF; /* mask out the bottom12 bits, we don't care about the wrap arounds */	
-		int absolutePositionR = tsrxR.getSelectedSensorPosition(RobotMap.kTimeoutMs) & 0xFFF; /* mask out the bottom12 bits, we don't care about the wrap arounds */
-
+		
         /* use the low level API to set the quad encoder signal */
         tsrxL.setSelectedSensorPosition(absolutePositionL, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
       

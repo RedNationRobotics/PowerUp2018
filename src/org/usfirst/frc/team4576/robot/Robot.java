@@ -1,6 +1,6 @@
 package org.usfirst.frc.team4576.robot;
 
-import org.usfirst.frc.team4576.robot.commands.AutoCrossBaseline;
+import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
@@ -31,8 +31,7 @@ public class Robot extends IterativeRobot {
 	Command teleopCommand;
 	Command autonomousCommand;
 
-	final String autoCrossBaseline = "CrossBaseline";
-	final String autoMiddleGear = "MiddleGear";
+	final String autoDriveStraight = "DriveStraight";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 
@@ -49,7 +48,7 @@ public class Robot extends IterativeRobot {
 		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
 		chooser.addDefault("Do Nothing.", null);
-		chooser.addObject("Middle Gear Auto w/ gyro", autoMiddleGear);
+		chooser.addObject("Drive straight Encoders", autoDriveStraight);
 		// chooser.addObject("Right Gear Auto", autoRightGear);
 
 		SmartDashboard.putData("Auto choices", chooser);
@@ -74,7 +73,7 @@ public class Robot extends IterativeRobot {
 			//autonomousCommand = new AutoCrossBaseline();
 			//break;
 		default:
-			autonomousCommand = new AutoCrossBaseline();
+			autonomousCommand = new AutoDriveStraight();
 			break;
 		}
 

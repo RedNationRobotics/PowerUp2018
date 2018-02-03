@@ -9,12 +9,12 @@ package org.usfirst.frc.team4576.robot;
 public class RobotMap {
 
 	// Talon IDs:
-	public static int LEFT_MASTER = 0;
-	public static int RIGHT_MASTER = 1;
-	public static int LEFT_SLAVE = 2;
-	public static int RIGHT_SLAVE = 3;
+	public static final int LEFT_MASTER = 0;
+	public static final int RIGHT_MASTER = 1;
+	public static final int LEFT_SLAVE = 2;
+	public static final int RIGHT_SLAVE = 3;
 	
-	public static int SHIFT_SOLENOID = 0;
+	public static final int SHIFT_SOLENOID = 0;
 	
 	/**
 	 * Which PID slot to pull gains from.  Starting 2018, you can choose 
@@ -34,7 +34,6 @@ public class RobotMap {
 	public static final int kTimeoutMs = 10;
 
 	
-	public static final int SHIFT_SOLENOID = 0;
 	
 }
 
