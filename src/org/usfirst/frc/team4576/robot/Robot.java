@@ -37,6 +37,33 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> chooser = new SendableChooser<>();
 
 	public void robotInit() {
+		
+		Robot.chassis.tsrxL.setSensorPhase(true);
+
+		Robot.chassis.tsrxL.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.1097, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.113333, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0, RobotMap.kTimeoutMs);
+		
+		Robot.chassis.tsrxR.setSensorPhase(true);
+
+		Robot.chassis.tsrxR.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.1097, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.113333, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0, RobotMap.kTimeoutMs);
+
+		Robot.chassis.tsrxL.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 
 		System.out.println("RNR 2018 Robot Code Powering up...");
 		oi = new OI();
