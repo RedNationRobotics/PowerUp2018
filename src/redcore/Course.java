@@ -1,11 +1,7 @@
 package redcore;
 
 import java.util.concurrent.Callable;
-//*******************************************************************
-//Course			Author: Luke Whatley & Gavin Pretorius
-//								Last Edited: 2/12/2018 by RL
-//Calculates and outputs joystick course and course error
-//*******************************************************************
+
 public class Course implements Runnable {
 	
 	protected Thread _Thread;
@@ -73,6 +69,7 @@ public class Course implements Runnable {
 	}
 	
 	public void WaitTiming() {
+	
 		try {
 			Thread.sleep((long) (1000 / _UpdateFrequency_Hz));
 		} catch (InterruptedException e) {
