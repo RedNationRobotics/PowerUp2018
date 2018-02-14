@@ -4,17 +4,29 @@ import java.util.TimerTask;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
-
+//*******************************************************************
+//BNO055 						Author: james@team2168.org
+//								Last Edited: 2/12/2018 by RL
+//This code was originally ported from arduino source developed by Adafruit to 
+//be compatible with First robotics competition and the WPI Library
+// See the original comment header below.
+//
+//This is a library for the BNO055 orientation sensor
+//Designed specifically to work with the Adafruit BNO055 Breakout.
+//
+//These sensors use I2C to communicate, 2 pins are required to interface.
+//Adafruit invests time and resources providing this open source code,
+//please support Adafruit and open-source hardware by purchasing products
+//from Adafruit!------> http://www.adafruit.com/products
+//Written by KTOWN for Adafruit Industries.
+//MIT license, all text above must be included in any redistribution
+//*******************************************************************
 /**
- * BNO055 IMU for the FIRST Robotics Competition.
- * References throughout the code are to the following sensor documentation:
- *   http://git.io/vuOl1
- * 
  * To use the sensor, wire up to it over I2C on the roboRIO.
  * Creating an instance of this class will cause communications with the sensor
  *   to being.All communications with the sensor occur in a separate thread
  *   from your robot code to avoid blocking the main robot program execution.
- * 
+ *
  *  Example:
  *    private static BNO055 imu;
  *    
@@ -22,7 +34,6 @@ import edu.wpi.first.wpilibj.Timer;
  *        imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
  *        		BNO055.vector_type_t.VECTOR_EULER);
  *    }
- * 
  * You can check the status of the sensor by using the following methods:
  *   isSensorPresent(); //Checks if the code can talk to the sensor over I2C
  *                      // If this returns false, check your wiring.
@@ -34,35 +45,8 @@ import edu.wpi.first.wpilibj.Timer;
  *                   // required sensors report they are calibrated. Some
  *                   // Calibration sequences require you to move the BNO055
  *                   // around. See the method comments for more info.
- *
  * Once the sensor calibration is complete , you can get position data by
- *   by using the getVector() method. See this method definiton for usage info.
- * 
- * This code was originally ported from arduino source developed by Adafruit.
- * See the original comment header below.
- * 
- * @author james@team2168.org
- *
- *
- *ORIGINAL ADAFRUIT HEADER - https://github.com/adafruit/Adafruit_BNO055/
- *=======================================================================
- *This is a library for the BNO055 orientation sensor
- *
- *Designed specifically to work with the Adafruit BNO055 Breakout.
- *
- *Pick one up today in the adafruit shop!
- *------> http://www.adafruit.com/products
- *
- *These sensors use I2C to communicate, 2 pins are required to interface.
- *
- *Adafruit invests time and resources providing this open source code,
- *please support Adafruit and open-source hardware by purchasing products
- *from Adafruit!
- *
- *Written by KTOWN for Adafruit Industries.
- *
- *MIT license, all text above must be included in any redistribution
- *
+ * by using the getVector() method. See this method definiton for usage info.
  */
 public class BNO055 {
 	//Tread variables

@@ -4,6 +4,7 @@ import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
@@ -18,12 +19,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import redcore.BNO055;
 
+//*******************************************************************
+//Robot							Author: Robert Lohmann
+//								Last Edited: 2/12/2018 by RL
+//This class contains central methods for periodic control of the bot during the match. 
+//Here, we declare our subsystems and set the choices for the autonomous.
+//*******************************************************************
 public class Robot extends IterativeRobot {
 
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
-	
+	public static final Elevator elevator = new Elevator();
+
 	public static BNO055 imu;
 	public static OI oi;
 
@@ -38,7 +46,7 @@ public class Robot extends IterativeRobot {
 
 	public void robotInit() {
 
-		System.out.println("RNR 2018 Robot Code Powering up...");
+		System.out.print("Red Nation Robotics 2018 Code Powering up....");
 		oi = new OI();
 
 		teleopCommand = new DriveWithJoysticks();
@@ -65,7 +73,8 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
-
+		Robot.chassis.initAuto();
+		
 		autoSelected = chooser.getSelected();
 
 		switch (autoSelected) {
@@ -75,7 +84,7 @@ public class Robot extends IterativeRobot {
 		default:
 			autonomousCommand = null;
 			break;
-		
+
 		}
 
 		System.out.println("Auto Selected: " + autoSelected);
@@ -104,6 +113,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO Heading", Robot.imu.getHeading());
+		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
 	}
 
 	public void testPeriodic() {

@@ -7,7 +7,12 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+//*******************************************************************
+//Pneumatics					Author: Robert Lohmann
+//								Last Edited: 2/12/2018 by RL
+//This subsystem contains all the methods for commands controlling
+//our compressor, solenoids, and pressure sensor
+//*******************************************************************
 public class Pneumatics extends Subsystem {
 
 	public Pneumatics() {
