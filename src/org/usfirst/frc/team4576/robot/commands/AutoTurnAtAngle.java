@@ -18,7 +18,6 @@ public class AutoTurnAtAngle {
 		double _LTurn = Robot.imu.getHeading() - 90.0;
 		double _RTurn = Robot.imu.getHeading() + 90.0;
 		
-		Robot.chassis.tsrxL();
 		
 		}
 
