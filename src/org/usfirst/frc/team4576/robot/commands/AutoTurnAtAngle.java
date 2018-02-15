@@ -15,10 +15,19 @@ public class AutoTurnAtAngle {
 		
 
 		//we can choose to turn left or right
-		double _LTurn = Robot.imu.getHeading() - 90.0;
-		double _RTurn = Robot.imu.getHeading() + 90.0;
+		double _LTurn = Robot.imu.getHeading() - 45.0;
+		double _RTurn = Robot.imu.getHeading() + 45.0;
 		
+		while(_LTurn != Robot.imu.getHeading()) {
+			Robot.chassis.tsrxL.set(-.125);
+			Robot.chassis.tsrxR.set(.125);
+		}
 		
+		while(_RTurn != Robot.imu.getHeading()) {
+			Robot.chassis.tsrxL.set(.125);
+			Robot.chassis.tsrxR.set(.125);
+		}
+	
 		}
 
 }
