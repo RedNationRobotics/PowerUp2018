@@ -1,10 +1,9 @@
 package org.usfirst.frc.team4576.robot;
 
-import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
+import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight1;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
-import org.usfirst.frc.team4576.robot.subsystems.Elevator;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator1;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
@@ -16,8 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import redcore.BNO055;
+import redcore.Course;
 
 //*******************************************************************
 //Robot							
@@ -27,11 +26,12 @@ import redcore.BNO055;
 //*******************************************************************
 public class Robot extends IterativeRobot {
 
+	public static Joystick driveStick1 = new Joystick(4);
+	SendableChooser<String> chooser = new SendableChooser<>();
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
-	public static final Elevator elevator = new Elevator();
-
+	public static final Elevator1 elevator = new Elevator1();
 	public static BNO055 imu;
 	public static OI oi;
 
@@ -42,8 +42,21 @@ public class Robot extends IterativeRobot {
 
 	final String autoDriveStraight = "DriveStraight";
 	String autoSelected;
-	SendableChooser<String> chooser = new SendableChooser<>();
 
+	Course.RobotInterface _CourseRobotnterface = new Course.RobotInterface() {
+		
+		@Override
+		public double FetchJoystickLeftRight() {
+			
+			return Robot.driveStick1.getRawAxis(4);
+		}
+		public double FetchHeading() {
+			return imu.getHeading();
+		}
+	};
+	
+	public Course _Course = new Course(_CourseRobotInterface);
+	
 	public void robotInit() {
 
 		System.out.print("Red Nation Robotics 2018 Code Powering up....");
@@ -58,6 +71,8 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("Drive straight Encoders", autoDriveStraight);
+		
+		chooser = new SendableChooser<>();
 
 		SmartDashboard.putData("Auto Selected:", chooser);
 		
@@ -79,7 +94,7 @@ public class Robot extends IterativeRobot {
 
 		switch (autoSelected) {
 		case autoDriveStraight:
-			autonomousCommand = new AutoDriveStraight();
+			autonomousCommand = new AutoDriveStraight1();
 			break;
 		default:
 			autonomousCommand = null;
