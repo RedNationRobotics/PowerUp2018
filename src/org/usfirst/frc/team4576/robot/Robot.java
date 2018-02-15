@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
 
 //*******************************************************************
-//Robot							Author: Robert Lohmann
+//Robot							
 //								Last Edited: 2/12/2018 by RL
 //This class contains central methods for periodic control of the bot during the match. 
 //Here, we declare our subsystems and set the choices for the autonomous.
@@ -48,7 +48,7 @@ public class Robot extends IterativeRobot {
 
 		System.out.print("Red Nation Robotics 2018 Code Powering up....");
 		oi = new OI();
-
+		imu= BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
 		teleopCommand = new DriveWithJoysticks();
 
 		// camera.setFPS(15);
@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
 		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
-		SmartDashboard.putNumber("BNO Heading", Robot.imu.getHeading());
+		SmartDashboard.putNumber("BNO Heading", imu.getHeading());
 		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
 	}
 

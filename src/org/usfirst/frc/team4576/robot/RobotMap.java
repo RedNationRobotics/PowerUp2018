@@ -36,8 +36,8 @@ public class RobotMap {
 	public static final int LEFT_SLAVE = 2;
 	public static final int RIGHT_SLAVE = 3;
 	public static final int LEFT_INTAKE = 4;
-	public static final int RIGHT_INTAKE = 5;
-	public static final int ELEVATOR_TALON = 6;
+	public static final int RIGHT_INTAKE = 6;
+	public static final int ELEVATOR_TALON = 5;
 	//Solenoid IDs:
 	public static final int SHIFT_SOLENOID = 0;
 	

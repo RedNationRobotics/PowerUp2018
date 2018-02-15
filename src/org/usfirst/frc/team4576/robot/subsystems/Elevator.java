@@ -7,7 +7,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
+//import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 //*******************************************************************
@@ -170,6 +170,9 @@ public class Elevator extends Subsystem {
 			// shooterElevR.set(0);
 			tsrxE.set(0);
 			return;
+			
+			
+			
 		}
 		tsrxE.set(stick.getRawAxis(3) - stick.getRawAxis(2));
 		// shootertsrxE.set(stick.getRawAxis(3) - stick.getRawAxis(2));

@@ -129,11 +129,12 @@ public class Chassis extends Subsystem {
 
 	public void initTeleop() {
 		drive.setSafetyEnabled(false);
+		
 	}
 
 	// This declares that for driving only the assigned axes are used.
 	public void normalDrive() {
 	
-		drive.arcadeDrive(Robot.driveStick.getRawAxis(FORWARD_AXIS), Robot.driveStick.getRawAxis(TURN_AXIS));
+		drive.arcadeDrive(Robot.driveStick.getRawAxis(FORWARD_AXIS), -Robot.driveStick.getRawAxis(TURN_AXIS));
 	}
 }

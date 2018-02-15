@@ -23,26 +23,26 @@ public class AutoDriveStraight extends Command {
 		// Robot.chassis.gyro.reset();
 	}
 
-	public void driveStraightLeft(double distance) {
-		double rencoder = Robot.chassis.absolutePositionR;	
-		double targetpositionR  = (double) (distance / 360.00000000);
-		while (rencoder < targetpositionR)
-			Robot.chassis.tsrxR.set(ControlMode.Position, .05);
+	public void driveStraightLeft(double Ldistance) {
+		double lencoder = Robot.chassis.absolutePositionL;	
+		double targetpositionL  = (double) (Ldistance * 360.00000000);
+		while (lencoder < targetpositionL)
+			Robot.chassis.tsrxL.set(ControlMode.Position, targetpositionL);
 	}
 
-	public void driveStraightRight(double distance) {
+	public void driveStraightRight(double Rdistance) {
 		double rencoder = Robot.chassis.absolutePositionR;	
-		double targetpositionR  = (double) (distance / 360.00000000);
+		double targetpositionR  = (double) (Rdistance * 360.00000000);
 		while (rencoder < targetpositionR)
-			Robot.chassis.tsrxR.set(ControlMode.Position, .05);
+			Robot.chassis.tsrxR.set(ControlMode.Position, targetpositionR);
 	}
 
 	@Override
 	protected void execute() {
 		// -,+ for forward, +,- for backwards
 		// -,- to turn right, +,+ to turn left
-		driveStraightLeft(500);
-		driveStraightRight(500);
+		driveStraightLeft(5);
+		driveStraightRight(5);
 	}
 
 	protected void end() {
