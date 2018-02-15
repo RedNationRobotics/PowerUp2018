@@ -129,7 +129,6 @@ public class Chassis extends Subsystem {
 
 	public void initTeleop() {
 		drive.setSafetyEnabled(false);
-		
 	}
 
 	// This declares that for driving only the assigned axes are used.
