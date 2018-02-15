@@ -114,6 +114,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO Heading", imu.getHeading());
 		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
+		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
 	}
 
 	public void testPeriodic() {

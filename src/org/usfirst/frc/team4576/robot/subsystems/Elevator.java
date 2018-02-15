@@ -40,7 +40,16 @@ public class Elevator extends Subsystem {
 
 	boolean firstRun = true;
 
-	public Elevator() {/* choose the sensor and sensor direction */
+	public Elevator() {
+		
+		//This stuff is for enabline a soft rotation limit so we don't break our elevator
+				tsrxE.configForwardSoftLimitEnable(true, RobotMap.kTimeoutMs);
+				tsrxE.configReverseSoftLimitEnable(true, RobotMap.kTimeoutMs);
+				
+				tsrxE.configForwardSoftLimitThreshold(50, RobotMap.kTimeoutMs);
+				tsrxE.configReverseSoftLimitThreshold(50, RobotMap.kTimeoutMs);
+		
+		/* choose the sensor and sensor direction */
 		tsrxE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, RobotMap.kPIDLoopIdx,
 				RobotMap.kTimeoutMs);
 
@@ -62,6 +71,7 @@ public class Elevator extends Subsystem {
 		 * units per rotation.
 		 */
 		tsrxE.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+		
 
 		/* set closed loop gains in slot0, typically kF stays zero. */
 		tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
