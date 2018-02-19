@@ -6,13 +6,13 @@ import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoLeftScale extends Command {
+public class AutoLeftSwitch extends Command {
 
 	/* If the robot is on the left side this will do both of
-	 *  the scale sides left or right
+	 *  the code for the switches left or right
 	 *  Tell @kat if there are problems ;)*/
 	
-	public AutoLeftScale() {
+	public AutoLeftSwitch() {
 
 	}
 
@@ -29,15 +29,14 @@ public class AutoLeftScale extends Command {
 
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	        	Elevator Elevator = new Elevator();
+	        	
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(3.56397);
+	    		Timer.delay(1.85);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		//not sure if we need this move yet
-	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.2);
+	    		Timer.delay(0.5);
 	    		
 	    		Elevator.up();
 	    		Timer.delay(1.5);
@@ -51,29 +50,20 @@ public class AutoLeftScale extends Command {
 	        if (Robot.gameData.charAt(0) == 'R') {
 	            
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
-	            Elevator Elevator = new Elevator();
 	            
 	            Robot.chassis.setLeftRight(-.6, .6);
-	            Timer.delay(1.541666);
+	            Timer.delay(2);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.541666);
+	    		Timer.delay(1.85);
 	    		
-	    		AutoTurnAtAngle.TurnLeft();
-	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.7708);
-	    		
-	    		AutoTurnAtAngle.TurnLeft();
-	    		
-	    		// not sure if we need this move yet
+	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.2);
+	    		Timer.delay(0.5);
 	    		
-	    		Elevator.up();
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
