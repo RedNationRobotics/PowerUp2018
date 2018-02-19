@@ -19,8 +19,8 @@ public class AutoCrossBaseline extends Command {
 
 		Robot.chassis.setLeftRight(-.6, .6);
 		Timer.delay(1.85);
-
 	}
+
 
 	@Override
 	protected boolean isFinished() {

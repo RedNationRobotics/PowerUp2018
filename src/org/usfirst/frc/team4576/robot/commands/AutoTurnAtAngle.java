@@ -6,34 +6,41 @@ import edu.wpi.first.wpilibj.command.Command;
 
 //*******************************************************************
 //AutoTurnAtAngle				Author: Gavin Pretorius
-//								Last Edited: 2/16/2018 by GP
+//								Last Edited: 2/19/2018 by GP
 //This class is used to turn x amount of degrees during autonomous period. 
 //This will allow us to accurately maneuver during the autonomous period
 //*******************************************************************
 
 public class AutoTurnAtAngle extends Command {
-	 
-	double setPoint;
-	double heading = Robot.imu.getHeading();
-	double _LTurn = heading - 45.0;
-	double _RTurn = heading + 45.0;
 	
-	public void AutoTurnAtAngleLeft(double setPoint) {
-		setPoint would = _LTurn;
-		Robot.chassis.tsrxL.set(-.125);
-		Robot.chassis.tsrxR.set(.125);
+	double _heading = Robot.imu.getHeading();
+	double _Lturn = _heading -90.0;
+	double _Rturn = _heading +90.0;
+
+	//Turn left 90 degrees
+	public void TurnLeft() {
+		
+		while(_Lturn != Robot.imu.getHeading()) {
+			Robot.chassis.tsrxL.set(.5);
+			Robot.chassis.tsrxL.set(-.5);
+		}
 	}
 	
-	public void AutoTurnAtAngleRight(double setPoint) {
-		setPoint would = _LTurn;
-		Robot.chassis.tsrxL.set(.125);
-		Robot.chassis.tsrxR.set(-.125);
-	}
+	//Turn right 90 degrees
+	public void TurnRight() {
+		
+		while(_Rturn != Robot.imu.getHeading()) {
+			Robot.chassis.tsrxL.set(-.5);
+			Robot.chassis.tsrxL.set(.5);
+		}
+	}	
+	
+	
 	
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	 
 }
