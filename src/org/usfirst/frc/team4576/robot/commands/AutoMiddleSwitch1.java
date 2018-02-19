@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4576.robot.commands;
 
 import org.usfirst.frc.team4576.robot.Robot;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,6 +19,8 @@ public class AutoMiddleSwitch1 extends Command {
 	protected void initialize() {
 		Robot.chassis.initAuto();
 	}
+	
+	Elevator Elevator = new Elevator();
 
 		protected void  execute() {
 	        // -,+ for forward, +,- for backwards
@@ -40,6 +43,7 @@ public class AutoMiddleSwitch1 extends Command {
 	    		Robot.chassis.setLeftRight(-.6, .6);
 	    		Timer.delay(0.65294);
 	    		
+	    		Elevator.up();
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
@@ -65,6 +69,7 @@ public class AutoMiddleSwitch1 extends Command {
 	    		Robot.chassis.setLeftRight(-.6, .6);
 	    		Timer.delay(0.62294);
 	    		
+	    		Elevator.up();
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
