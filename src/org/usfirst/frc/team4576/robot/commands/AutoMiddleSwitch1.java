@@ -5,13 +5,12 @@ import org.usfirst.frc.team4576.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoLeftSwitch extends Command {
+public class AutoMiddleSwitch1 extends Command {
 
-	/* If the robot is on the left side this will do both of
-	 *  the code for the switches left or right
-	 *  Tell @kat if there are problems ;)*/
+	/* This will go to the switch side parallel of the alliance wall and release the box
+	 * any problems tell @kat she wrote it*/	
 	
-	public AutoLeftSwitch() {
+	public AutoMiddleSwitch1() {
 
 	}
 
@@ -29,12 +28,17 @@ public class AutoLeftSwitch extends Command {
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(0.76176);
+	    		
+	    		AutoTurnAtAngle.TurnLeft();
+	    		
+	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Timer.delay(0.65294);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.65294);
 	    		
 	    		Timer.delay(1.5);
 	    		new Release(true);
@@ -49,17 +53,17 @@ public class AutoLeftSwitch extends Command {
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	            
 	            Robot.chassis.setLeftRight(-.6, .6);
-	            Timer.delay(2);
+	            Timer.delay(0.76176);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(0.65294);
 	    		
-	    		AutoTurnAtAngle.TurnRight();
+	    		AutoTurnAtAngle.TurnLeft();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.62294);
 	    		
 	    		Timer.delay(1.5);
 	    		new Release(true);

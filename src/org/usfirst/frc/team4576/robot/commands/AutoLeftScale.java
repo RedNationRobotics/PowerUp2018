@@ -5,13 +5,13 @@ import org.usfirst.frc.team4576.robot.Robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoLeftSwitch extends Command {
+public class AutoLeftScale extends Command {
 
 	/* If the robot is on the left side this will do both of
-	 *  the code for the switches left or right
+	 *  the scale sides left or right
 	 *  Tell @kat if there are problems ;)*/
 	
-	public AutoLeftSwitch() {
+	public AutoLeftScale() {
 
 	}
 
@@ -29,12 +29,14 @@ public class AutoLeftSwitch extends Command {
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(3.56397);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
+	    		//not sure if we need this move yet
+	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.2);
 	    		
 	    		Timer.delay(1.5);
 	    		new Release(true);
@@ -49,17 +51,24 @@ public class AutoLeftSwitch extends Command {
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	            
 	            Robot.chassis.setLeftRight(-.6, .6);
-	            Timer.delay(2);
+	            Timer.delay(1.541666);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(1.541666);
 	    		
-	    		AutoTurnAtAngle.TurnRight();
+	    		AutoTurnAtAngle.TurnLeft();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.7708);
+	    		
+	    		AutoTurnAtAngle.TurnLeft();
+	    		
+	    		// not sure if we need this move yet
+	    		
+	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Timer.delay(0.2);
 	    		
 	    		Timer.delay(1.5);
 	    		new Release(true);
