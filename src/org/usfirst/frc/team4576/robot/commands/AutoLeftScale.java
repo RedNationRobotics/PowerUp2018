@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4576.robot.commands;
 
 import org.usfirst.frc.team4576.robot.Robot;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,7 @@ public class AutoLeftScale extends Command {
 	        if (Robot.gameData.charAt(0) == 'L') {
 
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
-
+	        	Elevator Elevator = new Elevator();
 	    		Robot.chassis.setLeftRight(-.6, .6);
 	    		Timer.delay(3.56397);
 	    		
@@ -38,6 +39,7 @@ public class AutoLeftScale extends Command {
 	    		Robot.chassis.setLeftRight(-.6, .6);
 	    		Timer.delay(0.2);
 	    		
+	    		Elevator.up();
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
