@@ -8,7 +8,7 @@ import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
-
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -30,20 +30,19 @@ import redcore.Course;
 public class Robot extends IterativeRobot {
 
 	public static Joystick driveStick1 = new Joystick(4);
-	SendableChooser<String> chooser = new SendableChooser<>();
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
 	public static final Elevator elevator = new Elevator();
-<<<<<<< HEAD
-=======
+
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
->>>>>>> d281c4f7603b22b180c1fde38da4790f9eabf139
+
 	public static BNO055 imu;
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
+	public static Joystick secondaryStick = new Joystick(1);
 
 	Command teleopCommand;
 	Command autonomousCommand;
@@ -52,6 +51,7 @@ public class Robot extends IterativeRobot {
 	final String autoCrossBaseline = "CrossBaseline";
 	final String autoLeftSwitch	= "LeftSwitch";
 	String autoSelected;
+
 
 	Course.RobotInterface _CourseRobotInterface = new Course.RobotInterface() {
 		
@@ -67,10 +67,39 @@ public class Robot extends IterativeRobot {
 	
 	public Course _Course = new Course(_CourseRobotInterface);
 	
-	public void robotInit() {
 
+	public static String oiSelected;
+	SendableChooser<String> chooser = new SendableChooser<>();
+
+	public void robotInit() {
+		Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.setSensorPhase(true);
+		Robot.chassis.tsrxR.setSensorPhase(true);
+
+		/* set the peak, nominal outputs */
+		Robot.chassis.tsrxL.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		Robot.chassis.tsrxR.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+
+		/* set closed loop gains in slot0 */
+		Robot.chassis.tsrxL.config_kF(RobotMap.CHASSIS_PID, 0.1097, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kD(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		
+		Robot.chassis.tsrxR.config_kF(RobotMap.CHASSIS_PID, 0.1097, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kD(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		
+		
 		System.out.print("Red Nation Robotics 2018 Code Powering up....");
-		oi = new OI();
 		imu= BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
 		teleopCommand = new DriveWithJoysticks();
 
@@ -81,22 +110,20 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("Drive straight Encoders", autoDriveStraight);
-<<<<<<< HEAD
+
 		
 		chooser = new SendableChooser<>();
-=======
+
 		chooser.addObject("Cross Baseline", autoCrossBaseline);
 		chooser.addObject("Left Switch", autoLeftSwitch);
 
-
->>>>>>> d281c4f7603b22b180c1fde38da4790f9eabf139
-
 		SmartDashboard.putData("Auto Selected:", chooser);
-		
+	
+		oi = new OI();
+
 	}
 
 	public void disabledInit() {
-
 	}
 
 	public void disabledPeriodic() {
@@ -150,13 +177,13 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Left Encoder", Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
-		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		SmartDashboard.putNumber("Left Encoder", Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
+		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
 		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO Heading", imu.getHeading());
 		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
-		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.kPIDLoopIdx));
+		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.ELEVATOR_PID));
 	}
 
 	public void testPeriodic() {
