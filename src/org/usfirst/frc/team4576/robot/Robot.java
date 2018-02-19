@@ -1,9 +1,9 @@
 package org.usfirst.frc.team4576.robot;
 
-import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight1;
+import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
-import org.usfirst.frc.team4576.robot.subsystems.Elevator1;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
@@ -31,7 +31,7 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
-	public static final Elevator1 elevator = new Elevator1();
+	public static final Elevator elevator = new Elevator();
 	public static BNO055 imu;
 	public static OI oi;
 
@@ -43,7 +43,7 @@ public class Robot extends IterativeRobot {
 	final String autoDriveStraight = "DriveStraight";
 	String autoSelected;
 
-	Course.RobotInterface _CourseRobotnterface = new Course.RobotInterface() {
+	Course.RobotInterface _CourseRobotInterface = new Course.RobotInterface() {
 		
 		@Override
 		public double FetchJoystickLeftRight() {
@@ -94,7 +94,7 @@ public class Robot extends IterativeRobot {
 
 		switch (autoSelected) {
 		case autoDriveStraight:
-			autonomousCommand = new AutoDriveStraight1();
+			autonomousCommand = new AutoDriveStraight();
 			break;
 		default:
 			autonomousCommand = null;
