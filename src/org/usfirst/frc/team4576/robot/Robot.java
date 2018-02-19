@@ -1,6 +1,8 @@
 package org.usfirst.frc.team4576.robot;
 
+import org.usfirst.frc.team4576.robot.commands.AutoCrossBaseline;
 import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
+import org.usfirst.frc.team4576.robot.commands.AutoLeftSwitch;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
@@ -8,6 +10,7 @@ import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,6 +35,11 @@ public class Robot extends IterativeRobot {
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
 	public static final Elevator elevator = new Elevator();
+<<<<<<< HEAD
+=======
+	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+>>>>>>> d281c4f7603b22b180c1fde38da4790f9eabf139
 	public static BNO055 imu;
 	public static OI oi;
 
@@ -41,6 +49,8 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 
 	final String autoDriveStraight = "DriveStraight";
+	final String autoCrossBaseline = "CrossBaseline";
+	final String autoLeftSwitch	= "LeftSwitch";
 	String autoSelected;
 
 	Course.RobotInterface _CourseRobotInterface = new Course.RobotInterface() {
@@ -71,8 +81,15 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("Drive straight Encoders", autoDriveStraight);
+<<<<<<< HEAD
 		
 		chooser = new SendableChooser<>();
+=======
+		chooser.addObject("Cross Baseline", autoCrossBaseline);
+		chooser.addObject("Left Switch", autoLeftSwitch);
+
+
+>>>>>>> d281c4f7603b22b180c1fde38da4790f9eabf139
 
 		SmartDashboard.putData("Auto Selected:", chooser);
 		
@@ -90,11 +107,21 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		Robot.chassis.initAuto();
 		
+		//final String gameData = DriverStation.getInstance().getGameSpecificMessage(); 
+    	//For Testing at the shop
+		//gameData = "LLL";
+		
 		autoSelected = chooser.getSelected();
 
 		switch (autoSelected) {
 		case autoDriveStraight:
 			autonomousCommand = new AutoDriveStraight();
+			break;
+		case autoCrossBaseline:
+			autonomousCommand = new AutoCrossBaseline();
+			break;
+		case autoLeftSwitch:
+			autonomousCommand = new AutoLeftSwitch();
 			break;
 		default:
 			autonomousCommand = null;
