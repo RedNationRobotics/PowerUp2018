@@ -3,6 +3,7 @@ package org.usfirst.frc.team4576.robot.commands;
 import org.usfirst.frc.team4576.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 //*******************************************************************
 //DriveWithJoysticks			Author: Gavin Pretorius
 //								Last Edited: 2/12/2018 by RL
@@ -16,7 +17,6 @@ public class DriveWithJoysticks extends Command {
 		requires(Robot.chassis);
 		requires(Robot.elevator);
 		Robot.chassis.initTeleop();
-
 	}
 
 	@Override
@@ -29,8 +29,9 @@ public class DriveWithJoysticks extends Command {
 	protected void execute() {
 		// TODO Auto-generated method stub
 		Robot.chassis.normalDrive();
-		Robot.elevator.elevatorTeleop(Robot.driveStick);
-		Robot.elevator.gamePadControl(Robot.driveStick);
+
+		Robot.elevator.elevatorTeleop(Robot.secondaryStick);
+		Robot.elevator.gamePadControl(Robot.secondaryStick);
 	}
 
 	@Override
