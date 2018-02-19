@@ -21,8 +21,7 @@ public class AutoTurnAtAngle extends Command {
 	public void TurnLeft() {
 		
 		while(_Lturn != Robot.imu.getHeading()) {
-			Robot.chassis.tsrxL.set(.5);
-			Robot.chassis.tsrxL.set(-.5);
+			Robot.chassis.setLeftRight(.5, -.5);
 		}
 	}
 	
@@ -30,8 +29,8 @@ public class AutoTurnAtAngle extends Command {
 	public void TurnRight() {
 		
 		while(_Rturn != Robot.imu.getHeading()) {
-			Robot.chassis.tsrxL.set(-.5);
-			Robot.chassis.tsrxL.set(.5);
+			Robot.chassis.setLeftRight(-.5, .5);
+
 		}
 	}	
 	

@@ -1,35 +1,31 @@
 package redcore;
 
-import java.util.concurrent.Callable;
-
 public class Course implements Runnable {
 	
 	protected Thread _Thread;
 	protected double _ControllerLeftRight; 
 	protected boolean _Stop = false;
+	public double _Heading = 0.0;
 	public double _Course = 0.0;
 	protected double _Max_deg_per_sec = 382.3;
 	protected double _UpdateFrequency_Hz = 100.0;
 	protected double MaxRateOfChange_deg_per_Hz = _Max_deg_per_sec / _UpdateFrequency_Hz;
-	protected Callable<Double> _GetLeftRightFunction;
 	
 	public interface RobotInterface {
 		double FetchJoystickLeftRight();
+		double FetchHeading();
 	}
 	
 	protected RobotInterface _robotInterface;
 	
 	public Course(RobotInterface robotInterface) {
 		_robotInterface = robotInterface;
+		_Thread = new Thread(this);
 	}
 	
 	public void Demo() {
 		double lr = _robotInterface.FetchJoystickLeftRight();
 		System.out.println(lr);
-	}
-	
-	public Course(Callable<Double> GetLeftRightFunction) {
-		_GetLeftRightFunction = GetLeftRightFunction;
 	}
 	
 
@@ -57,7 +53,8 @@ public class Course implements Runnable {
 	
 	public void ComputeCourseError() {
 		try {
-			_ControllerLeftRight = _GetLeftRightFunction.call();
+			_ControllerLeftRight = _robotInterface.FetchJoystickLeftRight();
+			_Heading = _robotInterface.FetchHeading();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,3 +78,4 @@ public class Course implements Runnable {
 	
 	
 }
+
