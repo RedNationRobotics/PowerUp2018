@@ -51,6 +51,7 @@ public class AutoLeftScale extends Command {
 	        if (Robot.gameData.charAt(0) == 'R') {
 	            
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
+	            Elevator Elevator = new Elevator();
 	            
 	            Robot.chassis.setLeftRight(-.6, .6);
 	            Timer.delay(1.541666);
@@ -72,6 +73,7 @@ public class AutoLeftScale extends Command {
 	    		Robot.chassis.setLeftRight(-.6, .6);
 	    		Timer.delay(0.2);
 	    		
+	    		Elevator.up();
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
