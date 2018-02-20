@@ -6,13 +6,12 @@ import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoLeftSwitch extends Command {
+public class AutoMiddleSwitch1 extends Command {
 
-	/* If the robot is on the left side this will do both of
-	 *  the code for the switches left or right
-	 *  Tell @kat if there are problems ;)*/
+	/* This will go to the switch side parallel of the alliance wall and release the box
+	 * any problems tell @kat she wrote it*/	
 	
-	public AutoLeftSwitch() {
+	public AutoMiddleSwitch1() {
 
 	}
 
@@ -20,6 +19,8 @@ public class AutoLeftSwitch extends Command {
 	protected void initialize() {
 		Robot.chassis.initAuto();
 	}
+	
+	Elevator Elevator = new Elevator();
 
 		protected void  execute() {
 	        // -,+ for forward, +,- for backwards
@@ -28,15 +29,19 @@ public class AutoLeftSwitch extends Command {
 	        if (Robot.gameData.charAt(0) == 'L') {
 
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
-	        	Elevator Elevator = new Elevator();
-	        	
+
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(0.76176);
+	    		
+	    		AutoTurnAtAngle.TurnLeft();
+	    		
+	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Timer.delay(0.65294);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.65294);
 	    		
 	    		Elevator.up();
 	    		Timer.delay(1.5);
@@ -50,23 +55,21 @@ public class AutoLeftSwitch extends Command {
 	        if (Robot.gameData.charAt(0) == 'R') {
 	            
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
-	            Elevator Elevator = new Elevator();
 	            
 	            Robot.chassis.setLeftRight(-.6, .6);
-	            Timer.delay(2);
+	            Timer.delay(0.76176);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(1.85);
+	    		Timer.delay(0.65294);
 	    		
-	    		AutoTurnAtAngle.TurnRight();
+	    		AutoTurnAtAngle.TurnLeft();
 	    		
 	    		Robot.chassis.setLeftRight(-.6, .6);
-	    		Timer.delay(0.5);
+	    		Timer.delay(0.62294);
 	    		
 	    		Elevator.up();
-	    		
 	    		Timer.delay(1.5);
 	    		new Release(true);
 	    		Timer.delay(2);
@@ -99,3 +102,5 @@ public class AutoLeftSwitch extends Command {
 
 	}
 }
+
+
