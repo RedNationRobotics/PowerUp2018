@@ -3,12 +3,7 @@ package org.usfirst.frc.team4576.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import redcore.AxisButton;
 
-import org.usfirst.frc.team4576.robot.commands.AutoCrossBaseline;
-import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
-import org.usfirst.frc.team4576.robot.commands.AutoLeftSwitch;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.Release;
 import org.usfirst.frc.team4576.robot.commands.Shift;
