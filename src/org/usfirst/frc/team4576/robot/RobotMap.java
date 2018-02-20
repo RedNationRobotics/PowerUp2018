@@ -30,7 +30,7 @@ package org.usfirst.frc.team4576.robot;
 public class RobotMap {
 
 	// Talon IDs:
-	public static final int LEFT_MASTER = 5;
+    public static final int LEFT_MASTER = 5;
     public static final int RIGHT_MASTER = 1;
     public static final int LEFT_SLAVE = 2;
     public static final int RIGHT_SLAVE = 3;
