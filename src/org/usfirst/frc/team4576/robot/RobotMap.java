@@ -15,7 +15,6 @@ package org.usfirst.frc.team4576.robot;
 //4: Y
 //5: Left Bumper
 //6: Right Bumper
-//7: Back
 //8: Start
 //9: Left Joystick pressed down
 //10: Right Joystick pressed down
@@ -64,6 +63,9 @@ public class RobotMap {
 	public static final double kP1 = 0.1;
 	public static final double kI1 = 0.0;
 	public static final double kD1 = 0.0;
+	//PDP Channels (for reading amperage)
+	public static final int LEFT_PDPCHANNEL = 2;
+	public static final int RIGHT_PDPCHANNEL = 12;
 	// These lines declare the axes for turning
 	public static final int FORWARD_AXIS = 1;
 	public static final int TURN_AXIS = 4;

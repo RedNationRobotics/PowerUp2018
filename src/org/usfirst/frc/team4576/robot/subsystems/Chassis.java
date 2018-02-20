@@ -21,8 +21,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //*******************************************************************
 public class Chassis extends Subsystem {
 
-	double rpm = 0;
 	double gyroZero = 0;
+	double lamps = 0;
+	double ramps = 0;
 
 	public Chassis() {
 		tsrxL2.follow(tsrxL);
@@ -40,11 +41,11 @@ public class Chassis extends Subsystem {
 	public WPI_TalonSRX tsrxL3 = new WPI_TalonSRX(RobotMap.LEFT_SLAVE2);
 	public WPI_TalonSRX tsrxR3 = new WPI_TalonSRX(RobotMap.RIGHT_SLAVE2);
 
-	// Relay flashlight = new Relay(RobotMap.FLASHLIGHT_PWM);
-	// private Value currentValue;
 	// This defines the talons used to drive.
 	// RobotDrive drive = new RobotDrive(tsrxL, tsrxR);
 	DifferentialDrive drive = new DifferentialDrive(tsrxL, tsrxR);
+	
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
 	public int absolutePositionL = tsrxL.getSelectedSensorPosition(RobotMap.kTimeoutMs)
 			& 0xFFF; /*
@@ -57,21 +58,21 @@ public class Chassis extends Subsystem {
 						 * wrap arounds
 						 */
 
-	PowerDistributionPanel pdp = new PowerDistributionPanel();
-
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 	}
 
-	// This defines whether a talon is on the right or left.
+	//sets the left and right throttle (PercentOutput Mode)
 	public void setLeftRight(double left, double right) {
 		tsrxL.set(ControlMode.PercentOutput, left);
 		tsrxR.set(ControlMode.PercentOutput, right);
 
 	}
+	//drives straight a set amount of encoder clicks. (PercentOutput Mode)
 
 	public void motionMagicStraight(double positionUnits) {
-		tsrxL.set(ControlMode.MotionMagic, positionUnits);
+		tsrxL.set(ControlMode.MotionMagic, -positionUnits);
 		tsrxR.set(ControlMode.MotionMagic, positionUnits);
 	}
 
@@ -109,10 +110,10 @@ public class Chassis extends Subsystem {
 	}
 
 	public double getSpeed() {
-		return (getLeftSpeed() + getRightSpeed()) / 2.0; // in inches per second
+		return (getLeftSpeed() + getRightSpeed()) / 2.0; // average RPM
 	}
 	// ----------------- Gyro ------------------------------
-
+	
 	public double getAngle() {
 		if (!Robot.imu.isInitialized())
 			return -1;
@@ -127,7 +128,12 @@ public class Chassis extends Subsystem {
 	public double getZero() {
 		return gyroZero;
 	}
-
+    public double getLAmps() { 
+    	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
+    }
+    public double getRAmps() {
+    	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
+    }
 	// This declares that for driving only the assigned axes are used.
 	public void normalDrive() {
 

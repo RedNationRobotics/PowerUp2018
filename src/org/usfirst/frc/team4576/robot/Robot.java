@@ -46,8 +46,6 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-
 	public static BNO055 imu;
 	public static OI oi;
 
@@ -229,11 +227,15 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Left Encoder", Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
 		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
-		SmartDashboard.putNumber("psensor rawVolts", Robot.pneumatics.rawVolts());
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO Heading", imu.getHeading());
 		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
 		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.ELEVATOR_PID));
+		SmartDashboard.putNumber("Left Amps", Robot.chassis.getLAmps());
+		SmartDashboard.putNumber("Right Amps", Robot.chassis.getRAmps());
+		SmartDashboard.putNumber("Left Speed", Robot.chassis.getLeftSpeed());
+		SmartDashboard.putNumber("Right Speed", Robot.chassis.getRightSpeed());
+
 	}
 
 	public void testPeriodic() {
