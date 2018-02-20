@@ -7,14 +7,20 @@ package org.usfirst.frc.team4576.robot;
  * floating around.
  */
 public class RobotMap {
-
 	// Talon IDs:
-	public static final int LEFT_MASTER = 0;
-	public static final int RIGHT_MASTER = 1;
-	public static final int LEFT_SLAVE = 2;
-	public static final int RIGHT_SLAVE = 3;
+    public static final int LEFT_MASTER = 5;
+    public static final int RIGHT_MASTER = 1;
+    public static final int LEFT_SLAVE = 2;
+    public static final int RIGHT_SLAVE = 3;
+    public static final int LEFT_SLAVE2 = 4;
+    public static final int RIGHT_SLAVE2 = 7;
+    public static final int ELEVATOR_TALON = 6;
+    
+  //Victor IDs:
+    public static final int LEFT_INTAKE = 0;
+    public static final int RIGHT_INTAKE = 1;
 	
-	public static final int SHIFT_SOLENOID = 0;
+	public static int SHIFT_SOLENOID = 0;
 	
 	/**
 	 * Which PID slot to pull gains from.  Starting 2018, you can choose 
