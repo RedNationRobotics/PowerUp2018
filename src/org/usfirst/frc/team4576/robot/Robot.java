@@ -10,7 +10,9 @@ import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -55,8 +57,13 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> chooser = new SendableChooser<>();
 	public void robotInit() {
 		Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
+		
+	//	Robot.chassis.tsrxL.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
+	//	Robot.chassis.tsrxR.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
+		
 		Robot.chassis.tsrxL.setSensorPhase(true);
-		Robot.chassis.tsrxR.setSensorPhase(true);
+		Robot.chassis.tsrxR.setSensorPhase(false);
 
 		/* set the peak, nominal outputs */
 		Robot.chassis.tsrxL.configNominalOutputForward(0, RobotMap.kTimeoutMs);
@@ -70,16 +77,15 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
 
 		/* set closed loop gains in slot0 */
-		Robot.chassis.tsrxL.config_kF(RobotMap.CHASSIS_PID, 0.1097, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kD(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kF(0, RobotMap.kF0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(0, RobotMap.kP0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(0, RobotMap.kI0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kD(0, RobotMap.kD0, RobotMap.kTimeoutMs);
 		
-		Robot.chassis.tsrxR.config_kF(RobotMap.CHASSIS_PID, 0.1097, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kD(RobotMap.CHASSIS_PID, 0, RobotMap.kTimeoutMs);
-		
+		Robot.chassis.tsrxR.config_kF(0, RobotMap.kF1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(0, RobotMap.kP1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(0, RobotMap.kI1, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kD(0, RobotMap.kD1, RobotMap.kTimeoutMs);
 		
 		System.out.print("Red Nation Robotics 2018 Code Powering up....");
 		imu= BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
@@ -101,16 +107,26 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledInit() {
+	
 	}
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		autoSelected = chooser.getSelected();
+		
+		/*
+		 * it's generally a good idea to put motor controllers back into a known
+		 * state when robot is disabled. That way when you enable the robot
+		 * doesn't just continue doing what it was doing before. BUT if that's
+		 * what the application/testing requires than modify this accordingly
+		 */
+		Robot.chassis.setLeftRight(0, 0);
+		/* clear our buffer and put everything into a known state */
+		Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.CHASSIS_PID, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.CHASSIS_PID, RobotMap.kTimeoutMs);
 	}
 
-	public void autonomousInit() {
-		Robot.chassis.initAuto();
-		
+	public void autonomousInit() {		
 		//final String gameData = DriverStation.getInstance().getGameSpecificMessage(); 
     	//For Testing at the shop
 		//gameData = "LLL";

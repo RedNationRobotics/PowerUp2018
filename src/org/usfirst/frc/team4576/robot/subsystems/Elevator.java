@@ -26,9 +26,6 @@ public class Elevator extends Subsystem { // This system extends PIDSubsystem
 	boolean _lastButton2 = false;
 
 	public WPI_TalonSRX tsrxE = new WPI_TalonSRX(RobotMap.ELEVATOR_TALON);
-	/*
-	 * Inversed numbers to compensate for difference from practice bot
-	 */
 	/** save the target position to servo to */
 	double targetPos1 = (double) (2.0000000 * 360.00000000);// change the value
 															// in front of
@@ -46,7 +43,7 @@ public class Elevator extends Subsystem { // This system extends PIDSubsystem
 	public Elevator() {
 		// constants that are used when
 		// computing the motor output
-		// This stuff is for enabline a soft rotation limit so we don't break
+		// This stuff is for enabling a soft rotation limit so we don't break
 		// our elevator
 		tsrxE.configForwardSoftLimitEnable(true, RobotMap.kTimeoutMs);
 		tsrxE.configReverseSoftLimitEnable(true, RobotMap.kTimeoutMs);

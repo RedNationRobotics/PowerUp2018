@@ -52,6 +52,18 @@ public class RobotMap {
 	public static final int CHASSIS_PID = 0;
 	public static final int ELEVATOR_PID = 1;
 
+	//PID Values
+	//Chassis
+	public static final double kF0 = 0.1097;
+	public static final double kP0 = 0.1;
+	public static final double kI0 = 0.0;
+	public static final double kD0 = 0.0;
+	
+	//ELevator
+	public static final double kF1 = 0.1097;
+	public static final double kP1 = 0.1;
+	public static final double kI1 = 0.0;
+	public static final double kD1 = 0.0;
 	// These lines declare the axes for turning
 	public static final int FORWARD_AXIS = 1;
 	public static final int TURN_AXIS = 4;

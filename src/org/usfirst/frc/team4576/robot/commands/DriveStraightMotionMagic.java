@@ -1,14 +1,12 @@
 package org.usfirst.frc.team4576.robot.commands;
 
 import org.usfirst.frc.team4576.robot.Robot;
-import org.usfirst.frc.team4576.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class AutoDriveForward extends Command {
+public class DriveStraightMotionMagic extends Command {
 	private double targetPosition;
-	private double encoderPositionAverage;
-    public AutoDriveForward(double targetPosition) {
+    public DriveStraightMotionMagic(double targetPosition) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
