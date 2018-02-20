@@ -17,7 +17,6 @@ import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -65,6 +64,7 @@ public class Robot extends IterativeRobot {
 	final String autoRightScale = "RightScale";
 	final String autoMiddleSwitch1 = "MiddleSwitch1";
 	final String autoMiddleSwitch2 = "MiddleSwitch2";
+	final String autoPeriodicOnly = "RunStateMachine";
 	final String autoMiddleScale = "MiddleScale";
 	
 	String autoSelected;
@@ -89,36 +89,53 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> chooser = new SendableChooser<>();
 
 	public void robotInit() {
-		Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, RobotMap.kTimeoutMs);
-		
-	//	Robot.chassis.tsrxL.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
-	//	Robot.chassis.tsrxR.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 1, 10);
-		
-		Robot.chassis.tsrxL.setSensorPhase(true);
-		Robot.chassis.tsrxR.setSensorPhase(false);
+		/* choose the sensor and sensor direction */
+        Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.setSensorPhase(false);
+        Robot.chassis.tsrxL.setInverted(true);
+        
+        Robot.chassis.tsrxR.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.setSensorPhase(true);
 
-		/* set the peak, nominal outputs */
-		Robot.chassis.tsrxL.configNominalOutputForward(0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.configPeakOutputForward(1, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
 
-		Robot.chassis.tsrxR.configNominalOutputForward(0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.configPeakOutputForward(1, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+        
+        /* set the peak and nominal outputs, 12V means full */
+        Robot.chassis.tsrxL.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+        
+        Robot.chassis.tsrxR.configNominalOutputForward(0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.configPeakOutputForward(1, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
+        /* set the allowable closed-loop error,
+         * Closed-Loop output will be neutral within this range.
+         * See Table in Section 17.2.1 for native units per rotation. 
+         */
+        Robot.chassis.tsrxL.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs); /* always servo */
+        Robot.chassis.tsrxR.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs); /* always servo */
 
-		/* set closed loop gains in slot0 */
-		Robot.chassis.tsrxL.config_kF(0, RobotMap.kF0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(0, RobotMap.kP0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(0, RobotMap.kI0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kD(0, RobotMap.kD0, RobotMap.kTimeoutMs);
-		
-		Robot.chassis.tsrxR.config_kF(0, RobotMap.kF1, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(0, RobotMap.kP1, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(0, RobotMap.kI1, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kD(0, RobotMap.kD1, RobotMap.kTimeoutMs);
+        /* set closed loop gains in slot0 */
+        Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs); 
+        
+        Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        
+        /* set acceleration and vcruise velocity - see documentation */
+        Robot.chassis.tsrxL.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.configMotionAcceleration(1000, RobotMap.kTimeoutMs);
+		 
+		 Robot.chassis.tsrxR.configMotionCruiseVelocity(1000, RobotMap.kTimeoutMs);
+		 Robot.chassis.tsrxR.configMotionAcceleration(1000, RobotMap.kTimeoutMs);
+			/* zero the sensor */
+		 Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
+		 Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		
 		System.out.print("Red Nation Robotics 2018 Code Powering up....");
 		imu= BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
@@ -131,6 +148,7 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("Drive straight Encoders", autoDriveStraight);
+		chooser.addObject("Run State Machine", autoPeriodicOnly);
 
 		
 		chooser = new SendableChooser<>();
@@ -163,8 +181,19 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.CHASSIS_PID, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.CHASSIS_PID, RobotMap.kTimeoutMs);
 	}
+	
+	public enum EAutoStates {
+		eStartDriving,
+		eCheckEncoderCount,
+		eStopMotors
+	}
+	
+	public EAutoStates _eAutoState;
+	
 
-	public void autonomousInit() {		
+	public void autonomousInit() {	
+		
+		_eAutoState = EAutoStates.eStartDriving;
 		//final String gameData = DriverStation.getInstance().getGameSpecificMessage(); 
     	//For Testing at the shop
 		//gameData = "LLL";
@@ -196,6 +225,9 @@ public class Robot extends IterativeRobot {
 		case autoMiddleSwitch2:
 			autonomousCommand = new AutoMiddleSwitch2();
 			break;
+		case autoPeriodicOnly:
+			//leave this empty!!
+			break;
 		case autoMiddleScale:
 			autonomousCommand = new AutoMiddleScale();
 			break;
@@ -205,6 +237,7 @@ public class Robot extends IterativeRobot {
 			break;
 
 		}
+		
 
 		System.out.println("Auto Selected: " + autoSelected);
 
@@ -213,7 +246,41 @@ public class Robot extends IterativeRobot {
 
 	}
 
+	public double TargetPosL = 50000;
+	public double TargetPosR = 50000;
+	
 	public void autonomousPeriodic() {
+		double lencoder = Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
+		double rencoder = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
+		
+		switch(_eAutoState) {
+		case eStartDriving:
+		{
+			Robot.chassis.tsrxL.set(ControlMode.MotionMagic, TargetPosL);
+			Robot.chassis.tsrxR.set(ControlMode.MotionMagic, TargetPosR);
+			//Robot.chassis.tsrxL.set(ControlMode.Velocity, VelocityL);
+			//Robot.chassis.tsrxR.set(ControlMode.Velocity, VelocityR);
+			_eAutoState = EAutoStates.eCheckEncoderCount;
+		}
+			break;
+		case eCheckEncoderCount:
+		{
+			if(lencoder >= (TargetPosL -25) && rencoder >= (TargetPosR -25)) { 
+				_eAutoState = EAutoStates.eStopMotors;
+			}
+		}
+			break;
+		case eStopMotors:
+		{
+			Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
+			Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
+
+		}
+			break;
+	}
+		
+		SmartDashboard.putNumber("Left Encoder", lencoder);
+		SmartDashboard.putNumber("Right Encoder", rencoder);
 		Scheduler.getInstance().run();
 
 	}
