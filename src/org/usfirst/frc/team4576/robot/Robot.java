@@ -2,13 +2,21 @@ package org.usfirst.frc.team4576.robot;
 
 import org.usfirst.frc.team4576.robot.commands.AutoCrossBaseline;
 import org.usfirst.frc.team4576.robot.commands.AutoDriveStraight;
+import org.usfirst.frc.team4576.robot.commands.AutoLeftScale;
 import org.usfirst.frc.team4576.robot.commands.AutoLeftSwitch;
+import org.usfirst.frc.team4576.robot.commands.AutoMiddleScale;
+import org.usfirst.frc.team4576.robot.commands.AutoMiddleSwitch1;
+import org.usfirst.frc.team4576.robot.commands.AutoMiddleSwitch2;
+import org.usfirst.frc.team4576.robot.commands.AutoRightScale;
+import org.usfirst.frc.team4576.robot.commands.AutoRightSwitch;
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -50,6 +58,13 @@ public class Robot extends IterativeRobot {
 	final String autoDriveStraight = "DriveStraight";
 	final String autoCrossBaseline = "CrossBaseline";
 	final String autoLeftSwitch	= "LeftSwitch";
+	final String autoLeftScale = "LeftScale";
+	final String autoRightSwitch = "RightSwitch";
+	final String autoRightScale = "RightScale";
+	final String autoMiddleSwitch1 = "MiddleSwitch1";
+	final String autoMiddleSwitch2 = "MiddleSwitch2";
+	final String autoMiddleScale = "MiddleScale";
+	
 	String autoSelected;
 
 
@@ -150,6 +165,25 @@ public class Robot extends IterativeRobot {
 		case autoLeftSwitch:
 			autonomousCommand = new AutoLeftSwitch();
 			break;
+		case autoLeftScale:
+			autonomousCommand = new AutoLeftScale();
+			break;
+		case autoRightSwitch:
+			autonomousCommand = new AutoRightSwitch();
+			break;
+		case autoRightScale:
+			autonomousCommand = new AutoRightScale();
+			break;
+		case autoMiddleSwitch1:
+			autonomousCommand = new AutoMiddleSwitch1();
+			break;
+		case autoMiddleSwitch2:
+			autonomousCommand = new AutoMiddleSwitch2();
+			break;
+		case autoMiddleScale:
+			autonomousCommand = new AutoMiddleScale();
+			break;
+			
 		default:
 			autonomousCommand = null;
 			break;
