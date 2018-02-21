@@ -1,14 +1,13 @@
 package org.usfirst.frc.team4576.robot.subsystems;
 
-import org.usfirst.frc.team4576.robot.Robot;
 import org.usfirst.frc.team4576.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PIDController;
 //import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -27,6 +26,9 @@ public class Elevator extends Subsystem { // This system extends PIDSubsystem
 
 	public WPI_TalonSRX tsrxE = new WPI_TalonSRX(RobotMap.ELEVATOR_TALON);
 	/** save the target position to servo to */
+	DigitalInput limitSwitchT = new DigitalInput(1);
+	DigitalInput limitSwitchB = new DigitalInput(2);
+
 	double targetPos1 = (double) (2.0000000 * 360.00000000);// change the value
 															// in front of
 															// *360.0000000
