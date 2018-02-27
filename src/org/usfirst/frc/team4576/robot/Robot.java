@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> chooser = new SendableChooser<>();
 
 	public void robotInit() {
-		/* choose the sensor and sensor direction */
+		/* choose the sensor and sensor direction */		
         Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
         Robot.chassis.tsrxL.setSensorPhase(false);
         Robot.chassis.tsrxL.setInverted(true);
@@ -296,8 +296,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO Heading", imu.getHeading());
-		SmartDashboard.putString("Elevator PID", Robot.elevator.elevstring.toString());
-		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.ELEVATOR_PID));
+		SmartDashboard.putNumber("Elevator Encoder", Robot.elevator.tsrxE.getSelectedSensorPosition(1));
 		SmartDashboard.putNumber("Left Amps", Robot.chassis.getLAmps());
 		SmartDashboard.putNumber("Right Amps", Robot.chassis.getRAmps());
 		SmartDashboard.putNumber("Left Speed", Robot.chassis.getLeftSpeed());

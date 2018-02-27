@@ -30,12 +30,12 @@ package org.usfirst.frc.team4576.robot;
 public class RobotMap {
 
 	// Talon IDs:
-	public static final int LEFT_MASTER = 5;
-    public static final int RIGHT_MASTER = 1;
+	public static final int LEFT_MASTER = 0;
+   public static final int RIGHT_MASTER = 1;
     public static final int LEFT_SLAVE = 2;
     public static final int RIGHT_SLAVE = 3;
     public static final int LEFT_SLAVE2 = 4;
-    public static final int RIGHT_SLAVE2 = 7;
+    public static final int RIGHT_SLAVE2 = 5;
     public static final int ELEVATOR_TALON = 6;
 
 	//Victor IDs:
@@ -64,8 +64,11 @@ public class RobotMap {
 	public static final double kI1 = 0.0;
 	public static final double kD1 = 0.0;
 	//PDP Channels (for reading amperage)
-	public static final int LEFT_PDPCHANNEL = 2;
-	public static final int RIGHT_PDPCHANNEL = 12;
+	public static final int LEFT_PDPCHANNEL = 1;//2 on practice, 1 on competition
+	public static final int RIGHT_PDPCHANNEL = 12;//12 on practice, 12 on competition
+	//DIo Channels
+	public static final int TOPDIO = 1;
+	public static final int BOTDIO = 2;	
 	// These lines declare the axes for turning
 	public static final int FORWARD_AXIS = 1;
 	public static final int TURN_AXIS = 4;

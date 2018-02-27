@@ -47,12 +47,12 @@ public class Chassis extends Subsystem {
 	
 	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-	public int absolutePositionL = tsrxL.getSelectedSensorPosition(RobotMap.kTimeoutMs)
+	public int absolutePositionL = tsrxL.getSelectedSensorPosition(0)
 			& 0xFFF; /*
 						 * mask out the bottom12 bits, we don't care about the
 						 * wrap arounds
 						 */
-	public int absolutePositionR = tsrxR.getSelectedSensorPosition(RobotMap.kTimeoutMs)
+	public int absolutePositionR = tsrxR.getSelectedSensorPosition(0)
 			& 0xFFF; /*
 						 * mask out the bottom12 bits, we don't care about the
 						 * wrap arounds

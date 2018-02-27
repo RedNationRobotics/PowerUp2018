@@ -30,8 +30,8 @@ public class DriveWithJoysticks extends Command {
 		// TODO Auto-generated method stub
 		Robot.chassis.normalDrive();
 
-		Robot.elevator.elevatorTeleop(Robot.secondaryStick);
-		Robot.elevator.gamePadControl(Robot.secondaryStick);
+		//Robot.elevator.elevatorTeleop(Robot.secondaryStick);
+		//Robot.elevator.gamePadControl(Robot.secondaryStick);
 	}
 
 	@Override

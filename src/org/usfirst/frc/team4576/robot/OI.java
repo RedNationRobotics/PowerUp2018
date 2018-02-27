@@ -3,7 +3,10 @@ package org.usfirst.frc.team4576.robot;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import redcore.AxisButton;
 
+import org.usfirst.frc.team4576.robot.commands.ElevDown;
+import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.Release;
 import org.usfirst.frc.team4576.robot.commands.Shift;
@@ -42,16 +45,13 @@ public class OI {
 	Button dsLB = new JoystickButton(Robot.driveStick, 5);
 	Button dsRB = new JoystickButton(Robot.driveStick, 6);
 
-	Button ssA = new JoystickButton(Robot.driveStick, 1);
-	Button ssX = new JoystickButton(Robot.driveStick, 3);
-	Button ssBACK = new JoystickButton(Robot.driveStick, 7);
-	Button ssSTART = new JoystickButton(Robot.driveStick, 8);
-	Button ssLB = new JoystickButton(Robot.driveStick, 5);
-	Button ssRB = new JoystickButton(Robot.driveStick, 6);
 
-	public static final String singleControl = "Single Operator Control:";
-	public static final String dualControl = "Dual Operator Control:";
-	public static SendableChooser<String> oichooser = new SendableChooser<>();
+//	AxisButton rTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
+//	AxisButton lTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
+	
+	Button ssLB = new JoystickButton(Robot.secondaryStick, 5);
+	Button ssRB = new JoystickButton(Robot.secondaryStick, 6);
+
 	// AxisButton RT = new AxisButton(Robot.secondaryStick, 3, 0.5, 0.5);
 	public OI() {
 		dsX.whenPressed(new Shift(true));
@@ -63,5 +63,9 @@ public class OI {
 		dsRB.whileHeld(new Release(true));
 		dsRB.whenReleased(new Release(false));
 		
+		ssLB.whileHeld(new ElevDown(true));
+		ssLB.whenReleased(new ElevDown(false));
+		ssRB.whileHeld(new ElevUp(true));
+		ssRB.whenReleased(new ElevUp(false));
 }
 }
