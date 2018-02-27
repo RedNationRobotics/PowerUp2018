@@ -295,7 +295,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Amps", Robot.chassis.getRAmps());
 		SmartDashboard.putNumber("Left Speed", Robot.chassis.getLeftSpeed());
 		SmartDashboard.putNumber("Right Speed", Robot.chassis.getRightSpeed());
-=======
 		
 		//SmartDashboard.putNumber("Amperage", );
 		SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
@@ -313,7 +312,6 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
 		SmartDashboard.putNumber("BNO055 Heading :", imu.getHeading());
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
->>>>>>> 65cb2b4be08ea98424558084977deb7a28ccb5ec
 
 	}
 
