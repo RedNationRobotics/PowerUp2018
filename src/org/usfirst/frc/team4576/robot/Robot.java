@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static BNO055 imu;
 	public static Joystick driveStick1  = new Joystick(4);
 	
+    public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
@@ -99,7 +101,7 @@ public class Robot extends IterativeRobot {
 		 Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		 Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 
-		System.out.println("RNR 2017 Robot Code Initializing...");
+	    System.out.print("Red Nation Robotics 2018 Code Powering up....");
 		oi = new OI();
 
 		teleopCommand = new DriveWithJoysticks();
