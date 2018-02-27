@@ -2,6 +2,7 @@ package org.usfirst.frc.team4576.robot;
 
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
+import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
@@ -25,12 +26,15 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
+	public static final Elevator elevator = new Elevator();
 	public static BNO055 imu;
 	public static Joystick driveStick1  = new Joystick(4);
 	
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
+	public static Joystick secondaryStick = new Joystick(0);
+
 	public static Timer t = new Timer();
 
 
@@ -44,12 +48,9 @@ public class Robot extends IterativeRobot {
 	
 
 	public void robotInit() {
-<<<<<<< HEAD
 		/* choose the sensor and sensor direction */		
-=======
 		
 		/* choose the sensor and sensor direction */
->>>>>>> 65cb2b4be08ea98424558084977deb7a28ccb5ec
         Robot.chassis.tsrxL.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
         Robot.chassis.tsrxL.setSensorPhase(false);
         Robot.chassis.tsrxL.setInverted(false);
@@ -285,7 +286,6 @@ public class Robot extends IterativeRobot {
 
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-<<<<<<< HEAD
 		SmartDashboard.putNumber("Left Encoder", Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
 		SmartDashboard.putNumber("Right Encoder", Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.CHASSIS_PID));
 		SmartDashboard.putNumber("psensor PSI", Robot.pneumatics.getPsi());

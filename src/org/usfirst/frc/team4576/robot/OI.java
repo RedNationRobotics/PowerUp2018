@@ -39,21 +39,25 @@ import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 // 6 - DPad Left/Right
 public class OI {
 	Button dsA = new JoystickButton(Robot.driveStick, 1);
+	Button dsB = new JoystickButton(Robot.driveStick, 2);
 	Button dsX = new JoystickButton(Robot.driveStick, 3);
-	Button dsBACK = new JoystickButton(Robot.driveStick, 7);
-	Button dsSTART = new JoystickButton(Robot.driveStick, 8);
+	Button dsY = new JoystickButton(Robot.driveStick, 4);
 	Button dsLB = new JoystickButton(Robot.driveStick, 5);
 	Button dsRB = new JoystickButton(Robot.driveStick, 6);
+	Button dsBACK = new JoystickButton(Robot.driveStick, 7);
+	Button dsSTART = new JoystickButton(Robot.driveStick, 8);
+	
 
 
 //	AxisButton rTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
 //	AxisButton lTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
-	
+	Button ssY = new JoystickButton(Robot.secondaryStick, 4);
 	Button ssLB = new JoystickButton(Robot.secondaryStick, 5);
 	Button ssRB = new JoystickButton(Robot.secondaryStick, 6);
 
 	// AxisButton RT = new AxisButton(Robot.secondaryStick, 3, 0.5, 0.5);
 	public OI() {
+		/*Single Operator Control*/
 		dsX.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
@@ -62,10 +66,25 @@ public class OI {
 		dsLB.whenReleased(new Intake(false));
 		dsRB.whileHeld(new Release(true));
 		dsRB.whenReleased(new Release(false));
+		dsY.whileHeld(new ElevUp(true));
+		dsY.whenReleased(new ElevUp(false));
+		/**/
+		
+		/*Dual Operator Control
+		dsX.whenPressed(new Shift(true));
+		dsA.whenPressed(new Shift(false));
+		dsBACK.whenPressed(new ToggleCompressor(false));
+		dsSTART.whenPressed(new ToggleCompressor(true));
+		dsLB.whileHeld(new Intake(true));
+		dsLB.whenReleased(new Intake(false));
 		
 		ssLB.whileHeld(new ElevDown(true));
 		ssLB.whenReleased(new ElevDown(false));
 		ssRB.whileHeld(new ElevUp(true));
 		ssRB.whenReleased(new ElevUp(false));
+		ssY.whileHeld(new Release(true));
+		ssY.whenReleased(new Release(false));
+		*/
+
 }
 }
