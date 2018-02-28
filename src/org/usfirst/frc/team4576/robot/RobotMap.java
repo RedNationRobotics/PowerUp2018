@@ -31,7 +31,7 @@ public class RobotMap {
 
 	// Talon IDs:
 	public static final int LEFT_MASTER = 0;
-   public static final int RIGHT_MASTER = 1;
+    public static final int RIGHT_MASTER = 1;
     public static final int LEFT_SLAVE = 2;
     public static final int RIGHT_SLAVE = 3;
     public static final int LEFT_SLAVE2 = 4;
@@ -50,15 +50,17 @@ public class RobotMap {
 	// configuration.
 	public static final int CHASSIS_PID = 0;
 	public static final int ELEVATOR_PID = 1;
-
-	//PID Values
+	//Throttle Values
+	public static final double ELEVSPEEDUP = 1;
+	public static final double ELEVSPEEDDOWN = -.5;
+	/*PID Values*/
 	//Chassis
-	public static final double kF0 = 0.1097;
-	public static final double kP0 = 0.1;
+	public static final double kF0 = 0.2;
+	public static final double kP0 = 0.2;
 	public static final double kI0 = 0.0;
 	public static final double kD0 = 0.0;
 	
-	//ELevator
+	//ELevator 
 	public static final double kF1 = 0.1097;
 	public static final double kP1 = 0.1;
 	public static final double kI1 = 0.0;
@@ -66,7 +68,7 @@ public class RobotMap {
 	//PDP Channels (for reading amperage)
 	public static final int LEFT_PDPCHANNEL = 1;//2 on practice, 1 on competition
 	public static final int RIGHT_PDPCHANNEL = 12;//12 on practice, 12 on competition
-	//DIo Channels
+	//DIO Channels
 	public static final int TOPDIO = 1;
 	public static final int BOTDIO = 2;	
 	// These lines declare the axes for turning

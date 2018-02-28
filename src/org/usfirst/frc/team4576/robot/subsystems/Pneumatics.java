@@ -21,7 +21,7 @@ public class Pneumatics extends Subsystem {
 
 	}
 
-	private Compressor c;
+	public Compressor c;
 	private Solenoid s0;
 	public AnalogInput psensor;
 	protected void initDefaultCommand() {
@@ -37,14 +37,22 @@ public class Pneumatics extends Subsystem {
 	public void setShift(boolean closed) {
 		s0.set(closed);
 	}
+	public boolean getShift() {
+		if (s0.get() == true) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
 
 	public void shiftUp() {
-		s0.set(true);
+		setShift(true);
 
 	}
 
 	public void shiftDown() {
-		s0.set(false);
+		setShift(false);
 	
 	}
 

@@ -34,12 +34,12 @@ public class Elevator extends Subsystem {
 	}
 	public void up() {
 
-		tsrxE.set(ControlMode.PercentOutput, 1);
+		tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDUP);
 	}
 
 	public void down() {
 
-		tsrxE.set(ControlMode.PercentOutput, -.5);
+		tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDDOWN);
 		
 	}
 	/*
