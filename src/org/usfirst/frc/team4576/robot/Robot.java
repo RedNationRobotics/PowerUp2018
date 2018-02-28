@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 
 	public static BNO055 imu;
+    // Robot.gamedata.charat 0 - your switch 1 - scale 2 - enemy switch
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
 	public static OI oi;

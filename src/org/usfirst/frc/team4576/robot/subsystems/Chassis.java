@@ -62,7 +62,8 @@ public class Chassis extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 	}
-
+	 // +,+ for forward, -,- for backwards
+    // +,- to turn right, -,+ to turn left
 	//sets the left and right throttle (PercentOutput Mode)
 	public void setLeftRight(double left, double right) {
 		tsrxL.set(ControlMode.PercentOutput, -left);
@@ -70,7 +71,8 @@ public class Chassis extends Subsystem {
 
 	}
 	//drives straight a set amount of encoder clicks. (PercentOutput Mode)
-
+	 // +,+ for forward, -,- for backwards
+    // +,- to turn right, -,+ to turn left
 	public void motionMagicLeftRight(double LpositionUnits, double RpositionUnits) {
 		tsrxL.set(ControlMode.MotionMagic, -LpositionUnits);
 		tsrxR.set(ControlMode.MotionMagic, RpositionUnits);
