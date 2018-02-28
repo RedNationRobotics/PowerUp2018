@@ -62,12 +62,14 @@ public class OI {
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsLB.whileHeld(new Intake(true));
-		dsLB.whenReleased(new Intake(false));
-		dsRB.whileHeld(new Release(true));
-		dsRB.whenReleased(new Release(false));
-		dsY.whileHeld(new ElevUp(true));
-		dsY.whenReleased(new ElevUp(false));
+		dsY.whileHeld(new Intake(true));
+		dsY.whenReleased(new Intake(false));
+		dsB.whileHeld(new Release(true));
+		dsB.whenReleased(new Release(false));
+		dsLB.whileHeld(new ElevUp(true));
+		dsLB.whenReleased(new ElevUp(false));
+		dsRB.whileHeld(new ElevDown(true));
+		dsRB.whenReleased(new ElevUp(false));
 		/**/
 		
 		/*Dual Operator Control
