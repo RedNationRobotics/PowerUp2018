@@ -171,7 +171,9 @@ public class Robot extends IterativeRobot {
 		eChained_MoveWait,
 		eStopMotors,
 		eEmergencyStop,
-		eIdle
+		eIdle,
+		eTurn90Degrees,
+		eCheckFieldColor
 	}
 
 	public EAutoStates _eCurrentAutoState; // current auto state
@@ -217,7 +219,16 @@ public class Robot extends IterativeRobot {
 	public MotionItem[] _Silly_AutoRecipe = {
 		new MotionItem(EAutoStates.eTurnRight, 50000),
 		new MotionItem(EAutoStates.eStopMotors), 
-		new MotionItem(EAutoStates.eIdle) //
+		new MotionItem(EAutoStates.eIdle) 
+	};
+	
+	public MotionItem[] _LeftStation_LeftSwitch = {
+		new MotionItem(EAutoStates.eDriveForward, 10000),
+		new MotionItem(EAutoStates.eTurn90Degrees, 30000),
+		new MotionItem(EAutoStates.eDriveForward, 50000), 
+		new MotionItem(EAutoStates.eCheckFieldColor), 
+		new MotionItem(EAutoStates.eStopMotors), 
+		new MotionItem(EAutoStates.eIdle)
 	};
 
 	public static final double _dMoveTolerance = 25.0;
@@ -251,12 +262,37 @@ public class Robot extends IterativeRobot {
 					System.out.println("Hit eDriveForward");
 					_TargetLeftEncoderPosition = _CurrentLeftEncoderPosition  + _CurrentMotionItem.dParam1; 
 					_TargetRightEncoderPosition = _CurrentRightEncoderPosition + _CurrentMotionItem.dParam1; 
-					Robot.chassis.tsrxL.set(ControlMode.MotionMagic, -_TargetLeftEncoderPosition);
+					Robot.chassis.tsrxL.set(ControlMode.MotionMagic, _TargetLeftEncoderPosition);
 					Robot.chassis.tsrxR.set(ControlMode.MotionMagic, _TargetRightEncoderPosition);
 					_eCurrentAutoState = EAutoStates.eChained_MoveWait; // chained event, first to move, then check
 					System.out.println("Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
 				}
+				
+			case eTurn90Degrees:
+			{
+				_TargetLeftEncoderPosition = _CurrentLeftEncoderPosition  + _CurrentMotionItem.dParam1; 
+				_TargetRightEncoderPosition = _CurrentRightEncoderPosition + _CurrentMotionItem.dParam1;
+				Robot.chassis.tsrxL.set(ControlMode.MotionMagic, _TargetLeftEncoderPosition); // forward 
+				Robot.chassis.tsrxR.set(ControlMode.MotionMagic, -_TargetRightEncoderPosition);// back
+				MoveToNextMotionItemInSelectedRecipe();
+
+			}
+				
 				break;
+			case eCheckFieldColor:
+			{
+			
+				if (Robot.gameData.charAt(0) == 'L')/* need the left driverstation left switch data, go on the first website*/ {
+					
+					_eCurrentAutoState = EAutoStates.eDriveForward; // chained event, first to move, then check
+				}
+				if (Robot.gameData.charAt(0) == 'R')/*need the left driverstation right switch data, go on the first website*/ {
+					
+				}
+				MoveToNextMotionItemInSelectedRecipe();
+
+			}
+			break;
 
 			case eChained_MoveWait:
 				{
@@ -266,7 +302,7 @@ public class Robot extends IterativeRobot {
 					}
 				}
 				break; 
-			case eStopMotors: 
+			case eStopMotors:  
 			{
 				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
 				Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
