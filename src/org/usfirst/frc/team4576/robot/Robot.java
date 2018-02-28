@@ -163,26 +163,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
 	}
 
-<<<<<<< HEAD
 
 
-	// *************** FSM zone **********************************************************
-	public enum EAutoStates{
-		eDriveForward,
-		eTurnRight,
-		eChained_MoveWait,
-		eStopMotors,
-		eEmergencyStop,
-		eIdle,
-		eTurn90Degrees,
-		eCheckFieldColor
-=======
+
 	// *************** FSM zone ***************
 	// ****************************************
 	public enum EAutoStates {
-		eDriveForward, eTurnRight, eChained_MoveWait, eStopMotors, eEmergencyStop, eIdle
->>>>>>> e759fc015916159874ef21103087f6f2cb9840a8
-	}
+		eDriveForward, eTurnRight, eChained_MoveWait, eStopMotors, eEmergencyStop, eIdle, eTurn90Degrees, eCheckFieldColor
+		}
 
 	public EAutoStates _eCurrentAutoState; // current auto state
 
@@ -217,7 +205,6 @@ public class Robot extends IterativeRobot {
 			new MotionItem(EAutoStates.eStopMotors), new MotionItem(EAutoStates.eIdle) };
 
 	// another drive recipe
-<<<<<<< HEAD
 	public MotionItem[] _Silly_AutoRecipe = {
 		new MotionItem(EAutoStates.eTurnRight, 50000),
 		new MotionItem(EAutoStates.eStopMotors), 
@@ -231,12 +218,8 @@ public class Robot extends IterativeRobot {
 		new MotionItem(EAutoStates.eCheckFieldColor), 
 		new MotionItem(EAutoStates.eStopMotors), 
 		new MotionItem(EAutoStates.eIdle)
-=======
-	public MotionItem[] _Silly_AutoRecipe = { new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eStopMotors), new MotionItem(EAutoStates.eIdle) //
->>>>>>> e759fc015916159874ef21103087f6f2cb9840a8
-	};
 
+	};
 	public static final double _dMoveTolerance = 25.0;
 
 	public void MoveToNextMotionItemInSelectedRecipe() {
@@ -252,7 +235,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void UpdateFSM() {
-<<<<<<< HEAD
 		switch(_eCurrentAutoState){
 
 			case eIdle: // do nothing
@@ -308,7 +290,6 @@ public class Robot extends IterativeRobot {
 			{
 				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
 				Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
-=======
 		switch (_eCurrentAutoState) {
 
 		case eIdle: // do nothing
@@ -333,7 +314,6 @@ public class Robot extends IterativeRobot {
 			if (IsCloseEnough()) {
 				System.out.println("Hit eChained_MoveWait (" + _CurrentLeftEncoderPosition + ", "
 						+ _CurrentRightEncoderPosition + ")");
->>>>>>> e759fc015916159874ef21103087f6f2cb9840a8
 				MoveToNextMotionItemInSelectedRecipe();
 			}
 		}
@@ -352,6 +332,8 @@ public class Robot extends IterativeRobot {
 			Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
 			_eCurrentAutoState = EAutoStates.eIdle;
 			break;
+		}
+		}
 		}
 	}
 

@@ -23,24 +23,24 @@ public class AutoMiddleSwitch1 extends Command {
 	Elevator Elevator = new Elevator();
 
 		protected void  execute() {
-	        // -,+ for forward, +,- for backwards
-	        // -,- to turn right, +,+ to turn left
+			 // +,+ for forward, -,- for backwards
+	        // +,- to turn right, -,+ to turn left
 	        // charat 0 - your switch 1 - scale 2 - enemy switch
 	        if (Robot.gameData.charAt(0) == 'L') {
 
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.76176);
 	    		
 	    		AutoTurnAtAngle.TurnLeft();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.65294);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.65294);
 	    		
 	    		Elevator.up();
@@ -56,17 +56,17 @@ public class AutoMiddleSwitch1 extends Command {
 	            
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	            
-	            Robot.chassis.setLeftRight(-.6, .6);
+	            Robot.chassis.setLeftRight(.6, .6);
 	            Timer.delay(0.76176);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.65294);
 	    		
 	    		AutoTurnAtAngle.TurnLeft();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.62294);
 	    		
 	    		Elevator.up();

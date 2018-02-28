@@ -35,7 +35,7 @@ public class AutoDriveForward extends Command {
       	System.out.println(this.getClass().getName() + "isFinished() : motorPositions [bl, br, fl, fr] ["
 				+ lPosition + ", "
 				+ rPosition + ", " + ']');
-    	Robot.chassis.motionMagicStraight(targetPosition);
+    	Robot.chassis.motionMagicLeftRight(targetPosition, targetPosition);
     }
 
     // Make this return true when this Command no longer needs to run execute()
