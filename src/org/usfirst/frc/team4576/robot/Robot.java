@@ -24,6 +24,7 @@ import redcore.BNO055.reg_t;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
 import PowerUp2018.AutoRecipes;
+import Pixyrio.PixyObjectFinder;
 
 
 
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
 	public static final Elevator elevator = new Elevator();
+	public static final PixyObjectFinder _POF = new PixyObjectFinder();
 
 	public static BNO055 imu;
 	public static Joystick driveStick1  = new Joystick(4);
@@ -419,6 +421,7 @@ public class Robot extends IterativeRobot {
 	
 
 	public void autonomousPeriodic() {
+		_POF.UpdatePeriodic();
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents(); 
 		UpdateFSM();
@@ -440,6 +443,7 @@ public class Robot extends IterativeRobot {
 	
 
 	public void teleopPeriodic() {
+		_POF.UpdatePeriodic();
 		Scheduler.getInstance().run();
 
 		UpdateDriveCoreComponents(); // shared with auto
