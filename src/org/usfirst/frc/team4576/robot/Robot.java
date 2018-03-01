@@ -21,6 +21,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
 import redcore.BNO055.reg_t;
+import PowerUp2018.AutoStates.EAutoStates;
+import PowerUp2018.MotionItem;
+import PowerUp2018.AutoRecipes;
+
 
 
 public class Robot extends IterativeRobot {
@@ -168,205 +172,13 @@ public class Robot extends IterativeRobot {
 
 
 	// *************** FSM zone **********************************************************
-	public enum EAutoStates{
-		eDriveForward,
-		eTurnRight,
-		eTurnLeft,
-		eChained_MoveWait,
-		eStopMotors,
-		eEmergencyStop,
-		eIdle,
-		eSlightlyDriftLeft,
-		eDriveForwardWithLift,
-		eOutTakeThenLowerLift,
-		eLiftUp,
-		eLiftDown,
-		eReverse,
-		eIntake,
-		eOutTake
-		
-	}
-
 	public EAutoStates _eCurrentAutoState; // current auto state
-	
-	public class MotionItem {
-		public EAutoStates eAutoState;
-		public double dParam1;
-
-		
-		// constructor to take two values
-		public MotionItem(EAutoStates eTempAutoState, double dTempParam1) {
-		   eAutoState = eTempAutoState;
-		   dParam1 = dTempParam1;
-		}
-		
-		// constructor to take one value
-		public MotionItem(EAutoStates eTempAutoState) {
-			eAutoState = eTempAutoState;
-			dParam1 =0.0;
-		}
-		
-	}
-
-	
+	public EAutoStates _ePreviousAutoState; // current auto state
 	public double _TargetLeftEncoderPosition; 
 	public double _TargetRightEncoderPosition;
-
-	
 	public MotionItem[] _Selected_AutoRecipe; // the current array of motion items selected at start of autoInit
 	public MotionItem _CurrentMotionItem; // current position in the array
 	int _iCurrentMotionItemIndex; // current position in the drive recipe
-	
-		/*Recipes*/
-	public MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnLeft, 30000),
-			new MotionItem(EAutoStates.eTurnRight, 30000),
-			//new MotionItem(EAutoStates.eOutTake, 0.5),
-			//new MotionItem(EAutoStates.eReverse, 50000),
-			//new MotionItem(EAutoStates.eLiftDown, 0.5),
-			//new MotionItem(EAutoStates.eIdle)
-			
-	};
-	public MotionItem[] _LeftSide_LeftSwitch = {	
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 45000000/*to the scale*/), // set encoder clicks in parameter
-			new MotionItem(EAutoStates.eOutTake, 0.5), //set time for it to outtake in parameter
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown, 0.5),
-			new MotionItem(EAutoStates.eIdle) //waits until autonomous period is over
-			
-	};
-	public MotionItem[] _LeftSide_RightSwitch = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000/*to the scale*/), // set encoder clicks in parameter
-			new MotionItem(EAutoStates.eTurnLeft, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 150000),	
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTakeThenLowerLift, 0.5),
-			new MotionItem(EAutoStates.eIdle) //waits until autonomous period is over
-
-		};
-	public MotionItem[] _LeftSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnLeft, 30000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	};
-	public MotionItem[] _LeftSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 150000),	
-			new MotionItem(EAutoStates.eTurnLeft, 50000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	};
-	public MotionItem[] _MiddleSide_LeftSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-
-	};
-	public MotionItem[] _MiddleSide_RightSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-
-	};
-	public MotionItem[] _MiddleSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 20000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-
-	};
-	public MotionItem[] _MiddleSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 20000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-
-	};
-	public MotionItem[] _RightSide_LeftSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 45000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 150000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	};
-	public MotionItem[] _RightSide_RightSwitch  = {
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	};
-	public MotionItem[] _RightSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 2500000),			
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	}; 
-	public MotionItem[] _RightSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
-			
-	};
-
 	public static final double _dMoveTolerance = 100.0;
 
 	
@@ -383,6 +195,10 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void UpdateFSM() {
+		if (_ePreviousAutoState != _eCurrentAutoState)
+			System.out.println(_eCurrentAutoState.name());
+		_ePreviousAutoState = _eCurrentAutoState;
+		
 		switch(_eCurrentAutoState){
 
 			case eIdle: // do nothing
@@ -540,54 +356,54 @@ public class Robot extends IterativeRobot {
 		switch (autoSelected) {
         case autoLeftSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(_LeftSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(_LeftSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch);
     		}
             break;
         case autoLeftScale:
     		if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(_LeftSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(_LeftSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale);
     		}
             break;
         case autoMiddleSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(_MiddleSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(_MiddleSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch);
     		}
            break;
         case autoMiddleScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(_MiddleSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(_MiddleSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale);
     		}
             break;
         case autoRightSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(_RightSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(_RightSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch);
     		}
             break;
         case autoRightScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(_RightSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(_RightSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale);
     		}
             break;
         case autoTest:
-			InitializeAutoRecipe(_Test_);
+			InitializeAutoRecipe(AutoRecipes._Test_);
         default:
             break;
 
