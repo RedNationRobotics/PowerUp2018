@@ -8,6 +8,7 @@ import redcore.AxisButton;
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
+import org.usfirst.frc.team4576.robot.commands.IntakeArm;
 import org.usfirst.frc.team4576.robot.commands.Release;
 import org.usfirst.frc.team4576.robot.commands.Shift;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
@@ -46,6 +47,9 @@ public class OI {
 	Button dsRB = new JoystickButton(Robot.driveStick, 6);
 	Button dsBACK = new JoystickButton(Robot.driveStick, 7);
 	Button dsSTART = new JoystickButton(Robot.driveStick, 8);
+	Button dsLSTICK = new JoystickButton(Robot.driveStick, 9);
+	Button dsRSTICK = new JoystickButton(Robot.driveStick, 10);
+
 	
 
 
@@ -70,6 +74,7 @@ public class OI {
 		dsLB.whenReleased(new ElevUp(false));
 		dsRB.whileHeld(new ElevDown(true));
 		dsRB.whenReleased(new ElevUp(false));
+		dsRSTICK.whenPressed(new IntakeArm());
 		/**/
 		
 		/*Dual Operator Control

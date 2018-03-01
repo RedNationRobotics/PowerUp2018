@@ -23,6 +23,7 @@ public class Pneumatics extends Subsystem {
 
 	public Compressor c;
 	private Solenoid s0;
+	private Solenoid s1;
 	public AnalogInput psensor;
 	protected void initDefaultCommand() {
 		c = new Compressor();
@@ -54,6 +55,14 @@ public class Pneumatics extends Subsystem {
 	public void shiftDown() {
 		setShift(false);
 	
+	}
+	public void setIntakeArm(boolean closed) {
+		s1.set(closed);
+	}
+
+	public void intakeArm() {
+		s1.set(!s1.get());
+
 	}
 
 	// Compressor Toggle
