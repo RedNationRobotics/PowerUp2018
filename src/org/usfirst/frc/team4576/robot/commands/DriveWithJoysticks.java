@@ -15,7 +15,6 @@ public class DriveWithJoysticks extends Command {
 	public DriveWithJoysticks() {
 
 		requires(Robot.chassis);
-		requires(Robot.elevator);
 		Robot.chassis.initTeleop();
 	}
 
