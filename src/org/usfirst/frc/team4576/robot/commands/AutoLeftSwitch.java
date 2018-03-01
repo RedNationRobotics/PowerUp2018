@@ -22,20 +22,20 @@ public class AutoLeftSwitch extends Command {
 	}
 
 		protected void  execute() {
-	        // -,+ for forward, +,- for backwards
-	        // -,- to turn right, +,+ to turn left
+			 // +,+ for forward, -,- for backwards
+	        // +,- to turn right, -,+ to turn left
 	        // charat 0 - your switch 1 - scale 2 - enemy switch
 	        if (Robot.gameData.charAt(0) == 'L') {
 
 	        	AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	        	Elevator Elevator = new Elevator();
 	        	
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(1.85);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.5);
 	    		
 	    		Elevator.up();
@@ -52,17 +52,17 @@ public class AutoLeftSwitch extends Command {
 	            AutoTurnAtAngle AutoTurnAtAngle = new AutoTurnAtAngle();
 	            Elevator Elevator = new Elevator();
 	            
-	            Robot.chassis.setLeftRight(-.6, .6);
+	            Robot.chassis.setLeftRight(.6, .6);
 	            Timer.delay(2);
 	            
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(1.85);
 	    		
 	    		AutoTurnAtAngle.TurnRight();
 	    		
-	    		Robot.chassis.setLeftRight(-.6, .6);
+	    		Robot.chassis.setLeftRight(.6, .6);
 	    		Timer.delay(0.5);
 	    		
 	    		Elevator.up();

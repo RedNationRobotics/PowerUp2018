@@ -28,7 +28,7 @@ public class AutoDriveStraight extends Command{
 		// -,+ for forward, +,- for backwards
 		// -,- to turn right, +,+ to turn left
 		//addSequential(new AutoDriveForward(5));
-		new DriveStraightBNO(.5, 5);
+		new DriveStraightBNO(.5, .5);
 		
 	}
 

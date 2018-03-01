@@ -28,9 +28,9 @@ public class AutoMiddleSwitch2 extends Command {
 	
 	@Override
 	protected void execute() {
-		// -,+ for forward, +,- for backwards
-		// -,- to turn right, +,+ to turn left
-		// charat 0 - your switch 1 - scale 2 - enemy switch
+		 // +,+ for forward, -,- for backwards
+        // +,- to turn right, -,+ to turn left
+        // charat 0 - your switch 1 - scale 2 - enemy switch
 		if (Robot.gameData.charAt(0) == 'L') {
 
 

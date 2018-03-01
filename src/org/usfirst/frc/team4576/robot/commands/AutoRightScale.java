@@ -31,23 +31,23 @@ public class AutoRightScale extends Command {
 	
 	@Override
 	protected void execute() {
-		// -,+ for forward, +,- for backwards
-		// -,- to turn right, +,+ to turn left
-		// charat 0 - your switch 1 - scale 2 - enemy switch
+		 // +,+ for forward, -,- for backwards
+        // +,- to turn right, -,+ to turn left
+        // charat 0 - your switch 1 - scale 2 - enemy switch
 		if (Robot.gameData.charAt(0) == 'L') {
 
 
-			Robot.chassis.setLeftRight(-.6, .6);
+			Robot.chassis.setLeftRight(.6, .6);
 			Timer.delay(1.541666);
 			
 			AutoTurnAtAngle.TurnLeft();
 			
-			Robot.chassis.setLeftRight(-.6, .6);
+			Robot.chassis.setLeftRight(.6, .6);
 			Timer.delay(1.541666);
 			
 			AutoTurnAtAngle.TurnRight();
 			
-			Robot.chassis.setLeftRight(-.6, .6);
+			Robot.chassis.setLeftRight(.6, .6);
 			Timer.delay(.7708);
 			
 			AutoTurnAtAngle.TurnRight();
@@ -73,13 +73,13 @@ public class AutoRightScale extends Command {
 		
 		if (Robot.gameData.charAt(0) == 'R') {
 			
-			Robot.chassis.setLeftRight(-.6, .6);
+			Robot.chassis.setLeftRight(.6, .6);
 			Timer.delay(3.56397);
 			
 			AutoTurnAtAngle.TurnLeft();
 			
 			//if needed
-			//Robot.chassis.setLeftRight(-.6, .6);
+			//Robot.chassis.setLeftRight(.6, .6);
 			//Timer.delay(.5);
 			
 			

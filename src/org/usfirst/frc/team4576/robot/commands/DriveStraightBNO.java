@@ -34,7 +34,7 @@ public DriveStraightBNO(double throttle, double seconds) {
         xVal = throttle -error;
         yVal = throttle -error;
         }
-    Robot.chassis.setLeftRight(-xVal, yVal);
+    Robot.chassis.setLeftRight(xVal, yVal);
     
   }
 

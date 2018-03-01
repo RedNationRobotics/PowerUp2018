@@ -18,10 +18,11 @@ public class AutoTurnAtAngle extends Command {
 	double _Rturn = _heading +90.0;
 
 	//Turn left 90 degrees
+    // +,- to turn right, -,+ to turn left
 	public void TurnLeft() {
 		
 		while(_Lturn != Robot.imu.getHeading()) {
-			Robot.chassis.setLeftRight(.5, -.5);
+			Robot.chassis.setLeftRight(-.5, .5);
 		}
 	}
 	
@@ -29,7 +30,7 @@ public class AutoTurnAtAngle extends Command {
 	public void TurnRight() {
 		
 		while(_Rturn != Robot.imu.getHeading()) {
-			Robot.chassis.setLeftRight(-.5, .5);
+			Robot.chassis.setLeftRight(.5, -.5);
 
 		}
 	}	
