@@ -4,6 +4,7 @@ public class AutoStates {
 
 	public enum EAutoStates{
 		eDriveForward,
+		eStoppedTurn,
 		eTurnRight,
 		eTurnLeft,
 		eChained_MoveWait,

@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
 import redcore.BNO055.reg_t;
+import redcore.FieldDimensions;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
 import PowerUp2018.AutoRecipes;
@@ -98,14 +99,14 @@ public class Robot extends IterativeRobot {
 
         /* set closed loop gains in slot0 */
         Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs); 
+        Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.4, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.008, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.07, RobotMap.kTimeoutMs); 
         
         Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.4, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.008, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.07, RobotMap.kTimeoutMs);
         
         /* set acceleration and vcruise velocity - see documentation */
         Robot.chassis.tsrxL.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
@@ -124,7 +125,7 @@ public class Robot extends IterativeRobot {
 
 		// camera.setFPS(15);
 		// camera.setResolution(320, 240);
-		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		//CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		
 		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
 				BNO055.vector_type_t.VECTOR_EULER);
@@ -161,13 +162,18 @@ public class Robot extends IterativeRobot {
 	
 
 	public void UpdateDriveCoreComponents() {
-		_CurrentLeftEncoderPosition = Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
+		_CurrentLeftEncoderPosition = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
 		_CurrentRightEncoderPosition = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
 		_CurrentHeading = imu.getHeading();
 
 		SmartDashboard.putNumber("BNO055 Heading :", _CurrentHeading);
+		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
+		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
+		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
+		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
 		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
 		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
+
 	}
 
 
@@ -195,6 +201,22 @@ public class Robot extends IterativeRobot {
 		return (dLeftError >_dMoveTolerance && dRightError < _dMoveTolerance);
 	}
 	
+	
+	
+	public void DriveToTargetEncoderPositions() {
+		Robot.chassis.tsrxL.set(ControlMode.MotionMagic, -_TargetLeftEncoderPosition);
+		Robot.chassis.tsrxR.set(ControlMode.MotionMagic, _TargetRightEncoderPosition);
+	}
+	
+	
+	
+	public void SetTargetEncoderPositionsByInches(double dLeft_inch, double dRight_inch)  {
+		_TargetLeftEncoderPosition = _CurrentLeftEncoderPosition  + (dLeft_inch * FieldDimensions.dClicksPerInch); 
+		_TargetRightEncoderPosition = _CurrentRightEncoderPosition + (dRight_inch * FieldDimensions.dClicksPerInch); 
+	}
+	
+	
+	
 	public void UpdateFSM() {
 		if (_ePreviousAutoState != _eCurrentAutoState)
 			System.out.println(_eCurrentAutoState.name());
@@ -209,16 +231,21 @@ public class Robot extends IterativeRobot {
 			case eDriveForward:
 				{
 					System.out.println("Hit eDriveForward");
-					_TargetLeftEncoderPosition = _CurrentLeftEncoderPosition  + _CurrentMotionItem.dParam1; 
-					_TargetRightEncoderPosition = _CurrentRightEncoderPosition + _CurrentMotionItem.dParam1; 
-					Robot.chassis.tsrxL.set(ControlMode.MotionMagic, -_TargetLeftEncoderPosition);
-					Robot.chassis.tsrxR.set(ControlMode.MotionMagic, _TargetRightEncoderPosition + 500);
+					SetTargetEncoderPositionsByInches(_CurrentMotionItem.dParam1, _CurrentMotionItem.dParam1);
+					DriveToTargetEncoderPositions();
 					_eCurrentAutoState = EAutoStates.eChained_MoveWait; // chained event, first to move, then check
 					System.out.println("Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
 				}
-				
-				
 				break;
+			case eStoppedTurn:
+				{
+					double dWheelDrive_in = _CurrentMotionItem.dParam1 * FieldDimensions.dInchesPerDegree;
+					SetTargetEncoderPositionsByInches(dWheelDrive_in, -dWheelDrive_in);
+					DriveToTargetEncoderPositions();
+					_eCurrentAutoState = EAutoStates.eChained_MoveWait; // chained event, first to move, then check
+				}
+				break;
+				
 			case eSlightlyDriftLeft:
 			{
 				_TargetLeftEncoderPosition = _CurrentLeftEncoderPosition  + _CurrentMotionItem.dParam1; 

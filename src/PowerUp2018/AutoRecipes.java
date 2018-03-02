@@ -5,13 +5,16 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnLeft, 30000),
-			new MotionItem(EAutoStates.eTurnRight, 30000),
+			new MotionItem(EAutoStates.eDriveForward, 12.0),
+			//new MotionItem(EAutoStates.eStoppedTurn, -30.0),
+			//new MotionItem(EAutoStates.eDriveForward, 20.0),
+			//new MotionItem(EAutoStates.eTurnLeft, 30000),
+			//new MotionItem(EAutoStates.eTurnRight, 30000),
 			//new MotionItem(EAutoStates.eOutTake, 0.5),
 			//new MotionItem(EAutoStates.eReverse, 50000),
 			//new MotionItem(EAutoStates.eLiftDown, 0.5),
-			//new MotionItem(EAutoStates.eIdle)
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	public static MotionItem[] _LeftSide_LeftSwitch = {	
