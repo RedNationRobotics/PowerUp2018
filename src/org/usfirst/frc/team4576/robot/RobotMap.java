@@ -44,6 +44,7 @@ public class RobotMap {
 	
 	// Solenoid IDs:
 	public static final int SHIFT_SOLENOID = 0;
+	public static final int INTAKE_ARM = 1;
 
 	// Which PID slot to pull gains from: Starting 2018, you can choose
 	// from 0,1,2 or 3. Only the first two (0,1) are visible in web-based

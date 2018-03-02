@@ -17,6 +17,7 @@ public class Pneumatics extends Subsystem {
 
 	public Pneumatics() {
 		s0 = new Solenoid(RobotMap.SHIFT_SOLENOID);/* Shifting */
+		s1 = new Solenoid(RobotMap.INTAKE_ARM);/* Shifting */
 		psensor = new AnalogInput(0);
 
 	}

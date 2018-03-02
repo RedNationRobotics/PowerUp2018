@@ -137,7 +137,7 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eOutTake, 0.5),
 			new MotionItem(EAutoStates.eReverse, 50000),
 			new MotionItem(EAutoStates.eLiftDown),
-			new MotionItem(EAutoStates.eIdle)
+			new MotionItem(EAutoStates.eIdle) 
 			
 	}; 
 	public static MotionItem[] _RightSide_RightScale  = {

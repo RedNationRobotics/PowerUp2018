@@ -62,19 +62,19 @@ public class OI {
 	// AxisButton RT = new AxisButton(Robot.secondaryStick, 3, 0.5, 0.5);
 	public OI() {
 		/*Single Operator Control*/
-		dsX.whenPressed(new Shift(true));
+		dsB.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
 		dsY.whileHeld(new Intake(true));
 		dsY.whenReleased(new Intake(false));
-		dsB.whileHeld(new Release(true));
-		dsB.whenReleased(new Release(false));
-		dsLB.whileHeld(new ElevUp(true));
-		dsLB.whenReleased(new ElevUp(false));
-		dsRB.whileHeld(new ElevDown(true));
+		dsRB.whileHeld(new ElevUp(true));
 		dsRB.whenReleased(new ElevUp(false));
+		dsLB.whileHeld(new ElevDown(true));
+		dsLB.whenReleased(new ElevUp(false));
 		dsRSTICK.whenPressed(new IntakeArm());
+		dsX.whileHeld(new Release(true));
+		dsX.whenReleased(new Release(false));
 		/**/
 		
 		/*Dual Operator Control

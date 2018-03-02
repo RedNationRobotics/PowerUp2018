@@ -17,7 +17,7 @@ public class AutoStates {
 		eLiftDown,
 		eReverse,
 		eIntake,
-		eOutTake
+		eOutTake 
 	
 	}
 

@@ -9,6 +9,7 @@ import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -458,6 +459,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Rpm right: ", Robot.chassis.tsrxR.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
 		//SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
+		SmartDashboard.putNumber("Counter Top: ", Robot.elevator.counter1.get());
+		SmartDashboard.putNumber("Counter Bottom: ", Robot.elevator.counter2.get());
 
 	}
 
