@@ -4,6 +4,7 @@ import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
+import org.usfirst.frc.team4576.robot.subsystems.Lights;
 import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
 	public static final Elevator elevator = new Elevator();
+	public static final Lights lights = new Lights();
 
 	public static BNO055 imu;
 	public static Joystick driveStick1  = new Joystick(4);
@@ -155,6 +157,7 @@ public class Robot extends IterativeRobot {
         Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		autoSelected = chooser.getSelected();
+		Robot.lights.setLedMode(0.98);
 	}
 
 	
@@ -440,6 +443,7 @@ public class Robot extends IterativeRobot {
 	
 
 	public void teleopPeriodic() {
+		Robot.lights.setLedMode(0.99);
 		Scheduler.getInstance().run();
 
 		UpdateDriveCoreComponents(); // shared with auto
