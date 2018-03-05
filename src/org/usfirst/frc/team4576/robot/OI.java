@@ -2,13 +2,12 @@ package org.usfirst.frc.team4576.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
+import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.commands.Release;
 import org.usfirst.frc.team4576.robot.commands.Shift;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
@@ -50,16 +49,18 @@ public class OI {
 	Button dsLSTICK = new JoystickButton(Robot.driveStick, 9);
 	Button dsRSTICK = new JoystickButton(Robot.driveStick, 10);
 
-	
-
-
-//	AxisButton rTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
-//	AxisButton lTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
+	Button ssA = new JoystickButton(Robot.secondaryStick, 1);
+	Button ssB = new JoystickButton(Robot.secondaryStick, 2);
+	Button ssX = new JoystickButton(Robot.secondaryStick, 3);
 	Button ssY = new JoystickButton(Robot.secondaryStick, 4);
 	Button ssLB = new JoystickButton(Robot.secondaryStick, 5);
 	Button ssRB = new JoystickButton(Robot.secondaryStick, 6);
+	Button ssBACK = new JoystickButton(Robot.secondaryStick, 7);
+	Button ssSTART = new JoystickButton(Robot.secondaryStick, 8);
+	Button ssLSTICK = new JoystickButton(Robot.secondaryStick, 9);
+	Button ssRSTICK = new JoystickButton(Robot.secondaryStick, 10);
 
-	// AxisButton RT = new AxisButton(Robot.secondaryStick, 3, 0.5, 0.5);
+
 	public OI() {
 		/*Single Operator Control*/
 		dsX.whenPressed(new Shift(true));
@@ -75,6 +76,24 @@ public class OI {
 		dsRB.whileHeld(new ElevDown(true));
 		dsRB.whenReleased(new ElevUp(false));
 		dsRSTICK.whenPressed(new IntakeArm());
+		//dsLSTICK.whenPressed(new LEDMode(16));
+		//dsRSTICK.whenPressed(new LEDMode(22));
+		
+		ssA.whenPressed(new LEDMode(16));
+		ssB.whenPressed(new LEDMode(7));
+		ssX.whenPressed(new LEDMode(6));
+		ssY.whenPressed(new LEDMode(22));
+		ssLB.whenPressed(new LEDMode(23));
+		ssRB.whenPressed(new LEDMode(28));
+		ssBACK.whenPressed(new LEDMode(33));
+		ssSTART.whenPressed(new LEDMode(36));
+		ssLSTICK.whenPressed(new LEDMode(72));
+		ssRSTICK.whenPressed(new LEDMode(8));
+
+
+
+
+
 		/**/
 		
 		/*Dual Operator Control
@@ -91,6 +110,10 @@ public class OI {
 		ssRB.whenReleased(new ElevUp(false));
 		ssY.whileHeld(new Release(true));
 		ssY.whenReleased(new Release(false));
+		ssA.whenPressed(new LEDMode(7));
+		ssB.whenPressed(new LEDMode(42));
+		ssX.whenPressed(new LEDMode(11));
+		
 		*/
 
 }

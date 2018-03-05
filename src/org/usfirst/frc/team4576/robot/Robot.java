@@ -37,7 +37,6 @@ public class Robot extends IterativeRobot {
 	public static final Lights lights = new Lights();
 
 	public static BNO055 imu;
-	public static Joystick driveStick1  = new Joystick(4);
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	
 	public static OI oi;
@@ -157,7 +156,6 @@ public class Robot extends IterativeRobot {
         Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		autoSelected = chooser.getSelected();
-		Robot.lights.setLedMode(0.98);
 	}
 
 	
@@ -443,7 +441,6 @@ public class Robot extends IterativeRobot {
 	
 
 	public void teleopPeriodic() {
-		Robot.lights.setLedMode(0.99);
 		Scheduler.getInstance().run();
 
 		UpdateDriveCoreComponents(); // shared with auto
@@ -453,14 +450,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putNumber("Magnometer", reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putNumber("Gyro", reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putNumber("Course: ", Robot.driveStick1.getRawAxis(4));
-		//SmartDashboard.putBoolean("True = Compressor Low: ", pneumatics.c.getPressureSwitchValue());
-		//SmartDashboard.putString("Compressor state: ", pneumatics.compressorState());
+	//	SmartDashboard.putNumber("Course: ", Robot.driveStick1.getRawAxis(4));
+		SmartDashboard.putBoolean("Compressor state: ", pneumatics.c.enabled());
 		//SmartDashboard.putData("Autoshift: ", new ToggleAutoShift());
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
-		SmartDashboard.putNumber("Rpm left: ", Robot.chassis.tsrxL.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
-		SmartDashboard.putNumber("Rpm right: ", Robot.chassis.tsrxR.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
-		//SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
+		SmartDashboard.putNumber("Rpm left: ", chassis.getLeftSpeed());
+		SmartDashboard.putNumber("Rpm right: ", chassis.getRightSpeed());
+		SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
 
 	}

@@ -22,6 +22,7 @@ public class Shift extends Command {
 			Robot.pneumatics.shiftUp();
 		} else {
 			Robot.pneumatics.shiftDown();
+
 		}
 	}
 

@@ -17,6 +17,7 @@ public class ElevUp extends Command {
     	
         if (in) {
                Robot.elevator.up();
+               
         	}
         	
          else {
