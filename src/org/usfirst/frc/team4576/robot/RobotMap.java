@@ -53,7 +53,7 @@ public class RobotMap {
 	public static final int ELEVATOR_PID = 1;
 	//Throttle Values
 	public static final double ELEVSPEEDUP = 1;
-	public static final double ELEVSPEEDDOWN = -.6;
+	public static final double ELEVSPEEDDOWN = -0.8;
 	/*PID Values*/
 	//Chassis
 	public static final double kF0 = 0.2;

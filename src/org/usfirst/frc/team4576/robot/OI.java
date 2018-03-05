@@ -71,7 +71,7 @@ public class OI {
 		dsRB.whileHeld(new ElevUp(true));
 		dsRB.whenReleased(new ElevUp(false));
 		dsLB.whileHeld(new ElevDown(true));
-		dsLB.whenReleased(new ElevUp(false));
+		dsLB.whenReleased(new ElevDown(false));
 		dsRSTICK.whenPressed(new IntakeArm());
 		dsX.whileHeld(new Release(true));
 		dsX.whenReleased(new Release(false));

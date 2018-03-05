@@ -7,6 +7,10 @@ package redcore;
 
 public class FieldDimensions 
 {
+	
+	public static final double dLiftClicksPerInch = 465.6;
+	public static final double dLiftInchesPerClicks = 1.0/dLiftClicksPerInch;
+	
 	public static final double dClicksPerInch = 1653;
 	public static final double dInchesPerClicks = 1.0/dClicksPerInch;
 

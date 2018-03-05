@@ -5,11 +5,24 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 12.0),
+			new MotionItem(EAutoStates.eDriveForward, 120.0),
+			new MotionItem(EAutoStates.eChained_MoveWait),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 50.0),
+			new MotionItem(EAutoStates.eChained_MoveWait),
+			new MotionItem(EAutoStates.eSetLiftHeight, 70.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.2),
+			new MotionItem(EAutoStates.eChained_WaitTimer),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -50.0),
+			new MotionItem(EAutoStates.eChained_MoveWait),
+			new MotionItem(EAutoStates.eSetLiftHeight, -65.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
+			new MotionItem(EAutoStates.eStoppedTurn, 360.0),
 			//new MotionItem(EAutoStates.eStoppedTurn, -30.0),
 			//new MotionItem(EAutoStates.eDriveForward, 20.0),
-			//new MotionItem(EAutoStates.eTurnLeft, 30000),
-			//new MotionItem(EAutoStates.eTurnRight, 30000),
 			//new MotionItem(EAutoStates.eOutTake, 0.5),
 			//new MotionItem(EAutoStates.eReverse, 50000),
 			//new MotionItem(EAutoStates.eLiftDown, 0.5),
@@ -17,8 +30,10 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
+	
+/*	
 	public static MotionItem[] _LeftSide_LeftSwitch = {	
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 45000000/*to the scale*/), // set encoder clicks in parameter
+			new MotionItem(EAutoStates.eDriveForwardWithLift, 45000000), // set encoder clicks in parameter
 			new MotionItem(EAutoStates.eOutTake, 0.5), //set time for it to outtake in parameter
 			new MotionItem(EAutoStates.eReverse, 50000),
 			new MotionItem(EAutoStates.eLiftDown, 0.5),
@@ -26,7 +41,7 @@ public class AutoRecipes {
 			
 	};
 	public static MotionItem[] _LeftSide_RightSwitch = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000/*to the scale*/), // set encoder clicks in parameter
+			new MotionItem(EAutoStates.eDriveForward, 40000000), // set encoder clicks in parameter
 			new MotionItem(EAutoStates.eTurnLeft, 30000), 
 			new MotionItem(EAutoStates.eDriveForward, 50000),
 			new MotionItem(EAutoStates.eTurnRight, 30000), 
@@ -155,6 +170,6 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-
+*/
 	
 }
