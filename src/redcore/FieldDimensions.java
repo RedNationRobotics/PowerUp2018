@@ -15,7 +15,7 @@ public class FieldDimensions
 	public static final double dInchesPerClicks = 1.0/dClicksPerInch;
 
 	public static final double dWheelCentersWidth = 25.0;
-	public static final double dWheelTurnCircumference = (dWheelCentersWidth * 1.12) * Math.PI;
+	public static final double dWheelTurnCircumference = (dWheelCentersWidth * 1.06) * Math.PI;
 	public static final double dInchesPerDegree = dWheelTurnCircumference / 360.0;
 	
 	// dimensions of field components (in inches)
