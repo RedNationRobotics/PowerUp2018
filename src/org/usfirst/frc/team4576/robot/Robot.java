@@ -22,11 +22,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
 import redcore.BNO055.reg_t;
-import redcore.FieldDimensions;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
 import PowerUp2018.AutoRecipes;
 import PowerUp2018.AutoStates;
+import PowerUp2018.FieldDimensions;
 
 
 
