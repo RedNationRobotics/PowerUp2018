@@ -110,9 +110,14 @@ public class OI {
 		ssRB.whenReleased(new ElevUp(false));
 		ssY.whileHeld(new Release(true));
 		ssY.whenReleased(new Release(false));
-		ssA.whenPressed(new LEDMode(7));
-		ssB.whenPressed(new LEDMode(42));
-		ssX.whenPressed(new LEDMode(11));
+	
+		ssA.whenPressed(new LEDMode(16));
+		ssB.whenPressed(new LEDMode(7));
+		ssX.whenPressed(new LEDMode(6));	
+		ssBACK.whenPressed(new LEDMode(33));
+		ssSTART.whenPressed(new LEDMode(36));
+		ssLSTICK.whenPressed(new LEDMode(72));
+		ssRSTICK.whenPressed(new LEDMode(8));
 		
 		*/
 
