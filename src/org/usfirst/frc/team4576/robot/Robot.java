@@ -588,8 +588,8 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
 		SmartDashboard.putNumber("Rpm left: ", Robot.chassis.tsrxL.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
 		SmartDashboard.putNumber("Rpm right: ", Robot.chassis.tsrxR.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
-		//SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
-		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
+		SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
+		SmartDashboard.putBoolean("Shift state: ", pneumatics.getShift());
 		SmartDashboard.putNumber("Counter Top: ", Robot.elevator.counter1.get());
 		SmartDashboard.putNumber("Counter Bottom: ", Robot.elevator.counter2.get());
 		
