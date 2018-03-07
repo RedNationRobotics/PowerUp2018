@@ -18,40 +18,19 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eDriveForward, -36.0),
 			new MotionItem(EAutoStates.eStartTimer, 0.25),
 			new MotionItem(EAutoStates.eSetLiftHeight, 30.0),
-			
-
-
-			//new MotionItem(EAutoStates.eSetLiftHeight, 4.0),
-			//new MotionItem(EAutoStates.eChained_WaitLift),
-			//new MotionItem(EAutoStates.eDriveForward, 120.0),
-			//new MotionItem(EAutoStates.eChained_MoveWait),
-			//new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//new MotionItem(EAutoStates.eDriveForward, 50.0),
-			//new MotionItem(EAutoStates.eChained_MoveWait),
-			//new MotionItem(EAutoStates.eSetLiftHeight, 74.0),
-			//new MotionItem(EAutoStates.eChained_WaitLift),
-			//new MotionItem(EAutoStates.eGripper_Release),
-			//new MotionItem(EAutoStates.eStartTimer, 0.2),
-			//new MotionItem(EAutoStates.eGripper_Stop),
-			//new MotionItem(EAutoStates.eSetLiftHeight, -65.0),
-			//new MotionItem(EAutoStates.eChained_WaitLift),
-			//new MotionItem(EAutoStates.eDriveForward, -50.0),
-			//new MotionItem(EAutoStates.eChained_MoveWait),
-			//new MotionItem(EAutoStates.eStoppedTurn, 720.0),
-			
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	public static MotionItem[] _ElevatorDown_Recipe_ = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, -50.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -73.0),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
 	public static MotionItem[] _ElevatorUp_Recipe_ = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, 50.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
@@ -60,16 +39,12 @@ public class AutoRecipes {
 
 	public static MotionItem[] _LeftSide_LeftSwitch_1cube = { /*good*/	
 			new MotionItem(EAutoStates.eDriveForward, 151.0), 
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			new MotionItem(EAutoStates.eChained_WaitLift),
 			new MotionItem(EAutoStates.eDriveForward, 25.0),
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eDriveForward, -25.0),
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
@@ -78,13 +53,10 @@ public class AutoRecipes {
 	};
 	public static MotionItem[] _LeftSide_RightSwitch_1cube = { /*good*/
 			new MotionItem(EAutoStates.eDriveForward, 214.735), 
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eDriveForward, 187.62),
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
 			new MotionItem(EAutoStates.eChained_WaitLift),
 			new MotionItem(EAutoStates.eGripper_Release),
