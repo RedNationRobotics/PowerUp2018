@@ -38,12 +38,18 @@ public class AutoRecipes {
 	
 
 	public static MotionItem[] _LeftSide_LeftSwitch_1cube = { /*good*/	
+			//Forward to the Middle area of the switch
 			new MotionItem(EAutoStates.eDriveForward, 151.0), 
+			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			//Raise lift to switch height
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			//Drive up to switch
 			new MotionItem(EAutoStates.eDriveForward, 25.0),
+			//Release Cube
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			//Back up, lower lift, and stop.
 			new MotionItem(EAutoStates.eDriveForward, -25.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
@@ -52,9 +58,13 @@ public class AutoRecipes {
 			
 	};
 	public static MotionItem[] _LeftSide_RightSwitch_1cube = { /*good*/
+			//Forward until inbetween switch and scale
 			new MotionItem(EAutoStates.eDriveForward, 214.735), 
+			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			//Forward to opposite end of climb platform
 			new MotionItem(EAutoStates.eDriveForward, 187.62),
+			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
@@ -72,13 +82,18 @@ public class AutoRecipes {
 
 		};
 	public static MotionItem[] _LeftSide_LeftScale_1cube  = { /*good*/
+			//Forward until inbetween switch and scale
 			new MotionItem(EAutoStates.eDriveForward, 310.0),
+			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90), 
+			//Drive up to scale, Raise elevator
 			new MotionItem(EAutoStates.eDriveForward, 10.0),
 			new MotionItem(EAutoStates.eSetLiftHeight,73.0),
+			//Release Cube
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer,.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
+			//Back up, lower elevator, then stop.
 			new MotionItem(EAutoStates.eDriveForward, -12.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
 			new MotionItem(EAutoStates.eStopMotors),

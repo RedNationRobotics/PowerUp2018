@@ -30,9 +30,8 @@ import PowerUp2018.AutoStates;
 import PowerUp2018.FieldDimensions;
 
 
-
 public class Robot extends IterativeRobot {
-
+	
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
@@ -72,6 +71,7 @@ public class Robot extends IterativeRobot {
 	
 
 	public void robotInit() {
+		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		/*
 		 * Fixing motor motion issues
 		 * 1) Set the setSensorPhase(false)
@@ -152,13 +152,9 @@ public class Robot extends IterativeRobot {
 
 		teleopCommand = new DriveWithJoysticks();
 
-		// camera.setFPS(15);
-		// camera.setResolution(320, 240);
-		//CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-		
 		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
 				BNO055.vector_type_t.VECTOR_EULER);
-		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
+		//CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("LeftSide Switch", autoLeftSwitch);
