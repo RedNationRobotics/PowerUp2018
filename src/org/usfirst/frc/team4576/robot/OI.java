@@ -76,8 +76,6 @@ public class OI {
 		dsRB.whileHeld(new ElevDown(true));
 		dsRB.whenReleased(new ElevUp(false));
 		dsRSTICK.whenPressed(new IntakeArm());
-		//dsLSTICK.whenPressed(new LEDMode(16));
-		//dsRSTICK.whenPressed(new LEDMode(22));
 		
 		ssA.whenPressed(new LEDMode(16));
 		ssB.whenPressed(new LEDMode(7));
