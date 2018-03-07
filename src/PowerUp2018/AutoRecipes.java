@@ -32,7 +32,6 @@ public class AutoRecipes {
 			//new MotionItem(EAutoStates.eChained_WaitLift),
 			//new MotionItem(EAutoStates.eGripper_Release),
 			//new MotionItem(EAutoStates.eStartTimer, 0.2),
-			//new MotionItem(EAutoStates.eChained_WaitTimer),
 			//new MotionItem(EAutoStates.eGripper_Stop),
 			//new MotionItem(EAutoStates.eSetLiftHeight, -65.0),
 			//new MotionItem(EAutoStates.eChained_WaitLift),
@@ -57,150 +56,219 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _Just_Idle_ = {	
-			new MotionItem(EAutoStates.eIdle)
-
-	};
 	
-/*
-	public static MotionItem[] _LeftSide_LeftSwitch = {	
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 45000000), // set encoder clicks in parameter
-			new MotionItem(EAutoStates.eOutTake, 0.5), //set time for it to outtake in parameter
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown, 0.5),
-			new MotionItem(EAutoStates.eIdle) //waits until autonomous period is over
+
+	public static MotionItem[] _LeftSide_LeftSwitch_1cube = { /*good*/	
+			new MotionItem(EAutoStates.eDriveForward, 151.0), 
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
+			new MotionItem(EAutoStates.eDriveForward, 25.0),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eDriveForward, -25.0),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle) 
 			
 	};
-	public static MotionItem[] _LeftSide_RightSwitch = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000), // set encoder clicks in parameter
-			new MotionItem(EAutoStates.eTurnLeft, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 150000),	
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTakeThenLowerLift, 0.5),
-			new MotionItem(EAutoStates.eIdle) //waits until autonomous period is over
+	public static MotionItem[] _LeftSide_RightSwitch_1cube = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 214.735), 
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, 187.62),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 5.0),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, .4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -5.0),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle) 
 
 		};
-	public static MotionItem[] _LeftSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 30000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnLeft, 30000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _LeftSide_LeftScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 310.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90), 
+			new MotionItem(EAutoStates.eDriveForward, 10.0),
+			new MotionItem(EAutoStates.eSetLiftHeight,73.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -12.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _LeftSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 150000),	
-			new MotionItem(EAutoStates.eTurnLeft, 50000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _LeftSide_RightScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 214.735),
+			new MotionItem(EAutoStates.eStoppedTurn, 90), 
+			new MotionItem(EAutoStates.eDriveForward, 210.125),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 109.265),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _MiddleSide_LeftSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _MiddleSide_LeftSwitch_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 83.5),
+			new MotionItem(EAutoStates.eStoppedTurn, -90), 
+			new MotionItem(EAutoStates.eDriveForward, 40.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, 22.5),
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -22.5),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_RightSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _MiddleSide_RightSwitch_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 83.5),
+			new MotionItem(EAutoStates.eStoppedTurn, 90), 
+			new MotionItem(EAutoStates.eDriveForward, 40.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 22.5),
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -22.5),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 20000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _MiddleSide_LeftScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 81.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 104.53),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eDriveForward, 284.97),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 20000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 100000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _MiddleSide_RightScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 81.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, 104.53),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eDriveForward, 284.97),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _RightSide_LeftSwitch  = {
-			new MotionItem(EAutoStates.eDriveForward, 45000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 150000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eLiftUp),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _RightSide_LeftSwitch_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 214.735), 
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 187.62),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 5.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, .4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -5.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _RightSide_RightSwitch  = {
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 40000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _RightSide_RightSwitch_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 151.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 25.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -25.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _RightSide_LeftScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eTurnLeft, 50000),
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000),
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 2500000),			
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _RightSide_LeftScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 214.735),
+			new MotionItem(EAutoStates.eStoppedTurn, -90), 
+			new MotionItem(EAutoStates.eDriveForward, 210.125),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 109.265),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 			
 	}; 
-	public static MotionItem[] _RightSide_RightScale  = {
-			new MotionItem(EAutoStates.eDriveForward, 40000000),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
-			new MotionItem(EAutoStates.eDriveForward, 50000),
-			new MotionItem(EAutoStates.eTurnRight, 50000), 
-			new MotionItem(EAutoStates.eDriveForwardWithLift, 20000000),
-			new MotionItem(EAutoStates.eOutTake, 0.5),
-			new MotionItem(EAutoStates.eReverse, 50000),
-			new MotionItem(EAutoStates.eLiftDown),
+	public static MotionItem[] _RightSide_RightScale_1cube  = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, 310.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90), 
+			new MotionItem(EAutoStates.eDriveForward, 10.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -12.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-*/
+	
+	
+
 	
 }

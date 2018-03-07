@@ -488,56 +488,56 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		System.out.println(autoSelected);
 		switch (autoSelected) {
-/*
+
         case autoLeftSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch_1cube);
     		}
             break;
         case autoLeftScale:
     		if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
     		}
             break;
         case autoMiddleSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch_1cube);
     		}
            break;
         case autoMiddleScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale_1cube);
     		}
             break;
         case autoRightSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch_1cube);
     		}
             break;
         case autoRightScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_1cube);
     		}
             break;
-*/
+
         case autoTest:
 			InitializeAutoRecipe(AutoRecipes._Test_);
 			break;
