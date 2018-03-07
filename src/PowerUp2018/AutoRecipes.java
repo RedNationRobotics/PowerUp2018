@@ -69,13 +69,16 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
 			//Move Elevator up to Switch Height
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
 			//Release cube
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, .4),
 			new MotionItem(EAutoStates.eGripper_Stop),
 			//Back up, Lower Lift, then stop.
 			new MotionItem(EAutoStates.eDriveForward, -5.0),
+			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eChained_WaitLift),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 

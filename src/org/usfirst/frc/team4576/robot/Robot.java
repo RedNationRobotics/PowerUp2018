@@ -582,11 +582,17 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putNumber("Magnometer", reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putNumber("Gyro", reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
+	//	SmartDashboard.putNumber("Course: ", Robot.driveStick1.getRawAxis(4));
 		SmartDashboard.putBoolean("Compressor state: ", pneumatics.c.enabled());
+		//SmartDashboard.putData("Autoshift: ", new ToggleAutoShift());
+		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
 		SmartDashboard.putNumber("Rpm left: ", chassis.getLeftSpeed());
 		SmartDashboard.putNumber("Rpm right: ", chassis.getRightSpeed());
 		SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
-		SmartDashboard.putBoolean("Shift state: ", pneumatics.getShift());
+		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
+		//SmartDashboard.putNumber("Heading: ", imu.getHeading());
+		SmartDashboard.putNumber("Counter Top: ", Robot.elevator.counter1.get());
+		SmartDashboard.putNumber("Counter Bottom: ", Robot.elevator.counter2.get());
 		
 
 	}
