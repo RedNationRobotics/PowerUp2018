@@ -66,7 +66,7 @@ public class Chassis extends Subsystem {
     // +,- to turn right, -,+ to turn left
 	//sets the left and right throttle (PercentOutput Mode)
 	public void setLeftRight(double left, double right) {
-		tsrxL.set(ControlMode.PercentOutput, -left);
+		tsrxL.set(ControlMode.PercentOutput, left);
 		tsrxR.set(ControlMode.PercentOutput, right);
 
 	}
@@ -74,7 +74,7 @@ public class Chassis extends Subsystem {
 	 // +,+ for forward, -,- for backwards
     // +,- to turn right, -,+ to turn left
 	public void motionMagicLeftRight(double LpositionUnits, double RpositionUnits) {
-		tsrxL.set(ControlMode.MotionMagic, -LpositionUnits);
+		tsrxL.set(ControlMode.MotionMagic, LpositionUnits);
 		tsrxR.set(ControlMode.MotionMagic, RpositionUnits);
 	}
 

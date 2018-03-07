@@ -17,7 +17,7 @@ public class Pneumatics extends Subsystem {
 
 	public Pneumatics() {
 		s0 = new Solenoid(RobotMap.SHIFT_SOLENOID);/* Shifting */
-		s1 = new Solenoid(1);
+		s1 = new Solenoid(RobotMap.INTAKE_ARM);/* Shifting */
 		psensor = new AnalogInput(0);
 
 	}
@@ -50,7 +50,6 @@ public class Pneumatics extends Subsystem {
 
 	public void shiftUp() {
 		setShift(true);
-
 	}
 
 	public void shiftDown() {
@@ -60,14 +59,9 @@ public class Pneumatics extends Subsystem {
 	public void setIntakeArm(boolean closed) {
 		s1.set(closed);
 	}
-	public boolean getIntakeArm() {
-		if (s1.get() == true) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
-    }
+	public void setPositionIntakeArm(boolean bClose) {
+		s1.set(bClose);
+	}
 
 	public void intakeArm() {
 		s1.set(!s1.get());

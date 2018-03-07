@@ -33,7 +33,7 @@ public class ElevUp extends Command {
     @Override
     protected boolean isFinished() {
         // changed to true to check issues
-    	if (Robot.elevator.counter1.get() > 0) {
+    	if (Robot.elevator.counter1.get() > 0 || !in) {
     		return true;
     	}
     	else {

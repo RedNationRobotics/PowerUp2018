@@ -1,4 +1,4 @@
-package redcore;
+package PowerUp2018;
 /**
 * Interface that holds all the field measurements 
 */
@@ -7,6 +7,17 @@ package redcore;
 
 public class FieldDimensions 
 {
+	
+	public static final double dLiftClicksPerInch = 465.6;
+	public static final double dLiftInchesPerClicks = 1.0/dLiftClicksPerInch;
+	
+	public static final double dClicksPerInch = 1653;
+	public static final double dInchesPerClicks = 1.0/dClicksPerInch;
+
+	public static final double dWheelCentersWidth = 25.0;
+	public static final double dWheelTurnCircumference = (dWheelCentersWidth * 1.06) * Math.PI;
+	public static final double dInchesPerDegree = dWheelTurnCircumference / 360.0;
+	
 	// dimensions of field components (in inches)
 	public static double kFieldLengthX = 648;
 	public static double kAllianceStationLengthY = 264;

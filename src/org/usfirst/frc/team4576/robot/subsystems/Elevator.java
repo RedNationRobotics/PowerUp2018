@@ -22,7 +22,7 @@ public class Elevator extends Subsystem {
 	static DigitalInput limitSwitchTop = new DigitalInput(RobotMap.TOPDIO);
 	static DigitalInput limitSwitchBot = new DigitalInput(RobotMap.BOTDIO);
 	public Counter counter1 = new Counter(limitSwitchTop);
-	public Counter counter2 = new Counter(limitSwitchTop);
+	public Counter counter2 = new Counter(limitSwitchBot);
 
 
 	public Elevator() {
