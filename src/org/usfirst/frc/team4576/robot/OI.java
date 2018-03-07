@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
+import org.usfirst.frc.team4576.robot.commands.ElevFast;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
@@ -72,9 +73,14 @@ public class OI {
 		dsRB.whenReleased(new ElevUp(false));
 		dsLB.whileHeld(new ElevDown(true));
 		dsLB.whenReleased(new ElevDown(false));
-		dsRSTICK.whenPressed(new IntakeArm());
 		dsX.whileHeld(new Release(true));
 		dsX.whenReleased(new Release(false));
+		dsLSTICK.whenPressed(new ElevFast(true));
+		dsRSTICK.whenPressed(new ElevFast(false));
+
+		
+		
+
 		/**/
 		
 		/*Dual Operator Control

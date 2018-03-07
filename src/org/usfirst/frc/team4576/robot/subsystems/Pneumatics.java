@@ -50,7 +50,6 @@ public class Pneumatics extends Subsystem {
 
 	public void shiftUp() {
 		setShift(true);
-
 	}
 
 	public void shiftDown() {
@@ -59,6 +58,9 @@ public class Pneumatics extends Subsystem {
 	}
 	public void setIntakeArm(boolean closed) {
 		s1.set(closed);
+	}
+	public void setPositionIntakeArm(boolean bClose) {
+		s1.set(bClose);
 	}
 
 	public void intakeArm() {

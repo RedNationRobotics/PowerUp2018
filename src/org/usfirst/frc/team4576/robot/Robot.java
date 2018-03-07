@@ -25,6 +25,7 @@ import redcore.BNO055.reg_t;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
 import PowerUp2018.AutoRecipes;
+import PowerUp2018.AutoStates;
 import PowerUp2018.FieldDimensions;
 
 
@@ -116,20 +117,20 @@ public class Robot extends IterativeRobot {
         Robot.elevator.tsrxE.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs); /* always servo */
 
         /* set closed loop gains in slot0 */
-        Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.1, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.4, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.008, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.07, RobotMap.kTimeoutMs); 
+        Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.00019765625, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs); 
         
-        Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.1, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.4, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.008, RobotMap.kTimeoutMs);
-        Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.07, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.00019765625, RobotMap.kTimeoutMs);
+        Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
         /* set closed loop gains in slot0 */
-        Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.4, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs); 
+        Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
+        Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
+        Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs); 
         
         /* set acceleration and vcruise velocity - see documentation */
         Robot.chassis.tsrxL.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
@@ -138,8 +139,8 @@ public class Robot extends IterativeRobot {
 		 Robot.chassis.tsrxR.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
 		 Robot.chassis.tsrxR.configMotionAcceleration(7500, RobotMap.kTimeoutMs);
 		 
-		 Robot.elevator.tsrxE.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
-	     Robot.elevator.tsrxE.configMotionAcceleration(7500, RobotMap.kTimeoutMs);
+		 Robot.elevator.tsrxE.configMotionCruiseVelocity(10000, RobotMap.kTimeoutMs);
+	     Robot.elevator.tsrxE.configMotionAcceleration(10000, RobotMap.kTimeoutMs);
 			/* zero the sensor */
 		 Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		 Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
@@ -205,7 +206,8 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
 		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
 		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
-		
+		System.out.println(_CurrentHeading);
+		SmartDashboard.putNumber("Heading", _CurrentHeading);
 		SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
 		SmartDashboard.putNumber("Lift Encoder", _CurrentLiftEncoderPosition);
 
@@ -215,14 +217,14 @@ public class Robot extends IterativeRobot {
 
 
 	// *************** FSM zone **********************************************************
-	public EAutoStates _eCurrentAutoState; // current auto state
+	public static EAutoStates _eCurrentAutoState; // current auto state
 	public EAutoStates _ePreviousAutoState; // current auto state
 	public double _TargetLiftEncoderPosition; 
 	public double _TargetLeftEncoderPosition; 
 	public double _TargetRightEncoderPosition;
-	public MotionItem[] _Selected_AutoRecipe; // the current array of motion items selected at start of autoInit
-	public MotionItem _CurrentMotionItem; // current position in the array
-	int _iCurrentMotionItemIndex; // current position in the drive recipe
+	public static MotionItem[] _Selected_AutoRecipe; // the current array of motion items selected at start of autoInit
+	public static MotionItem _CurrentMotionItem; // current position in the array
+	static int _iCurrentMotionItemIndex; // current position in the drive recipe
 	public static final double _dMoveTolerance = 100.0;
 	public static final double _dLiftTolerance = 1000.0;
 
@@ -358,6 +360,13 @@ public class Robot extends IterativeRobot {
 			{
 				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
 				Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
+
+				MoveToNextMotionItemInSelectedRecipe();
+			}
+			break;
+			case eStopElevator:  
+			{
+				Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
 				MoveToNextMotionItemInSelectedRecipe();
 			}
 			break;
@@ -379,16 +388,13 @@ public class Robot extends IterativeRobot {
 				MoveToNextMotionItemInSelectedRecipe();
 			}
 			break;
-			case eGripper_ArmOpen:
+			case eGripper_SetArm:
 			{
-				
+				Robot.pneumatics.setPositionIntakeArm(_CurrentMotionItem.dParam1 >= 1.0);
+				MoveToNextMotionItemInSelectedRecipe();
 			}
 			break;
-			case eGripper_ArmClose:
-			{
-				
-			}
-			break;
+			
 /*
 			case eDriveForwardWithLift:  
 			{ 
@@ -459,9 +465,7 @@ public class Robot extends IterativeRobot {
 			}
 	}
 
-
-
-	public void InitializeAutoRecipe(MotionItem[] AutoRecipe) {
+	public static void InitializeAutoRecipe(MotionItem[] AutoRecipe) {
 		System.out.println("Hit InitializeAutoRecipe");
 
 		_Selected_AutoRecipe = AutoRecipe;
@@ -483,56 +487,56 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 		System.out.println(autoSelected);
 		switch (autoSelected) {
-/*
+
         case autoLeftSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch_1cube);
     		}
             break;
         case autoLeftScale:
     		if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
     		}
             break;
         case autoMiddleSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch_1cube);
     		}
            break;
         case autoMiddleScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale_1cube);
     		}
             break;
         case autoRightSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch_1cube);
     		}
     		if (Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch_1cube);
     		}
             break;
         case autoRightScale:
         	if (Robot.gameData.charAt(1) == 'L') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
     		}
     		if (Robot.gameData.charAt(1) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale);
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_1cube);
     		}
             break;
-*/
+
         case autoTest:
 			InitializeAutoRecipe(AutoRecipes._Test_);
 			break;
@@ -588,8 +592,14 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
 		SmartDashboard.putNumber("Rpm left: ", Robot.chassis.tsrxL.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
 		SmartDashboard.putNumber("Rpm right: ", Robot.chassis.tsrxR.getSelectedSensorVelocity(RobotMap.kPIDLoopIdx));
+<<<<<<< HEAD
 		SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
 		SmartDashboard.putBoolean("Shift state: ", pneumatics.getShift());
+=======
+		//SmartDashboard.putNumber("Psi: ", pneumatics.getPsi());
+		//SmartDashboard.putString("Shift state: ", pneumatics.shiftState());
+		//SmartDashboard.putNumber("Heading: ", imu.getHeading());
+>>>>>>> 970a71838ae03697c7988ec855f7a2d861f42699
 		SmartDashboard.putNumber("Counter Top: ", Robot.elevator.counter1.get());
 		SmartDashboard.putNumber("Counter Bottom: ", Robot.elevator.counter2.get());
 		
