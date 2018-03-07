@@ -58,14 +58,11 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			new MotionItem(EAutoStates.eChained_WaitLift),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, .4),
 			new MotionItem(EAutoStates.eGripper_Stop),
 			new MotionItem(EAutoStates.eDriveForward, -5.0),
-			new MotionItem(EAutoStates.eChained_MoveWait), 
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
-			new MotionItem(EAutoStates.eChained_WaitLift),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
@@ -142,14 +139,14 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eDriveForward, 81.0),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
 			new MotionItem(EAutoStates.eDriveForward, 104.53),
-			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eDriveForward, 284.97),
 			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
@@ -240,6 +237,20 @@ public class AutoRecipes {
 			
 	};
 	
+	public static MotionItem[] _LeftSide_Scale_2cubes = { 
+			new MotionItem(EAutoStates.eDriveForward, 274),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 45.0), 
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -12.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+			
+	};
 	
 
 	
