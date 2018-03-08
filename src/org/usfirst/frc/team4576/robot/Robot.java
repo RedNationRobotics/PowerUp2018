@@ -167,7 +167,6 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2CubesOr1);
 		chooser.addObject("RightSide Scale 2 Cubes", autoRight2CubesOr1);
-
 		chooser.addObject("LeftSide Switch", autoLeftSwitch);
 		chooser.addObject("LeftSide Scale", autoLeftScale); 
 		chooser.addObject("Middle Switch", autoMiddleSwitch);
