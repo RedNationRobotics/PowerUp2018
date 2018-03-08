@@ -19,6 +19,22 @@ public class FieldDimensions
 	public static final double dInchesPerDegree = dWheelTurnCircumference / 360.0;
 	
 	// dimensions of field components (in inches)
+	public static double kLengthfromcenterOfRobotToCornerOfSwitch = 255.53;
+	public static double kMaxLiftHeightScale = 73.0;
+	public static double kMinLiftHeightScale = -73.0;
+	public static double kMaxLiftHeightSwitch = 35.0;
+	public static double kMinLiftHeightSwitch = -35.0;
+	public static double kCenterToLineInfrontOfBaseLine = 101.0;
+	public static double kCenterToMiddlePartOfSwitchLoading = 151.5;
+	public static double kCornerOfPortalToSwitchSpaceBetweenXWall = 55.56;
+	public static double kLengthOfSpaceBetweenCenterofRobotStartToSwitchEdge = 41.56;
+	public static double kCenterToPointA = 214.0;
+	public static double kPointAToScaleSide = 241.66;
+	public static double kStartingCenterToCenterLoadingScale = 310.0;
+	public static double kTimerOuttake = 0.4;
+	public static double kTimerIntake = 0.2;
+	public static double kPointAToCenterBackLoadingSwitch = 174.0;
+
 	public static double kFieldLengthX = 648;
 	public static double kAllianceStationLengthY = 264;
 	public static double kScalePlatformLengthX = 82;

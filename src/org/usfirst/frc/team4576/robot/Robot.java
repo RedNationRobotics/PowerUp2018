@@ -57,12 +57,17 @@ public class Robot extends IterativeRobot {
 
 	Command teleopCommand;
 	Command autonomousCommand;
-	final String autoLeftSwitch = "LeftSwitch";
+	final String autoLeft2CubesOr1 = "Left2Cubes";
+    final String autoRight2CubesOr1 = "Right2Cubes";
+    
     final String autoLeftScale = "LeftScale";
+    final String autoLeftSwitch = "LeftSwitch";
     final String autoMiddleSwitch = "MiddleSwitch";
     final String autoMiddleScale = "MiddleScale";
     final String autoRightSwitch = "RightSwitch";
     final String autoRightScale = "RightScale";
+	final String autoLeftSwitch2cubes = "LeftSwitch2cubes";
+	final String autoRightSwitch2cubes = "autoRightSwitch2cubes";
     final String autoTest = "AutoTest";
 
 	
@@ -160,8 +165,11 @@ public class Robot extends IterativeRobot {
 		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
 		chooser.addDefault("Do Nothing.", null);
+		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2CubesOr1);
+		chooser.addObject("RightSide Scale 2 Cubes", autoRight2CubesOr1);
+
 		chooser.addObject("LeftSide Switch", autoLeftSwitch);
-		chooser.addObject("LeftSide Scale", autoLeftScale);
+		chooser.addObject("LeftSide Scale", autoLeftScale); 
 		chooser.addObject("Middle Switch", autoMiddleSwitch);
 		chooser.addObject("Middle Scale", autoMiddleScale);
 		chooser.addObject("Right Switch", autoRightSwitch);
@@ -488,6 +496,27 @@ public class Robot extends IterativeRobot {
 		System.out.println(autoSelected);
 		switch (autoSelected) {
 
+		case autoLeft2CubesOr1:
+			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes);
+			}
+			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'L') {
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScaleLeftSwitch_2cubes);
+			}
+			if (Robot.gameData.charAt(1) == 'R') {
+				InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
+			}
+			break;
+		case autoRight2CubesOr1:
+			if (Robot.gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'L') {
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_2cubes);
+    		} 
+			if (Robot.gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'R') {
+    			InitializeAutoRecipe(AutoRecipes._RightSide_RightScaleRightSwitch_2cubes);
+    		} 
+			if (Robot.gameData.charAt(1) == 'L') {
+				InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
+			}
         case autoLeftSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
     			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_1cube);
