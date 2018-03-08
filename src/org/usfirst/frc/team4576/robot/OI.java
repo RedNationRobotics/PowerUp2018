@@ -69,7 +69,7 @@ public class OI {
 
 	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
 	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
-	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 6, 0, 0, false);
+	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 5, 0, 0, false);
 
 
 	public OI() {
@@ -120,12 +120,13 @@ public class OI {
 		ssB.whenPressed(new ElevFast(true));
 		
 		ssX.whenPressed(new LEDMode(6));	
-		ssBACK.whenPressed(new LEDMode(33));
-		ssSTART.whenPressed(new LEDMode(36));
-		ssLSTICK.whenPressed(new LEDMode(72));
-		ssRSTICK.whenPressed(new LEDMode(8));
+		ssBACK.whenPressed(new LEDMode(29));
+		ssSTART.whenPressed(new LEDMode(22));
+		ssLSTICK.whenPressed(new LEDMode(17));
+		ssRSTICK.whenPressed(new LEDMode(7));
 		
-		ssRTrigger.whenPressed(new ScalingRelease());
-		ssDPad.whenPressed(new LEDMode(15));
+		
+//		ssRTrigger.whenPressed(new ScalingRelease());
+	//	ssDPad.whenPressed(new LEDMode(15));
 }
 }

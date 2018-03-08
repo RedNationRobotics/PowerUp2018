@@ -130,12 +130,12 @@ public class Chassis extends Subsystem {
 	public double getZero() {
 		return gyroZero;
 	}
-    public double getLAmps() { 
-    	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
-    }
-    public double getRAmps() {
-    	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
-    }
+   //public double getLAmps() { 
+   //	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
+  // }
+   // public double getRAmps() {
+  //  	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
+  //  }
 	// This declares that for driving only the assigned axes are used.
 	public void normalDrive() {
 
