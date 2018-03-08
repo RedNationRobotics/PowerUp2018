@@ -9,6 +9,11 @@ public class AutoRecipes {
 
 			
 	};
+	public static MotionItem[] _Test_1 = {	
+			new MotionItem(EAutoStates.eStoppedTurn, -720.0),
+
+			
+	};
 	public static MotionItem[] _ElevatorDown_Recipe_ = {	
 			new MotionItem(EAutoStates.eSetLiftHeight, -73.0),
 			new MotionItem(EAutoStates.eStopElevator),

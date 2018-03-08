@@ -105,8 +105,8 @@ public class OI {
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsLB.whileHeld(new Intake(true));
-		dsLB.whenReleased(new Intake(false));
+		dsY.whileHeld(new Intake(true));
+		dsY.whenReleased(new Intake(false));
 		dsRSTICK.whenPressed(new IntakeArm());
 
 		

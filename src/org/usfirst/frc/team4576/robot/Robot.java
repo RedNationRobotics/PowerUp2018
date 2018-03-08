@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4576.robot;
 
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
-import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
@@ -41,7 +40,7 @@ public class Robot extends IterativeRobot {
 
 	public static BNO055 imu;
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
-	
+
 	public static OI oi;
 
 	public static Joystick driveStick = new Joystick(0);
@@ -77,6 +76,10 @@ public class Robot extends IterativeRobot {
 	
 
 	public void robotInit() {
+		//For Testing purposes
+		gameData = "LLL"
+				
+				;
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		/*
 		 * Fixing motor motion issues
@@ -179,7 +182,6 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledInit() {
-		new LEDMode(42);
 	}
 
 	public void disabledPeriodic() {
@@ -564,7 +566,12 @@ public class Robot extends IterativeRobot {
             break;
 
         case autoTest:
-			InitializeAutoRecipe(AutoRecipes._Test_);
+        	if(Robot.gameData.charAt(1) == 'L') {
+        		InitializeAutoRecipe(AutoRecipes._Test_);
+        	}
+        	if(Robot.gameData.charAt(1) == 'R') {
+        		InitializeAutoRecipe(AutoRecipes._Test_1);
+        	}
 			break;
         default:
             break;
@@ -608,9 +615,9 @@ public class Robot extends IterativeRobot {
 		UpdateFSM();
 
 		//SmartDashboard.putNumber("Amperage", );
-		SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putNumber("Magnometer", reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putNumber("Gyro", reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
+		//SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
+		//SmartDashboard.putNumber("Magnometer", reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
+		//SmartDashboard.putNumber("Gyro", reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putBoolean("Compressor state: ", pneumatics.c.enabled());
 		SmartDashboard.putNumber("Rpm left: ", chassis.getLeftSpeed());
 		SmartDashboard.putNumber("Rpm right: ", chassis.getRightSpeed());
