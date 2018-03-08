@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
+import org.usfirst.frc.team4576.robot.commands.ElevFast;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
@@ -72,7 +73,7 @@ public class OI {
 
 
 	public OI() {
-		/*Single Operator Control*/
+		/*Single Operator Control
 		dsX.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
@@ -97,19 +98,17 @@ public class OI {
 		ssSTART.whenPressed(new LEDMode(36));
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
-
-
-
-
-		/**/
+		*/
 		
-		/*Dual Operator Control
+		//Dual Operator Control
 		dsX.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
 		dsLB.whileHeld(new Intake(true));
 		dsLB.whenReleased(new Intake(false));
+		dsRSTICK.whenPressed(new IntakeArm());
+
 		
 		ssLB.whileHeld(new ElevDown(true));
 		ssLB.whenReleased(new ElevDown(false));
@@ -119,10 +118,6 @@ public class OI {
 		ssY.whenReleased(new Release(false));
 		ssA.whenPressed(new ElevFast(false));
 		ssB.whenPressed(new ElevFast(true));
-		/*/
-		ssRTrigger.whenPressed(new ScalingRelease());
-		ssDPad.whenPressed(new LEDMode(15));
-		/*/
 		
 		ssX.whenPressed(new LEDMode(6));	
 		ssBACK.whenPressed(new LEDMode(33));
@@ -130,7 +125,7 @@ public class OI {
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
 		
-		*/
-
+		ssRTrigger.whenPressed(new ScalingRelease());
+		ssDPad.whenPressed(new LEDMode(15));
 }
 }
