@@ -5,22 +5,8 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 72.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 41.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
-			new MotionItem(EAutoStates.eDriveForward, 36.0),
-			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
-			new MotionItem(EAutoStates.eGripper_Intake),
-			new MotionItem(EAutoStates.eStartTimer, 1.0),
-			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eDriveForward, -36.0),
-			new MotionItem(EAutoStates.eStartTimer, 0.25),
-			new MotionItem(EAutoStates.eSetLiftHeight, 30.0),
-			new MotionItem(EAutoStates.eStopMotors),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle)
+			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
+
 			
 	};
 	public static MotionItem[] _ElevatorDown_Recipe_ = {	
@@ -38,113 +24,78 @@ public class AutoRecipes {
 	
 
 	public static MotionItem[] _LeftSide_LeftSwitch_1cube = { /*good*/	
-			//Forward to the Middle area of the switch
-			new MotionItem(EAutoStates.eDriveForward, 151.0), 
-			//Right
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToMiddlePartOfSwitchLoading), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Raise lift to switch height
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			//Drive up to switch
-			new MotionItem(EAutoStates.eDriveForward, 25.0),
-			//Release Cube
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eDriveForward, 8.0), 
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
-			//Back up, lower lift, and stop.
-			new MotionItem(EAutoStates.eDriveForward, -25.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eDriveForward, -8.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 			
 	};
 	public static MotionItem[] _LeftSide_RightSwitch_1cube = { /*good*/
-			//Forward until inbetween switch and scale
-			new MotionItem(EAutoStates.eDriveForward, 214.735), 
-			//Right
+			new MotionItem(EAutoStates.eDriveForward,FieldDimensions.kCenterToMiddlePartOfSwitchLoading), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Forward to opposite end of climb platform
-			new MotionItem(EAutoStates.eDriveForward, 187.62),
-			//Right
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kPointAToCenterBackLoadingSwitch),
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
-			//Move Elevator up to Switch Height
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			//Release cube
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, .4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, Lower Lift, then stop.
 			new MotionItem(EAutoStates.eDriveForward, -5.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 
 		};
 	public static MotionItem[] _LeftSide_LeftScale_1cube  = { /*good*/
-			//Forward until inbetween switch and scale
-			new MotionItem(EAutoStates.eDriveForward, 310.0),
-			//Right
-			new MotionItem(EAutoStates.eStoppedTurn, 90), 
-			//Drive up to scale, Raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 10.0),
-			new MotionItem(EAutoStates.eSetLiftHeight,73.0),
-			//Release Cube
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kStartingCenterToCenterLoadingScale),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower elevator, then stop.
-			new MotionItem(EAutoStates.eDriveForward, -12.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	public static MotionItem[] _LeftSide_RightScale_1cube  = { /*good*/
-			//Forward until between switch and scale
-			new MotionItem(EAutoStates.eDriveForward, 214.735),
-			//Right
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToPointA),
 			new MotionItem(EAutoStates.eStoppedTurn, 90), 
-			//Forward to opposite end of climb platform
-			new MotionItem(EAutoStates.eDriveForward, 210.125),
-			//Left
+			new MotionItem(EAutoStates.eDriveForward, 245.0),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
-			//Forward to scale platform, Raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 109.265),
-			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			//Left
+			new MotionItem(EAutoStates.eDriveForward, 95.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//Release Cube
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Back up, Lower Elevator, then stop.
-			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _MiddleSide_LeftSwitch_1cube  = { /*good*/
-			//Forward until between cube pile and wall
+	public static MotionItem[] _MiddleSide_LeftSwitch_1cube  = { 
 			new MotionItem(EAutoStates.eDriveForward, 83.5),
-			//Left
 			new MotionItem(EAutoStates.eStoppedTurn, -90), 
-			//Forward towards wall
 			new MotionItem(EAutoStates.eDriveForward, 40.0),
-			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Forward to middle of switch
 			new MotionItem(EAutoStates.eDriveForward, 22.5),
-			//Raise Elevator, Release cube
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower Elevator, then stop`
 			new MotionItem(EAutoStates.eDriveForward, -22.5),
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
@@ -152,23 +103,16 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_RightSwitch_1cube  = { /*good*/
-			//Forward until between cube pile and wall
+	public static MotionItem[] _MiddleSide_RightSwitch_1cube  = { 
 			new MotionItem(EAutoStates.eDriveForward, 83.5),
-			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90), 
-			//Forward towards wall
 			new MotionItem(EAutoStates.eDriveForward, 40.0),
-			//Left
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//Forward to switch, Raise Elevator
 			new MotionItem(EAutoStates.eDriveForward, 22.5),
 			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			//Release cube
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower elevator, then stop.
 			new MotionItem(EAutoStates.eDriveForward, -22.5),
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
@@ -176,152 +120,289 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_LeftScale_1cube  = { /*good*/
-			//Forward enough to turn
+	public static MotionItem[] _MiddleSide_LeftScale_1cube  = {
 			new MotionItem(EAutoStates.eDriveForward, 81.0),
-			//Left
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//Forward to wall
 			new MotionItem(EAutoStates.eDriveForward, 104.53),
-			//Right
-			new MotionItem(EAutoStates.eStoppedTurn, 90),
-			//Forward to scale, raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 284.97),
-			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			//Right
-			new MotionItem(EAutoStates.eStoppedTurn, 90),
-			//Release cube
-			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
-			new MotionItem(EAutoStates.eGripper_Stop),
-			//Left
-			new MotionItem(EAutoStates.eStoppedTurn, -90),
-			//Lower Elevator, then stop
-			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
-			new MotionItem(EAutoStates.eStopMotors),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle)
-
-	};
-	public static MotionItem[] _MiddleSide_RightScale_1cube  = { /*good*/
-			//Forward enough to turn
-			new MotionItem(EAutoStates.eDriveForward, 81.0),
-			//Right
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Forward to wall
-			new MotionItem(EAutoStates.eDriveForward, 104.53),
-			//Left
-			new MotionItem(EAutoStates.eStoppedTurn, -90),
-			//Drive to scale, raise elevator.
 			new MotionItem(EAutoStates.eDriveForward, 284.97),
 			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			//Left
-			new MotionItem(EAutoStates.eStoppedTurn, -90),
-			//Release cube
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Right
-			new MotionItem(EAutoStates.eStoppedTurn, 90),
-			//Lower elevator, then stop
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _RightSide_LeftSwitch_1cube  = { /*good*/
-			//Forward until between scale and switch
-			new MotionItem(EAutoStates.eDriveForward, 214.735), 
-			//Left
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//Forward to opposite side of climb platform
-			new MotionItem(EAutoStates.eDriveForward, 187.62),
-			//Left
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
-			//Drive forward, raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 5.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			//Release cube
+	public static MotionItem[] _MiddleSide_RightScale_1cube  = { 
+			new MotionItem(EAutoStates.eDriveForward, 81.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, 104.53),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eDriveForward, 284.97),
+			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, .4),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower elevator, then stop
-			new MotionItem(EAutoStates.eDriveForward, -5.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+
+	};
+	public static MotionItem[] _RightSide_LeftSwitch_1cube  = { /*good RECALL*/
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToPointA), 
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kPointAToCenterBackLoadingSwitch),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 8.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -8.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _RightSide_RightSwitch_1cube  = { /*good*/
-			//Forward to middle of switch
-			new MotionItem(EAutoStates.eDriveForward, 151.0), 
-			//Raise elevator
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
-			//Left
+	public static MotionItem[] _RightSide_RightSwitch_1cube  = { 
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToMiddlePartOfSwitchLoading), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			//Drive up to switch
-			new MotionItem(EAutoStates.eDriveForward, 25.0),
-			//Release cube
+			new MotionItem(EAutoStates.eDriveForward, 20.0),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower elevator, then stop
-			new MotionItem(EAutoStates.eDriveForward, -25.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eDriveForward, -20.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	public static MotionItem[] _RightSide_LeftScale_1cube  = { /*good*/
-			//Forward to between switch and scale
-			new MotionItem(EAutoStates.eDriveForward, 214.735),
-			//Left
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToPointA),
 			new MotionItem(EAutoStates.eStoppedTurn, -90), 
-			//Forward to opposite side of climb platform
-			new MotionItem(EAutoStates.eDriveForward, 210.125),
-			//Right
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kPointAToScaleSide),
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
-			//Forward to scale, raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 109.265),
-			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			//Right
+			new MotionItem(EAutoStates.eDriveForward, 93.8),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			//Release cube
+			new MotionItem(EAutoStates.eDriveForward, 4.3),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Left, lower elevator
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 			
 	}; 
 	public static MotionItem[] _RightSide_RightScale_1cube  = { /*good*/
-			//Forward to scale, raise elevator
-			new MotionItem(EAutoStates.eDriveForward, 310.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, 73.0),
-			//Left
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kStartingCenterToCenterLoadingScale),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
 			new MotionItem(EAutoStates.eStoppedTurn, -90), 
-			//forward up to scale
-			new MotionItem(EAutoStates.eDriveForward, 10.0),
-			//Release cube
+			new MotionItem(EAutoStates.eDriveForward, 7.0),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			//Back up, lower elevator, then stop
-			new MotionItem(EAutoStates.eDriveForward, -12.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -69.0),
+			new MotionItem(EAutoStates.eDriveForward, -7.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	
+	public static MotionItem[] _LeftSide_LeftScale_2cubes = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kLengthfromcenterOfRobotToCornerOfSwitch),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, 45.0),
+			new MotionItem(EAutoStates.eDriveForward, 149.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -14.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 135.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eDriveForward, 41.53), 
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 54.18),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveForward, 10.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerIntake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -10.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, -54.18),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 41.053),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, 45.0), 
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, -45.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+			
+	};
+	public static MotionItem[] _RightSide_RightScale_2cubes = { /*good*/
+			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kLengthfromcenterOfRobotToCornerOfSwitch),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, -45.0),
+			new MotionItem(EAutoStates.eDriveForward, 14.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -14.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -135.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eDriveForward, 41.53), 
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 54.18),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveForward, 10.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerIntake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -10.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, -54.18),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 41.053),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, 45.0), 
+			new MotionItem(EAutoStates.eDriveForward, 14.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, 45.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _RightSide_RightScaleRightSwitch_2cubes = { /*good*/
+			new MotionItem(EAutoStates.eStoppedTurn, -8.23),
+			new MotionItem(EAutoStates.eDriveForward, 134.11),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eStoppedTurn, -82.11),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
+			new MotionItem(EAutoStates.eDriveForward, 62.19),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, 34.76),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveForward, 14.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
+			new MotionItem(EAutoStates.eChained_WaitTimer, FieldDimensions.kTimerIntake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -14.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, -34.76),
+			new MotionItem(EAutoStates.eStoppedTurn, 66.01),
+			new MotionItem(EAutoStates.eDriveForward, 47.42),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, 23.99),
+			new MotionItem(EAutoStates.eDriveForward, 5.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -10.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _LeftSide_LeftScaleLeftSwitch_2cubes = { /*good*/
+			new MotionItem(EAutoStates.eStoppedTurn, 8.23),
+			new MotionItem(EAutoStates.eDriveForward, 134.11),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eStoppedTurn, 82.11),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
+			new MotionItem(EAutoStates.eDriveForward, 62.19),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveForward, 34.76),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveForward, 14.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
+			new MotionItem(EAutoStates.eChained_WaitTimer, FieldDimensions.kTimerIntake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -14.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
+			new MotionItem(EAutoStates.eDriveForward, -34.76),
+			new MotionItem(EAutoStates.eStoppedTurn, -66.01),
+			new MotionItem(EAutoStates.eDriveForward, 47.42),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eStoppedTurn, -23.99),
+			new MotionItem(EAutoStates.eDriveForward, 5.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -10.0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _LeftSide_LeftSwitchRightScale_2cubes = { /*not ready*/
+			new MotionItem(EAutoStates.eDriveForward, 151.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0), 
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 20.0), 
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer,.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -20.0), 
+			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, -35.0), 
+			new MotionItem(EAutoStates.eDriveForward, 60.735),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eDriveForward, 39.56),
+			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveForward, 20.0),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
+			new MotionItem(EAutoStates.eStartTimer, 0.2),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eDriveForward, -20.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+	};
 	
 
 	
