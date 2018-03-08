@@ -5,7 +5,7 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
+			new MotionItem(EAutoStates.eDriveForward, 10.0),
 
 			
 	};

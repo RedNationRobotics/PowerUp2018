@@ -52,9 +52,9 @@ public class OI {
 	Button dsLSTICK = new JoystickButton(Robot.driveStick, 9);
 	Button dsRSTICK = new JoystickButton(Robot.driveStick, 10);
 	
-	AxisButton dsRTrigger = new AxisButton(Robot.driveStick, 3, 0, 0, false);
-	AxisButton dsLTrigger = new AxisButton(Robot.driveStick, 2, 0, 0, false);
-	AxisButton dsDPad = new AxisButton(Robot.driveStick, 6, 0, 0, false);
+//	AxisButton dsRTrigger = new AxisButton(Robot.driveStick, 3, 0, 0, false);
+//	AxisButton dsLTrigger = new AxisButton(Robot.driveStick, 2, 0, 0, false);
+//	AxisButton dsDPad = new AxisButton(Robot.driveStick, 6, 0, 0, false);
 
 	Button ssA = new JoystickButton(Robot.secondaryStick, 1);
 	Button ssB = new JoystickButton(Robot.secondaryStick, 2);
@@ -67,9 +67,9 @@ public class OI {
 	Button ssLSTICK = new JoystickButton(Robot.secondaryStick, 9);
 	Button ssRSTICK = new JoystickButton(Robot.secondaryStick, 10);
 
-	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
-	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
-	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 5, 0, 0, false);
+//	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
+//	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
+//	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 6, 0, 0, false);
 
 
 	public OI() {
@@ -120,13 +120,12 @@ public class OI {
 		ssB.whenPressed(new ElevFast(true));
 		
 		ssX.whenPressed(new LEDMode(6));	
-		ssBACK.whenPressed(new LEDMode(76));
-		ssSTART.whenPressed(new LEDMode(22));
+		ssBACK.whenPressed(new LEDMode(25));
+		ssSTART.whenPressed(new LEDMode(21));
 		ssLSTICK.whenPressed(new LEDMode(17));
 		ssRSTICK.whenPressed(new LEDMode(7));
 		
 		
-//		ssRTrigger.whenPressed(new ScalingRelease());
-	//	ssDPad.whenPressed(new LEDMode(15));
+
 }
 }

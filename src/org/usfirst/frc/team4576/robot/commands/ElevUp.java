@@ -14,7 +14,6 @@ public class ElevUp extends Command {
     @Override
     protected void initialize() {
     	Robot.elevator.counter2.reset();
-    	
         if (in) {
                Robot.elevator.up();
                

@@ -17,7 +17,8 @@ public class AutoStates {
 		eChained_WaitLift,
 		eStopMotors,
 		eEmergencyStop,
-		eIdle
+		eIdle,
+		eBNOTurn
 /*
 		eGripper,
 		eSlightlyDriftLeft,
