@@ -39,12 +39,12 @@ public class RobotMap {
     public static final int ELEVATOR_TALON = 6;
 
 	//Victor IDs:
-	public static final int LEFT_INTAKE = 0;
-	public static final int RIGHT_INTAKE = 1;
+	public static final int LEFT_INTAKE = 7;
+	public static final int RIGHT_INTAKE = 8;
 	
 	// Solenoid IDs:
-	public static final int SHIFT_SOLENOID = 0;
-	public static final int INTAKE_ARM = 1;
+	public static final int SHIFT_SOLENOID = 7;
+	public static final int INTAKE_ARM = 0;
 
 	// Which PID slot to pull gains from: Starting 2018, you can choose
 	// from 0,1,2 or 3. Only the first two (0,1) are visible in web-based

@@ -9,7 +9,10 @@ import org.usfirst.frc.team4576.robot.subsystems.Pneumatics;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
-
+import PowerUp2018.AutoRecipes;
+import PowerUp2018.AutoStates.EAutoStates;
+import PowerUp2018.FieldDimensions; 
+import PowerUp2018.MotionItem;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -18,15 +21,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
 import redcore.BNO055.reg_t;
-import PowerUp2018.AutoStates.EAutoStates;
-import PowerUp2018.MotionItem;
-import PowerUp2018.AutoRecipes;
-import PowerUp2018.AutoStates;
-import PowerUp2018.FieldDimensions;
 
 
 
@@ -133,9 +131,9 @@ public class Robot extends IterativeRobot {
         Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
         /* set closed loop gains in slot0 */
         Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
-        Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs); 
+        Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 3.2, RobotMap.kTimeoutMs);
+        Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+        Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, .0, RobotMap.kTimeoutMs); 
         
         /* set acceleration and vcruise velocity - see documentation */
         Robot.chassis.tsrxL.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
@@ -144,8 +142,8 @@ public class Robot extends IterativeRobot {
 		 Robot.chassis.tsrxR.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
 		 Robot.chassis.tsrxR.configMotionAcceleration(7500, RobotMap.kTimeoutMs);
 		 
-		 Robot.elevator.tsrxE.configMotionCruiseVelocity(10000, RobotMap.kTimeoutMs);
-	     Robot.elevator.tsrxE.configMotionAcceleration(10000, RobotMap.kTimeoutMs);
+		 Robot.elevator.tsrxE.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
+	     Robot.elevator.tsrxE.configMotionAcceleration(7500, RobotMap.kTimeoutMs);
 			/* zero the sensor */
 		 Robot.chassis.tsrxL.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		 Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
@@ -158,11 +156,10 @@ public class Robot extends IterativeRobot {
 
 		// camera.setFPS(15);
 		// camera.setResolution(320, 240);
-		//CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		
 		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
 				BNO055.vector_type_t.VECTOR_EULER);
-		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
 		chooser.addDefault("Do Nothing.", null);
 		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2CubesOr1);
@@ -209,7 +206,7 @@ public class Robot extends IterativeRobot {
 		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
 		
 		double dDistanceLift_inches = FieldDimensions.dLiftInchesPerClicks * _CurrentLiftEncoderPosition;
-		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
+		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches); 
 		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
 		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
 		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
@@ -497,7 +494,7 @@ public class Robot extends IterativeRobot {
 
 		case autoLeft2CubesOr1:
 			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes);
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes); 
 			}
 			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'L') {
     			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScaleLeftSwitch_2cubes);

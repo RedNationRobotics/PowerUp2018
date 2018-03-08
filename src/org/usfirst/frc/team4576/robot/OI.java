@@ -65,6 +65,7 @@ public class OI {
 		/*Single Operator Control*/
 		dsB.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
+		
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
 		dsY.whileHeld(new Intake(true));
@@ -75,8 +76,9 @@ public class OI {
 		dsLB.whenReleased(new ElevDown(false));
 		dsX.whileHeld(new Release(true));
 		dsX.whenReleased(new Release(false));
-		dsLSTICK.whenPressed(new ElevFast(true));
-		dsRSTICK.whenPressed(new ElevFast(false));
+		//dsLSTICK.whenPressed(new ElevFast(true));
+		//dsRSTICK.whenPressed(new ElevFast(false));
+		dsRSTICK.whenPressed(new IntakeArm());
 
 		
 		
