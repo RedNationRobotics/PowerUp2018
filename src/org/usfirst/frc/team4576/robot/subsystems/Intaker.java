@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //to change throttle, see robotMap
 //*******************************************************************
 public class Intaker extends Subsystem {
-	WPI_VictorSPX intakeL = new WPI_VictorSPX(RobotMap.LEFT_INTAKE);
+	public WPI_VictorSPX intakeL = new WPI_VictorSPX(RobotMap.LEFT_INTAKE);
 	WPI_VictorSPX intakeR = new WPI_VictorSPX(RobotMap.RIGHT_INTAKE);
 
 	public Intaker() {

@@ -2,6 +2,7 @@ package org.usfirst.frc.team4576.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
@@ -9,6 +10,7 @@ import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
 import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.commands.Release;
+import org.usfirst.frc.team4576.robot.commands.ScalingRelease;
 import org.usfirst.frc.team4576.robot.commands.Shift;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 
@@ -48,6 +50,10 @@ public class OI {
 	Button dsSTART = new JoystickButton(Robot.driveStick, 8);
 	Button dsLSTICK = new JoystickButton(Robot.driveStick, 9);
 	Button dsRSTICK = new JoystickButton(Robot.driveStick, 10);
+	
+	AxisButton dsRTrigger = new AxisButton(Robot.driveStick, 3, 0, 0, false);
+	AxisButton dsLTrigger = new AxisButton(Robot.driveStick, 2, 0, 0, false);
+	AxisButton dsDPad = new AxisButton(Robot.driveStick, 6, 0, 0, false);
 
 	Button ssA = new JoystickButton(Robot.secondaryStick, 1);
 	Button ssB = new JoystickButton(Robot.secondaryStick, 2);
@@ -59,6 +65,10 @@ public class OI {
 	Button ssSTART = new JoystickButton(Robot.secondaryStick, 8);
 	Button ssLSTICK = new JoystickButton(Robot.secondaryStick, 9);
 	Button ssRSTICK = new JoystickButton(Robot.secondaryStick, 10);
+
+	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
+	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
+	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 6, 0, 0, false);
 
 
 	public OI() {
@@ -91,7 +101,6 @@ public class OI {
 
 
 
-
 		/**/
 		
 		/*Dual Operator Control
@@ -110,6 +119,10 @@ public class OI {
 		ssY.whenReleased(new Release(false));
 		ssA.whenPressed(new ElevFast(false));
 		ssB.whenPressed(new ElevFast(true));
+		/*/
+		ssRTrigger.whenPressed(new ScalingRelease());
+		ssDPad.whenPressed(new LEDMode(15));
+		/*/
 		
 		ssX.whenPressed(new LEDMode(6));	
 		ssBACK.whenPressed(new LEDMode(33));
