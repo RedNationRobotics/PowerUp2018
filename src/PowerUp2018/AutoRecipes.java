@@ -5,22 +5,8 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 72.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 41.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
-			new MotionItem(EAutoStates.eDriveForward, 36.0),
-			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
-			new MotionItem(EAutoStates.eGripper_Intake),
-			new MotionItem(EAutoStates.eStartTimer, 1.0),
-			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eDriveForward, -36.0),
-			new MotionItem(EAutoStates.eStartTimer, 0.25),
-			new MotionItem(EAutoStates.eSetLiftHeight, 30.0),
-			new MotionItem(EAutoStates.eStopMotors),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle)
+			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
+
 			
 	};
 	public static MotionItem[] _ElevatorDown_Recipe_ = {	
@@ -41,10 +27,10 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kCenterToMiddlePartOfSwitchLoading), 
 			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
-			new MotionItem(EAutoStates.eDriveForward, 22.0), 
+			new MotionItem(EAutoStates.eDriveForward, 8.0), 
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
-			new MotionItem(EAutoStates.eDriveForward, -22.0),
+			new MotionItem(EAutoStates.eDriveForward, -8.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
@@ -241,7 +227,7 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eDriveForward, FieldDimensions.kLengthfromcenterOfRobotToCornerOfSwitch),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
 			new MotionItem(EAutoStates.eStoppedTurn, 45.0),
-			new MotionItem(EAutoStates.eDriveForward, 14.0),
+			new MotionItem(EAutoStates.eDriveForward, 149.0),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
