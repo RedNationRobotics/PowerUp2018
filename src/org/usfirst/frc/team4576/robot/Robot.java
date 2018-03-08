@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4576.robot;
 
 import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
+import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.subsystems.Chassis;
 import org.usfirst.frc.team4576.robot.subsystems.Elevator;
 import org.usfirst.frc.team4576.robot.subsystems.Intaker;
@@ -171,7 +172,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledInit() {
-
+		new LEDMode(42);
 	}
 
 	public void disabledPeriodic() {

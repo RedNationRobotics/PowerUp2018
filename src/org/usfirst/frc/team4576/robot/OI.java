@@ -101,8 +101,8 @@ public class OI {
 		*/
 		
 		//Dual Operator Control
-		dsX.whenPressed(new Shift(true));
-		dsA.whenPressed(new Shift(false));
+		dsA.whenPressed(new Shift(true));
+		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
 		dsLB.whileHeld(new Intake(true));
@@ -120,7 +120,7 @@ public class OI {
 		ssB.whenPressed(new ElevFast(true));
 		
 		ssX.whenPressed(new LEDMode(6));	
-		ssBACK.whenPressed(new LEDMode(29));
+		ssBACK.whenPressed(new LEDMode(76));
 		ssSTART.whenPressed(new LEDMode(22));
 		ssLSTICK.whenPressed(new LEDMode(17));
 		ssRSTICK.whenPressed(new LEDMode(7));
