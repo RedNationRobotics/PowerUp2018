@@ -321,4 +321,4 @@ public class BNO055 {
 				break;
 			case eSetNormalPower:
 				if (_dCurrentTime_sec >= _dExpirationTime_sec) {
-					_dExpirationTime_sec = _dCurrentTime_sec;
+					_dExpirationTime_sec = _dCurrentTime_...
