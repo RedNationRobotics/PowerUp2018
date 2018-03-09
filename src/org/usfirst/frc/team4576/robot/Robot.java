@@ -456,7 +456,6 @@ public class Robot extends IterativeRobot {
 			case eBNOTurn:
 			{
 				double targetHeading = _CurrentMotionItem.dParam1;
-				double error = targetHeading - Robot.imu.getHeading();
 				if (Robot.imu.getHeading() + targetHeading > targetHeading){
 						Robot.chassis.setLeftRight(-.25, .25);
 				}
