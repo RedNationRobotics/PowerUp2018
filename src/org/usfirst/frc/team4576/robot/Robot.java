@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser; 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
-import redcore.BNO055.reg_t;
 
 
 
@@ -55,8 +54,8 @@ public class Robot extends IterativeRobot {
 
 	Command teleopCommand;
 	Command autonomousCommand;
-	final String autoLeft2CubesOr1 = "Left2Cubes";
-    final String autoRight2CubesOr1 = "Right2Cubes";
+	final String autoLeft2Cubes = "Left2Cubes";
+    final String autoRight2Cubes = "Right2Cubes";
     
     final String autoLeftScale = "LeftScale";
     final String autoLeftSwitch = "LeftSwitch";
@@ -157,13 +156,10 @@ public class Robot extends IterativeRobot {
 		// camera.setFPS(15);
 		// camera.setResolution(320, 240);
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-		
-		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS,
-				BNO055.vector_type_t.VECTOR_EULER);
 
 		chooser.addDefault("Do Nothing.", null);
-		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2CubesOr1);
-		chooser.addObject("RightSide Scale 2 Cubes", autoRight2CubesOr1);
+		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2Cubes);
+		chooser.addObject("RightSide Scale 2 Cubes", autoRight2Cubes);
 		chooser.addObject("LeftSide Switch", autoLeftSwitch);
 		chooser.addObject("LeftSide Scale", autoLeftScale); 
 		chooser.addObject("Middle Switch", autoMiddleSwitch);
@@ -199,8 +195,6 @@ public class Robot extends IterativeRobot {
 		_CurrentLeftEncoderPosition = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
 		_CurrentRightEncoderPosition = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx); 
 		
-		_CurrentHeading = imu.getHeading();
-
 		SmartDashboard.putNumber("BNO055 Heading :", _CurrentHeading);
 		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
 		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
@@ -492,18 +486,18 @@ public class Robot extends IterativeRobot {
 		System.out.println(autoSelected);
 		switch (autoSelected) {
 
-		case autoLeft2CubesOr1:
+		case autoLeft2Cubes:
 			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
-    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes); 
+    			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes);
 			}
 			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'L') {
     			InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScaleLeftSwitch_2cubes);
 			}
 			if (Robot.gameData.charAt(1) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
+				InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_2cubes);
 			}
 			break;
-		case autoRight2CubesOr1:
+		case autoRight2Cubes:
 			if (Robot.gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'L') {
     			InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_2cubes);
     		} 
@@ -511,7 +505,7 @@ public class Robot extends IterativeRobot {
     			InitializeAutoRecipe(AutoRecipes._RightSide_RightScaleRightSwitch_2cubes);
     		} 
 			if (Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
+				InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_2cubes);
 			}
         case autoLeftSwitch:
         	if (Robot.gameData.charAt(0) == 'L') {
@@ -606,10 +600,6 @@ public class Robot extends IterativeRobot {
 		UpdateDriveCoreComponents(); // shared with auto
 		UpdateFSM();
 
-		//SmartDashboard.putNumber("Amperage", );
-		SmartDashboard.putNumber("Accelerometer", reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putNumber("Magnometer", reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putNumber("Gyro", reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
 		SmartDashboard.putNumber("Course: ", Robot.driveStick1.getRawAxis(4));
 		//SmartDashboard.putBoolean("True = Compressor Low: ", pneumatics.c.getPressureSwitchValue());
 		//SmartDashboard.putString("Compressor state: ", pneumatics.compressorState());
