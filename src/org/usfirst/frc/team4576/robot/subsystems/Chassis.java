@@ -2,11 +2,8 @@ package org.usfirst.frc.team4576.robot.subsystems;
 
 import org.usfirst.frc.team4576.robot.Robot;
 import org.usfirst.frc.team4576.robot.RobotMap;
-import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -115,27 +112,16 @@ public class Chassis extends Subsystem {
 		return (getLeftSpeed() + getRightSpeed()) / 2.0; // average RPM
 	}
 	// ----------------- Gyro ------------------------------
-	
-	public double getAngle() {
-		if (!Robot.imu.isInitialized())
-			return -1;
-		return Robot.imu.getHeading();
-	}
-
-	public void resetGyro() {
-		this.gyroZero = this.getAngle() - gyroZero;
-
-	}
 
 	public double getZero() {
 		return gyroZero;
 	}
-   //public double getLAmps() { 
-   //	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
-  // }
-   // public double getRAmps() {
-  //  	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
-  //  }
+    public double getLAmps() { 
+    	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
+    }
+    public double getRAmps() {
+    	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
+    }
 	// This declares that for driving only the assigned axes are used.
 	public void normalDrive() {
 
