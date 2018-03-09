@@ -456,26 +456,22 @@ public class Robot extends IterativeRobot {
 			case eBNOTurn:
 			{
 				double targetHeading = _CurrentMotionItem.dParam1;
+				double error = targetHeading - Robot.imu.getHeading();
 				if (Robot.imu.getHeading() + targetHeading > targetHeading){
 						Robot.chassis.setLeftRight(-.25, .25);
 				}
 				if (Robot.imu.getHeading() + targetHeading < targetHeading){
 						Robot.chassis.setLeftRight(.25, -.25);
 				}
-				else if (Robot.imu.getHeading() == targetHeading)
+				else if (Robot.imu.getHeading() == targetHeading){
 					_eCurrentAutoState = EAutoStates.eChained_MoveWait;
-				
-					
 				}
-				DriveToTargetEncoderPositions();
-				_eCurrentAutoState = EAutoStates.eChained_MoveWait; // chained event, first to move, then check
 				}
 				break;
 	
 	
 			case eEmergencyStop:
 			default: // unknown, bad things without this .. when in doubt, idle
-			
 				System.out.print(_eCurrentAutoState.name());
 				// emergency stop
 				Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
@@ -484,6 +480,8 @@ public class Robot extends IterativeRobot {
 				_eCurrentAutoState = EAutoStates.eIdle;
 			
 				break;
+	}
+}
 
 	public static void InitializeAutoRecipe(MotionItem[] AutoRecipe) {
 		System.out.println("Hit InitializeAutoRecipe");
