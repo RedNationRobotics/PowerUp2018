@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public static final Lights lights = new Lights();
 
 	public static BNO055 imu;
-	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
+	public static String gameData;
 
 	public static OI oi;
 
@@ -55,8 +55,6 @@ public class Robot extends IterativeRobot {
 
 	Command teleopCommand;
 	Command autonomousCommand;
-	final String autoLeft2CubesOr1 = "Left2Cubes";
-	final String autoRight2CubesOr1 = "Right2Cubes";
 
 	final String autoLeftScale = "LeftScale";
 	final String autoLeftSwitch = "LeftSwitch";
@@ -64,17 +62,16 @@ public class Robot extends IterativeRobot {
 	final String autoMiddleScale = "MiddleScale";
 	final String autoRightSwitch = "RightSwitch";
 	final String autoRightScale = "RightScale";
-	final String autoLeftSwitch2cubes = "LeftSwitch2cubes";
-	final String autoRightSwitch2cubes = "autoRightSwitch2cubes";
+	final String autoLeftScale2cubes = "LeftSwitch2cubes";
+	final String autoRightScale2cubes = "autoRightSwitch2cubes";
 	final String autoTest = "AutoTest";
 
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
-
 	public void robotInit() {
-		// For Testing purposes
-		// gameData = "LLL"
 
+		// For Testing purposes
+		//game data
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		/*
 		 * Fixing motor motion issues 1) Set the setSensorPhase(false) 2) Move
@@ -128,12 +125,12 @@ public class Robot extends IterativeRobot {
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.00019765625, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.00019765625, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		/* set closed loop gains in slot0 */
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
@@ -163,19 +160,13 @@ public class Robot extends IterativeRobot {
 		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
 		// CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
-		chooser.addDefault("Do Nothing.", null);
-		chooser.addObject("LeftSide Scale 2 Cubes", autoLeft2CubesOr1);
-		chooser.addObject("RightSide Scale 2 Cubes", autoRight2CubesOr1);
-		chooser.addObject("LeftSide Switch", autoLeftSwitch);
-		chooser.addObject("LeftSide Scale", autoLeftScale);
-		chooser.addObject("Middle Switch", autoMiddleSwitch);
-		chooser.addObject("Middle Scale", autoMiddleScale);
-		chooser.addObject("Right Switch", autoRightSwitch);
-		chooser.addObject("Right Scale", autoRightScale);
-		chooser.addObject("Auto testing", autoTest);
+		chooser.addObject("LeftSide Scale 2 Cubes", autoLeftScale2cubes);
+		chooser.addObject("RightSide Scale 2 Cubes", autoRightScale2cubes);
+		chooser.addDefault("Default", autoTest);
 
 		SmartDashboard.putData("Auto Choices", chooser);
-		// chooser.addObject("Right Gear Auto", autoRightGear);
+
+		autoSelected = chooser.getSelected();
 
 	}
 
@@ -509,88 +500,36 @@ public class Robot extends IterativeRobot {
 	// *************** Start Auto zone
 	// **********************************************************
 	public void autonomousInit() {
+		gameData = DriverStation.getInstance().getGameSpecificMessage(); // get game data after sent
+		 
 		_eCurrentAutoState = EAutoStates.eEmergencyStop; // just to make sure
 		UpdateFSM();
 
 		autoSelected = chooser.getSelected();
 		System.out.println(autoSelected);
 		switch (autoSelected) {
-
-		case autoLeft2CubesOr1:
-			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
+		case autoLeftScale2cubes:
+			if (gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
 				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes);
 			}
-			if (Robot.gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'L') {
+			else if  (Robot.gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L') {
 				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScaleLeftSwitch_2cubes);
 			}
-			if (Robot.gameData.charAt(1) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
-			}
 			break;
-		case autoRight2CubesOr1:
-			if (Robot.gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'L') {
+		case autoRightScale2cubes:
+			if (gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'L') {
 				InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_2cubes);
 			}
-			if (Robot.gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'R') {
+			else if (gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'R') {
 				InitializeAutoRecipe(AutoRecipes._RightSide_RightScaleRightSwitch_2cubes);
 			}
-			if (Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
-			}
-		case autoLeftSwitch:
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_1cube);
-			}
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch_1cube);
-			}
 			break;
-		case autoLeftScale:
-			if (Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_1cube);
-			}
-			if (Robot.gameData.charAt(1) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightScale_1cube);
-			}
-			break;
-		case autoMiddleSwitch:
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch_1cube);
-			}
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_RightSwitch_1cube);
-			}
-			break;
-		case autoMiddleScale:
-			if (Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftScale_1cube);
-			}
-			if (Robot.gameData.charAt(1) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_RightScale_1cube);
-			}
-			break;
-		case autoRightSwitch:
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch_1cube);
-			}
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch_1cube);
-			}
-			break;
-		case autoRightScale:
-			if (Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftScale_1cube);
-			}
-			if (Robot.gameData.charAt(1) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_1cube);
-			}
-			break;
-
 		case autoTest:
 			InitializeAutoRecipe(AutoRecipes._Test_);
 
 			break;
 		default:
+			InitializeAutoRecipe(AutoRecipes._Test_);
 			break;
 
 		}
@@ -605,6 +544,8 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents();
 		UpdateFSM();
+		autoSelected = chooser.getSelected();
+		System.out.println(autoSelected);
 	}
 	// *************** End Auto zone
 	// **********************************************************
@@ -626,7 +567,6 @@ public class Robot extends IterativeRobot {
 
 		UpdateDriveCoreComponents(); // shared with auto
 		UpdateFSM();
-
 		// SmartDashboard.putNumber("Amperage", );
 		// SmartDashboard.putNumber("Accelerometer",
 		// reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());

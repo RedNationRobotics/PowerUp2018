@@ -11,7 +11,6 @@ import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
 import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.commands.Release;
-import org.usfirst.frc.team4576.robot.commands.ScalingRelease;
 import org.usfirst.frc.team4576.robot.commands.Shift;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 
