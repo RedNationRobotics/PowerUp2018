@@ -5,17 +5,16 @@ import PowerUp2018.AutoStates.EAutoStates;
 public class AutoRecipes {
 
 	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, 20.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -15.0),
-
+			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -720.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 			
 	};
 	public static MotionItem[] _Test_1 = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, 20.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, -15.0),
+			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
+			new MotionItem(EAutoStates.eStoppedTurn, -720.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
@@ -202,15 +201,13 @@ public class AutoRecipes {
 	public static MotionItem[] _RightSide_LeftSwitch_1cube  = { /*Finalized working*/
 			new MotionItem(EAutoStates.eDriveForward, 220.0), 
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 186.7),
+			new MotionItem(EAutoStates.eDriveForward, 180.0),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, 45.0),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eSetLiftHeight, -42.0),
-			new MotionItem(EAutoStates.eDriveForward, -5.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
@@ -269,7 +266,7 @@ public class AutoRecipes {
 	public static MotionItem[] _RightSide_LeftSwitch_2cube  = { /*Finalized working used*/
 			new MotionItem(EAutoStates.eDriveForward, 220.0), 
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 186.7),
+			new MotionItem(EAutoStates.eDriveForward, 180.0),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
 			new MotionItem(EAutoStates.eDriveForward, 5.0),
 			new MotionItem(EAutoStates.eSetLiftHeight, 45.0),
