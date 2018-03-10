@@ -126,26 +126,26 @@ public class Robot extends IterativeRobot {
 
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.2, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		/* set closed loop gains in slot0 */
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.4, RobotMap.kTimeoutMs);
-		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.05, RobotMap.kTimeoutMs);
+		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0005, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 
 		/* set acceleration and vcruise velocity - see documentation */
-		Robot.chassis.tsrxL.configMotionCruiseVelocity(10500, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.configMotionAcceleration(105000, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configMotionCruiseVelocity(10000, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.configMotionAcceleration(10000, RobotMap.kTimeoutMs);
 
-		Robot.chassis.tsrxR.configMotionCruiseVelocity(105000, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.configMotionAcceleration(105000, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configMotionCruiseVelocity(10000, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.configMotionAcceleration(10000, RobotMap.kTimeoutMs);
 
 		Robot.elevator.tsrxE.configMotionCruiseVelocity(7500, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.configMotionAcceleration(7500, RobotMap.kTimeoutMs);
@@ -572,7 +572,7 @@ public class Robot extends IterativeRobot {
 			break;
 			
 		case autoTest:
-			InitializeAutoRecipe(AutoRecipes._Test_);
+			InitializeAutoRecipe(AutoRecipes._Test_1);
 
 			break;
 		default:

@@ -117,6 +117,8 @@ public class OI {
 		ssY.whenReleased(new Release(false));
 		ssA.whenPressed(new ElevFast(false));
 		ssB.whenPressed(new ElevFast(true));
+		ssRSTICK.whenPressed(new IntakeArm());
+
 		
 		ssX.whenPressed(new LEDMode(6));	
 		ssBACK.whenPressed(new LEDMode(25));
