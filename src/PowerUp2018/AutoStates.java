@@ -18,7 +18,8 @@ public class AutoStates {
 		eStopMotors,
 		eEmergencyStop,
 		eIdle,
-		eBNOTurn
+		eBNOTurn,
+		eleftSide,
 /*
 		eGripper,
 		eSlightlyDriftLeft,

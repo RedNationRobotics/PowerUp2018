@@ -56,7 +56,13 @@ public class Robot extends IterativeRobot {
 
 	Command teleopCommand;
 	Command autonomousCommand;
+	//sets the starting pose for the grid of the field 
+	final String startingPoseRight = "Right";
+	final String startingPoseMiddle = "Middle";
+	final String startingPoseLeft = "Left";
 
+	
+	//auto recipes 
 	final String autoLeftScale = "LeftScale";
 	final String autoLeftSwitch = "LeftSwitch";
 	final String autoMiddleSwitch = "MiddleSwitch";
@@ -70,7 +76,9 @@ public class Robot extends IterativeRobot {
 
 	final String autoTest = "AutoTest";
 
+	String startingPose;
 	String autoSelected;
+	SendableChooser<String> chooser1 = new SendableChooser<>();
 	SendableChooser<String> chooser = new SendableChooser<>();
 	public void robotInit() {
 
@@ -174,8 +182,10 @@ public class Robot extends IterativeRobot {
 
 		chooser.addDefault("Default", autoTest);
 
+		SmartDashboard.putData("Set starting pose", chooser1);
 		SmartDashboard.putData("Auto Choices", chooser);
 
+		autoSelected = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 
 	}
@@ -510,13 +520,18 @@ public class Robot extends IterativeRobot {
 	// *************** Start Auto zone
 	// **********************************************************
 	public void autonomousInit() {
+		
+		
 		gameData = DriverStation.getInstance().getGameSpecificMessage(); // get game data after sent
 		 
 		_eCurrentAutoState = EAutoStates.eEmergencyStop; // just to make sure
 		UpdateFSM();
-
+		
+		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 		System.out.println(autoSelected);
+		System.out.println(startingPose);
+
 		switch (autoSelected) {
 		case autoLeftSwitch2cubes: /*new*/
 			if (Robot.gameData.charAt(0) == 'R') {
@@ -581,17 +596,27 @@ public class Robot extends IterativeRobot {
 			break;
 
 		}
-
+		switch (startingPose) {
+		case startingPoseLeft:
+			_Pose.SetPose(0, 1, 0);
+		break;
+		case startingPoseMiddle:
+			_Pose.SetPose(0, 0, 0);
+		break;
+		case startingPoseRight:
+			_Pose.SetPose(0, -1, 0);
+		break;
+		}
 		System.out.println("Auto selected: " + autoSelected);
 
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
-
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents();
 		UpdateFSM();
+		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 		System.out.println(autoSelected);
 	}
