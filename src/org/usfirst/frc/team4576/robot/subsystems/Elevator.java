@@ -18,42 +18,42 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //methods to enable joystick trigger control. To change throttle, see robotMap
 //*******************************************************************
 public class Elevator extends Subsystem {
-	public WPI_TalonSRX tsrxE = new WPI_TalonSRX(RobotMap.ELEVATOR_TALON);
-	static DigitalInput limitSwitchTop = new DigitalInput(RobotMap.TOPDIO);
-	static DigitalInput limitSwitchBot = new DigitalInput(RobotMap.BOTDIO);
-	public Counter counter1 = new Counter(limitSwitchTop);
-	public Counter counter2 = new Counter(limitSwitchBot);
+    public WPI_TalonSRX tsrxE = new WPI_TalonSRX(RobotMap.ELEVATOR_TALON);
+    static DigitalInput limitSwitchTop = new DigitalInput(RobotMap.TOPDIO);
+    static DigitalInput limitSwitchBot = new DigitalInput(RobotMap.BOTDIO);
+    public Counter counter1 = new Counter(limitSwitchTop);
+    public Counter counter2 = new Counter(limitSwitchBot);
 
 
-	public Elevator() {
-		tsrxE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, RobotMap.kTimeoutMs);
-	}
-	public void initCounter() {
-		counter1.reset();
-		counter2.reset();
-	}
-	public void up() {
+    public Elevator() {
+        tsrxE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, RobotMap.kTimeoutMs);
+    }
+    public void initCounter() {
+        counter1.reset();
+        counter2.reset();
+    }
+    public void up() {
 
-		tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDUP);
-	}
+        tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDUP);
+    }
 
-	public void down() {
+    public void down() {
 
-		tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDDOWN);
-		
-	}
-	/*
-	 * public void Shoot() { tsrxS.set(targetSpeed); /* 1500 RPM in either
-	 * direction
-	 */
+        tsrxE.set(ControlMode.PercentOutput, RobotMap.ELEVSPEEDDOWN);
+        
+    }
+    /*
+     * public void Shoot() { tsrxS.set(targetSpeed); /* 1500 RPM in either
+     * direction
+     */
 
-	public void stop() {
-		tsrxE.set(ControlMode.PercentOutput, 0);
-	}
+    public void stop() {
+        tsrxE.set(ControlMode.PercentOutput, 0);
+    }
 
-	protected void initDefaultCommand() {
-		/* get gamepad axis */
+    protected void initDefaultCommand() {
+        /* get gamepad axis */
 
-	}
+    }
 
 }

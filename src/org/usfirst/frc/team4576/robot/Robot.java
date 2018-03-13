@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
-import redcore.BNO055.reg_t;
+import redcore.Pose;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
 import PowerUp2018.AutoRecipes;
@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final Intaker intaker = new Intaker();
 	public static final Elevator elevator = new Elevator();
 	public static final Lights lights = new Lights();
+	public static final Pose _Pose = new Pose();
 
 	public static BNO055 imu;
 	public static String gameData;
