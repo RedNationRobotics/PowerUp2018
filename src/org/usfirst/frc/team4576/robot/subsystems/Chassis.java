@@ -2,11 +2,8 @@ package org.usfirst.frc.team4576.robot.subsystems;
 
 import org.usfirst.frc.team4576.robot.Robot;
 import org.usfirst.frc.team4576.robot.RobotMap;
-import org.usfirst.frc.team4576.robot.commands.DriveWithJoysticks;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -28,8 +25,8 @@ public class Chassis extends Subsystem {
 	public Chassis() {
 		tsrxL2.follow(tsrxL);
 		tsrxR2.follow(tsrxR);
-		tsrxL3.follow(tsrxL);
-		tsrxR3.follow(tsrxR);
+		//tsrxL3.follow(tsrxL);
+		//tsrxR3.follow(tsrxR);
 	}
 
 	boolean manualOverride = false;
@@ -38,8 +35,8 @@ public class Chassis extends Subsystem {
 	public WPI_TalonSRX tsrxR = new WPI_TalonSRX(RobotMap.RIGHT_MASTER);
 	public WPI_TalonSRX tsrxL2 = new WPI_TalonSRX(RobotMap.LEFT_SLAVE);
 	public WPI_TalonSRX tsrxR2 = new WPI_TalonSRX(RobotMap.RIGHT_SLAVE);
-	public WPI_TalonSRX tsrxL3 = new WPI_TalonSRX(RobotMap.LEFT_SLAVE2);
-	public WPI_TalonSRX tsrxR3 = new WPI_TalonSRX(RobotMap.RIGHT_SLAVE2);
+	//public WPI_TalonSRX tsrxL3 = new WPI_TalonSRX(RobotMap.LEFT_SLAVE2);
+	//public WPI_TalonSRX tsrxR3 = new WPI_TalonSRX(RobotMap.RIGHT_SLAVE2);
 
 	// This defines the talons used to drive.
 	// RobotDrive drive = new RobotDrive(tsrxL, tsrxR);

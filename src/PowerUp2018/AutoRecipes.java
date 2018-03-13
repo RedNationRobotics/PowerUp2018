@@ -4,17 +4,15 @@ import PowerUp2018.AutoStates.EAutoStates;
 
 public class AutoRecipes {
 
-	public static MotionItem[] _Test_ = {	
-			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -720.0),
+	public static MotionItem[] _Baseline_ = {	
+			new MotionItem(EAutoStates.eDriveForward, 150.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
 			
 	};
 	public static MotionItem[] _Test_1 = {	
-			new MotionItem(EAutoStates.eStoppedTurn, 720.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -720.0),
+			new MotionItem(EAutoStates.eDriveForward, 150.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
