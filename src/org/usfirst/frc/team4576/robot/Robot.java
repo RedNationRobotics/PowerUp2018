@@ -171,16 +171,21 @@ public class Robot extends IterativeRobot {
 		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
 		CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
+		//Auto selection
 		chooser.addObject("LeftSide Scale 2 Cubes", autoLeftScale2cubes);
 		chooser.addObject("RightSide Scale 2 Cubes", autoRightScale2cubes);
-		
 		chooser.addObject("Left Switch", autoLeftSwitch);
 		chooser.addObject("Right Switch", autoRightSwitch);
-		
 		chooser.addObject("Right Switch 2 cubes", autoRightSwitch2cubes);
 		chooser.addObject("Left Switch 2 cubes", autoLeftSwitch2cubes);
 
 		chooser.addDefault("Default", autoTest);
+		
+		//Pose selection
+		chooser.addObject("Right Pose", startingPoseRight);
+		chooser.addObject("Right Pose", startingPoseLeft);
+		chooser.addDefault("Right Pose", startingPoseMiddle);
+
 
 		SmartDashboard.putData("Set starting pose", chooser1);
 		SmartDashboard.putData("Auto Choices", chooser);
@@ -201,6 +206,7 @@ public class Robot extends IterativeRobot {
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		autoSelected = chooser.getSelected();
+		autoSelected = chooser1.getSelected();
 	}
 
 	public void UpdateDriveCoreComponents() {
