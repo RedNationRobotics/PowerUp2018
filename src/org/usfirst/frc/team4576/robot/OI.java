@@ -2,10 +2,8 @@ package org.usfirst.frc.team4576.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
-import org.usfirst.frc.team4576.robot.commands.ElevFast;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
@@ -115,11 +113,12 @@ public class OI {
 		ssRB.whenReleased(new ElevUp(false));
 		ssY.whileHeld(new Release(true));
 		ssY.whenReleased(new Release(false));
-		ssA.whenPressed(new ElevFast(false));
-		ssB.whenPressed(new ElevFast(true));
 		ssRSTICK.whenPressed(new IntakeArm());
 
 		
+
+		ssA.whenPressed(new LEDMode(45));
+		ssB.whenPressed(new LEDMode(35));
 		ssX.whenPressed(new LEDMode(6));	
 		ssBACK.whenPressed(new LEDMode(25));
 		ssSTART.whenPressed(new LEDMode(21));
