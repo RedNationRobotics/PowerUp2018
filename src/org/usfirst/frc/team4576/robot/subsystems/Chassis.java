@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //*******************************************************************
 public class Chassis extends Subsystem {
 
-	double gyroZero = 0;
 	double lamps = 0;
 	double ramps = 0;
 
@@ -112,16 +111,6 @@ public class Chassis extends Subsystem {
 		return (getLeftSpeed() + getRightSpeed()) / 2.0; // average RPM
 	}
 	// ----------------- Gyro ------------------------------
-
-	public double getZero() {
-		return gyroZero;
-	}
-    public double getLAmps() { 
-    	return lamps = pdp.getCurrent(RobotMap.LEFT_PDPCHANNEL);
-    }
-    public double getRAmps() {
-    	return ramps = pdp.getCurrent(RobotMap.RIGHT_PDPCHANNEL);
-    }
 	// This declares that for driving only the assigned axes are used.
 	public void normalDrive() {
 

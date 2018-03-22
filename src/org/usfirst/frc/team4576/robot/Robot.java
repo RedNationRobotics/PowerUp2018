@@ -135,13 +135,13 @@ public class Robot extends IterativeRobot {
 
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.65, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0003, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.65, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0003, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.6, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0001976562, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		/* set closed loop gains in slot0 */
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
@@ -163,13 +163,14 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 
-		System.out.println("RNR 2017 Robot Code Initializing...");
+		System.out.println("RNR 2018 Robot Code Powering Up...");
 		oi = new OI();
 
 		teleopCommand = new DriveWithJoysticks();
 
-		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
-		CameraServer.getInstance().startAutomaticCapture("cam1",1);
+		imu = BNO055.Instance();
+	
+		//CameraServer.getInstance().startAutomaticCapture("cam1",1);
 
 		chooser.addObject("LeftSide Scale 2 Cubes", autoLeftScale2cubes);
 		chooser.addObject("RightSide Scale 2 Cubes", autoRightScale2cubes);
@@ -209,9 +210,8 @@ public class Robot extends IterativeRobot {
 		_CurrentLeftEncoderPosition = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 		_CurrentRightEncoderPosition = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 
-		_CurrentHeading = imu.getHeading();
+		_CurrentHeading = imu.Heading();
 
-		SmartDashboard.putNumber("BNO055 Heading :", _CurrentHeading);
 		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
 		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
 
@@ -220,8 +220,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
 		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
 		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
-		System.out.println(_CurrentHeading);
+		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
+		SmartDashboard.putNumber("Rpm left", chassis.getLeftSpeed());
+		SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
+		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
+		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
+		//System.out.println(_CurrentHeading);
 		SmartDashboard.putNumber("Heading", _CurrentHeading);
+		SmartDashboard.putString("Calibration", imu.getCalibrationStatusString());
 		SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
 		SmartDashboard.putNumber("Lift Encoder", _CurrentLiftEncoderPosition);
 
@@ -283,7 +289,7 @@ public class Robot extends IterativeRobot {
 	public void SetTargetLiftPositionByInches(double dLift_Height_inch) {
 		_TargetLiftEncoderPosition = _CurrentLiftEncoderPosition
 				+ (dLift_Height_inch * FieldDimensions.dLiftClicksPerInch);
-		System.out.println("Target Lift Encoder: " + _TargetLiftEncoderPosition);
+		System.out.println("Target Lift Encoder" + _TargetLiftEncoderPosition);
 	}
 
 	public void UpdateFSM() {
@@ -467,13 +473,13 @@ public class Robot extends IterativeRobot {
 			case eBNOTurn:
 			{
 				double targetHeading = _CurrentMotionItem.dParam1;
-				if (Robot.imu.getHeading() + targetHeading > targetHeading){
+				if (Robot.imu.Heading() + targetHeading > targetHeading){
 						Robot.chassis.setLeftRight(-.25, .25);
 				}
-				if (Robot.imu.getHeading() + targetHeading < targetHeading){
+				if (Robot.imu.Heading() + targetHeading < targetHeading){
 						Robot.chassis.setLeftRight(.25, -.25);
 				}
-				else if (Robot.imu.getHeading() == targetHeading){
+				else if (Robot.imu.Heading() == targetHeading){
 					_eCurrentAutoState = EAutoStates.eChained_MoveWait;
 				}
 				}
@@ -647,11 +653,7 @@ public class Robot extends IterativeRobot {
 		// reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
 		// SmartDashboard.putNumber("Gyro",
 		// reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
-		SmartDashboard.putBoolean("Compressor on: ", pneumatics.c.enabled());
-		SmartDashboard.putNumber("Rpm left: ", chassis.getLeftSpeed());
-		SmartDashboard.putNumber("Rpm right: ", chassis.getRightSpeed());
-		SmartDashboard.putNumber("PSI: ", pneumatics.getPsi());
-		SmartDashboard.putBoolean("High Gear: ", pneumatics.getShift());
+		
 		// SmartDashboard.putNumber("Psensor RawVolts", pneumatics.rawVolts());
 
 	}
