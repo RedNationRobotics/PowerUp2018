@@ -80,8 +80,22 @@ public class Robot extends IterativeRobot {
 	String autoSelected;
 	SendableChooser<String> chooser1 = new SendableChooser<>();
 	SendableChooser<String> chooser = new SendableChooser<>();
-	public void robotInit() {
+	
+	public double _kP = 0.0;
+	public double _kI = 0.0;
+	public double _kD = 0.0;
 
+	
+	public void SetDrivePID() {
+		//pid values that will be moved post SMR 2018
+		_kP = SmartDashboard.getNumber("kP", 0.0);
+		_kI = SmartDashboard.getNumber("kI", 0.0);
+		_kD = SmartDashboard.getNumber("kD", 0.0);
+	}
+	
+	public void robotInit() {
+		SetDrivePID();
+		
 		// For Testing purposes
 		//game data
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
@@ -135,14 +149,14 @@ public class Robot extends IterativeRobot {
 
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 0.65, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0003, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, _kP, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, _kI, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, _kD, RobotMap.kTimeoutMs);
 
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 0.65, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0003, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, _kP, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, _kI, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, _kD, RobotMap.kTimeoutMs);
 		/* set closed loop gains in slot0 */
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.05, RobotMap.kTimeoutMs);
@@ -183,14 +197,14 @@ public class Robot extends IterativeRobot {
 		
 		//Pose selection
 		chooser.addObject("Right Pose", startingPoseRight);
-		chooser.addObject("Right Pose", startingPoseLeft);
-		chooser.addDefault("Right Pose", startingPoseMiddle);
+		chooser.addObject("Left Pose", startingPoseLeft);
+		chooser.addDefault("Middle Pose", startingPoseMiddle);
 
 
 		SmartDashboard.putData("Set starting pose", chooser1);
 		SmartDashboard.putData("Auto Choices", chooser);
 
-		autoSelected = chooser1.getSelected();
+		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 
 	}
@@ -206,7 +220,7 @@ public class Robot extends IterativeRobot {
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		autoSelected = chooser.getSelected();
-		autoSelected = chooser1.getSelected();
+		startingPose = chooser1.getSelected();
 	}
 
 	public void UpdateDriveCoreComponents() {
@@ -526,7 +540,8 @@ public class Robot extends IterativeRobot {
 	// *************** Start Auto zone
 	// **********************************************************
 	public void autonomousInit() {
-		
+			
+		SetDrivePID();
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage(); // get game data after sent
 		 
