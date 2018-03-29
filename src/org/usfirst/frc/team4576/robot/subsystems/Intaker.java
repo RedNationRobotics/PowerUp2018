@@ -2,8 +2,6 @@ package org.usfirst.frc.team4576.robot.subsystems;
 
 import org.usfirst.frc.team4576.robot.RobotMap;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,13 +21,13 @@ public class Intaker extends Subsystem {
 
 	public void intake() {
 
-		intakeL.set(-.85);
+		intakeL.set(-.90);
 
 	}
 
 	public void release() {
 
-		intakeL.set(.65);
+		intakeL.set(.40);
 	}
 	/*
 	 * public void Shoot() { tsrxS.set(targetSpeed); /* 1500 RPM in either

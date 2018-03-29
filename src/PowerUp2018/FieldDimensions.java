@@ -19,7 +19,7 @@ public class FieldDimensions
 	public static final double dInchesPerDegree = dWheelTurnCircumference / 360.0;
 	
 	// dimensions of field components (in inches)
-	public static double kLengthfromcenterOfRobotToCornerOfSwitch = 288.0;
+	public static double kLengthfromcenterOfRobotToCornerOfScale = 288.0;
 	public static double kMaxLiftHeightScale = 73.0;
 	public static double kMinLiftHeightScale = -68.0;
 	public static double kMaxLiftHeightSwitch = 31.0;

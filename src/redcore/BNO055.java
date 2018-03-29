@@ -377,6 +377,7 @@ public class BNO055 {
 
 
 	
+	@SuppressWarnings("static-access")
 	private void PrintCalibrationData() {
 		String strBytes = "";
 		for(int iIndex = 0; iIndex < _CalibrationDataBuffer.length; iIndex++) {

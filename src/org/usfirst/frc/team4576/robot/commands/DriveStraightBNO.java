@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4576.robot.commands;
 
 import org.usfirst.frc.team4576.robot.Robot;
-import org.usfirst.frc.team4576.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,7 +13,7 @@ public DriveStraightBNO(double throttle, double seconds) {
     requires(Robot.chassis);
   }
 
-  @Override
+@Override
   protected void initialize() {
     Robot.chassis.resetEncoders();
     Robot.chassis.stop();
@@ -27,7 +26,7 @@ public DriveStraightBNO(double throttle, double seconds) {
     
   }
 
-  @Override
+@Override
   protected boolean isFinished() {
 	  if(timeSinceInitialized() >= seconds) { 
 		return true; }
