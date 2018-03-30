@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final Lights lights = new Lights();
 	public static final Pose _Pose = new Pose();
+
 	public static BNO055 imu;
 	public static String gameData;
 
@@ -69,6 +70,7 @@ public class Robot extends IterativeRobot {
 	final String startingPoseRight = "Right";
 	final String startingPoseMiddle = "Middle";
 	final String startingPoseLeft = "Left";
+
 	//auto recipes 
 	final String autoLeftScale = "LeftScale";
 	final String autoLeftSwitch = "LeftSwitch";
@@ -84,9 +86,10 @@ public class Robot extends IterativeRobot {
 	
 	String startingPose;
 	String autoSelected;
-	SendableChooser<String> chooser1 = new SendableChooser<>();
+//	SendableChooser<String> chooser1 = new SendableChooser<>();
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
+	public double _kF = 0.0;
 	public double _kP = 0.0;
 	public double _kI = 0.0;
 	public double _kD = 0.0;
@@ -158,10 +161,11 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxR.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, RobotMap.kPIDLoopIdx, RobotMap.kTimeoutMs);
 
-		System.out.println("RNR 2017 Robot Code Initializing...");
+		System.out.println("RNR 2018 Robot Code Powering Up...");
 		oi = new OI();
 
 		teleopCommand = new DriveWithJoysticks();
+
 		//Auto selection
 		chooser.addObject("LeftSide Scale 2 Cubes", autoLeftScale2cubes);
 		chooser.addObject("RightSide Scale 2 Cubes", autoRightScale2cubes);
@@ -171,17 +175,17 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Left Switch 2 cubes", autoLeftSwitch2cubes);
 
 		chooser.addDefault("Default", autoTest);
-		
+	
 		//Pose selection
-		chooser.addObject("Right Pose", startingPoseRight);
-		chooser.addObject("Left Pose", startingPoseLeft);
-		chooser.addDefault("Middle Pose", startingPoseMiddle);
+	//	chooser.addObject("Right Pose", startingPoseRight);
+	//	chooser.addObject("Left Pose", startingPoseLeft);
+	//	chooser.addDefault("Middle Pose", startingPoseMiddle);
 
 
-		SmartDashboard.putData("Set starting pose", chooser1);
+	//	SmartDashboard.putData("Set starting pose", chooser1);
 		SmartDashboard.putData("Auto Choices", chooser);
 
-		startingPose = chooser1.getSelected();
+	//	startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 
 	}
@@ -194,13 +198,15 @@ public class Robot extends IterativeRobot {
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+		//lights.setLights(77);
 		/* clear our buffer and put everything into a known state */
 		Robot.chassis.tsrxL.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
 		autoSelected = chooser.getSelected();
-		startingPose = chooser1.getSelected();
+		//startingPose = chooser1.getSelected();
 	}
 
 	public void UpdateDriveCoreComponents() {
@@ -209,18 +215,12 @@ public class Robot extends IterativeRobot {
 		_CurrentLeftEncoderPosition = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 		_CurrentRightEncoderPosition = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 
-
 		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
-		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
-
+	    double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
 		double dDistanceLift_inches = FieldDimensions.dLiftInchesPerClicks * _CurrentLiftEncoderPosition;
 		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
 		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
-		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
-		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
 		SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
-		SmartDashboard.putNumber("Lift Encoder", _CurrentLiftEncoderPosition);
-
 	}
 
 	// *************** FSM zone
@@ -277,7 +277,7 @@ public class Robot extends IterativeRobot {
 	public void SetTargetLiftPositionByInches(double dLift_Height_inch) {
 		_TargetLiftEncoderPosition = _CurrentLiftEncoderPosition
 				+ (dLift_Height_inch * FieldDimensions.dLiftClicksPerInch);
-		System.out.println("Target Lift Encoder: " + _TargetLiftEncoderPosition);
+		System.out.println("Target Lift Encoder" + _TargetLiftEncoderPosition);
 	}
 
 	public void UpdateFSM() {
@@ -462,13 +462,14 @@ public class Robot extends IterativeRobot {
 		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.05, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0005, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage(); // get game data after sent
 		 
 		_eCurrentAutoState = EAutoStates.eEmergencyStop; // just to make sure
 		UpdateFSM();
 		
-		startingPose = chooser1.getSelected();
+		//startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 
 		switch (autoSelected) {
@@ -535,7 +536,6 @@ public class Robot extends IterativeRobot {
 			break;
 
 		}
-		
 		System.out.println("Auto selected: " + autoSelected);
 
 		if (autonomousCommand != null)
@@ -545,7 +545,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents();
 		UpdateFSM();
-		startingPose = chooser1.getSelected();
+		//startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 		SmartDashboard.putNumber("X", _Pose._x);
 		SmartDashboard.putNumber("Y", _Pose._y);
@@ -571,16 +571,33 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents(); // shared with auto
 		UpdateFSM();
-		SmartDashboard.putBoolean("Compressor on: ", pneumatics.c.enabled());
-		SmartDashboard.putNumber("Rpm left: ", chassis.getLeftSpeed());
-		SmartDashboard.putNumber("Rpm right: ", chassis.getRightSpeed());
-		SmartDashboard.putNumber("PSI: ", pneumatics.getPsi());
-		SmartDashboard.putBoolean("High Gear: ", pneumatics.getShift());
+
+		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
+		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
+		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
+		SmartDashboard.putNumber("Rpm left", chassis.getLeftSpeed());
+		SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
+		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
+		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
+		SmartDashboard.putNumber("Heading", _CurrentHeading);
+		SmartDashboard.putBoolean("Calibration", imu.isCalibrated());
+		SmartDashboard.putNumber("Pitch", imu.Picth());
+		SmartDashboard.putNumber("Roll", imu.Roll());
+
+		SmartDashboard.putNumber("Lift Encoder", _CurrentLiftEncoderPosition);
+
+		// SmartDashboard.putNumber("Amperage", );
+		// SmartDashboard.putNumber("Accelerometer",
+		// reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
+		// SmartDashboard.putNumber("Magnometer",
+		// reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
+		// SmartDashboard.putNumber("Gyro",
+		// reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
 		// SmartDashboard.putNumber("Psensor RawVolts", pneumatics.rawVolts());
 	}
-	@SuppressWarnings("deprecation")
+
 	public void testPeriodic() {
-		LiveWindow.run();
+		LiveWindow.setEnabled(true);
 	}
 	// *************** End Teleop zone
 	// **********************************************************

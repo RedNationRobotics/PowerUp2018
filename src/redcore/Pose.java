@@ -15,7 +15,7 @@ public class Pose {
 		_x = x;
 		_y = y;
 		_heading_deg = heading_deg;
-	}
+	} 
 	public void DriveForward(double Distance_in) {
 		_radHeading = _heading_deg * _div180 * Math.PI;
 		_JavaRadAngle = _pidive2 - _radHeading;

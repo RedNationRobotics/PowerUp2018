@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 //*******************************************************************
 public class Intaker extends Subsystem {
 	public WPI_VictorSPX intakeL = new WPI_VictorSPX(RobotMap.LEFT_INTAKE);
-	WPI_VictorSPX intakeR = new WPI_VictorSPX(RobotMap.RIGHT_INTAKE);
+	public WPI_VictorSPX intakeR = new WPI_VictorSPX(RobotMap.RIGHT_INTAKE);
 
 	public Intaker() {
 		intakeR.follow(intakeL);
@@ -28,6 +28,7 @@ public class Intaker extends Subsystem {
 	public void release() {
 
 		intakeL.set(.40);
+
 	}
 	/*
 	 * public void Shoot() { tsrxS.set(targetSpeed); /* 1500 RPM in either
