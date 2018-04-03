@@ -21,13 +21,14 @@ public class Intaker extends Subsystem {
 
 	public void intake() {
 
-		intakeL.set(-.85);
+		intakeL.set(-.90);
 
 	}
 
 	public void release() {
 
-		intakeL.set(.85);
+		intakeL.set(.40);
+
 	}
 	/*
 	 * public void Shoot() { tsrxS.set(targetSpeed); /* 1500 RPM in either

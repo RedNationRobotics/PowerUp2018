@@ -112,10 +112,7 @@ public class OI {
 		ssRB.whileHeld(new ElevUp(true));
 		ssRB.whenReleased(new ElevUp(false));
 		ssY.whileHeld(new Release(true));
-		ssY.whenReleased(new Release(false));
-		ssRSTICK.whenPressed(new IntakeArm());
-
-		
+		ssY.whenReleased(new Release(false));		
 
 		ssA.whenPressed(new LEDMode(45));
 		ssB.whenPressed(new LEDMode(35));
