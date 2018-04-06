@@ -36,6 +36,7 @@ public class BNO055 {
 	private static I2C _imu;
 	
 	private EBMOStates _CurrentState = EBMOStates.eInitialize;
+	private EBMOStates _PrevCurrentState = EBMOStates.eInitialize;
 	
 	private volatile boolean _IsSensorPresent = false;
 	private volatile boolean _IsInitialized = false;
@@ -277,6 +278,10 @@ public class BNO055 {
 	 * Called periodically. Communicates with the sensor, and checks its state. 
 	 */
 	private void update() {
+		if(_CurrentState != _PrevCurrentState) {
+			System.out.println("BNO");
+			_PrevCurrentState = _CurrentState;
+		}
 		_dCurrentTime_sec = Timer.getFPGATimestamp(); //seconds
 		switch(_CurrentState) {
 			case eInitialize:

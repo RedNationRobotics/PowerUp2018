@@ -389,6 +389,7 @@ public class Robot extends IterativeRobot {
 			{
 				if (IsTurnCloseEnough()) {
 					_Pose.RelativeTurn(_CurrentMotionItem.dParam1);
+					System.out.print("Heading: " + _Pose._heading_deg);
 					MoveToNextMotionItemInSelectedRecipe();
 				}
 			}
