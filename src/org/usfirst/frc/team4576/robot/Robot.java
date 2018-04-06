@@ -270,7 +270,7 @@ public class Robot extends IterativeRobot {
 		return (dTurnLError < _dTurnTolerance && dTurnRError < _dTurnTolerance);
 	}
 
-	public void DriveToTargetPose() {
+	public void DriveToTargetPosition() {
 		Robot.chassis.tsrxL.set(ControlMode.MotionMagic, -_TargetLeftEncoderPosition);
 		Robot.chassis.tsrxR.set(ControlMode.MotionMagic, _TargetRightEncoderPosition);
 	}
@@ -326,7 +326,7 @@ public class Robot extends IterativeRobot {
 				System.out.print("Pose(" + _Pose._x_in + "in, " + _Pose._y_in + "in, " + _Pose._heading_deg + "deg)\n");				Vector MagicArrow = _Pose.GetRelativeVector(_CurrentMotionItem._WayPoint);
 				MagicArrow.ShowSelf();
 				MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, MagicArrow._heading_deg);
-				MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._heading_deg);
+				MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._distance_in);
 				_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
 				_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, drive, _iCurrentMotionItemIndex + 2);
 				MoveToNextMotionItemInSelectedRecipe();
@@ -337,7 +337,7 @@ public class Robot extends IterativeRobot {
 				_CurrentLeftEncoderBeforeMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 				_CurrentRightEncoderBeforeMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);				
 				SetTargetEncoderPositionsByInches(_CurrentMotionItem.dParam1, _CurrentMotionItem.dParam1);
-				DriveToTargetPose();
+				DriveToTargetPosition();
 				_eCurrentAutoState = EAutoStates.eChained_DriveWait; // chained event, first to move, then check
 				System.out.println("Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
 			}
@@ -346,8 +346,8 @@ public class Robot extends IterativeRobot {
 			{
 				double dWheelDrive_in = _CurrentMotionItem.dParam1 * FieldDimensions.dInchesPerDegree;
 				SetTargetEncoderPositionsByInches(dWheelDrive_in, -dWheelDrive_in);
-				DriveToTargetPose();
-				_eCurrentAutoState = EAutoStates.eChained_DriveWait; // chained event, first to move, then check
+				DriveToTargetPosition();
+				_eCurrentAutoState = EAutoStates.eChained_TurnWait; // chained event, first to move, then check
 			}
 			break;		
 			case eStartTimer: 
@@ -387,12 +387,6 @@ public class Robot extends IterativeRobot {
 			case eChained_TurnWait: 
 			{
 				if (IsCloseEnough()) {
-					_CurrentLeftEncoderAfterMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-					_CurrentRightEncoderAfterMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-					_ActualDistancetraveledAveragedBefore = (_CurrentLeftEncoderBeforeMove + _CurrentRightEncoderBeforeMove) * 0.5;
-					_ActualDistancetraveledAveragedAfter = (_CurrentLeftEncoderAfterMove + _CurrentRightEncoderAfterMove) * 0.5;
-					_FinalPoseClicks = _ActualDistancetraveledAveragedAfter - _ActualDistancetraveledAveragedBefore;
-					_FinalPoseInchs = _FinalPoseClicks / FieldDimensions.dClicksPerInch;
 					_Pose.RelativeTurn(_CurrentMotionItem.dParam1);
 					MoveToNextMotionItemInSelectedRecipe();
 				}
