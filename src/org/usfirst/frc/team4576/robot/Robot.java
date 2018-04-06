@@ -237,7 +237,7 @@ public class Robot extends IterativeRobot {
 													// array
 	static int _iCurrentMotionItemIndex; // current position in the drive recipe
 	public static final double _dMoveTolerance = 500.0;
-	public static final double _dTurnTolerance = 5.0;
+	public static final double _dTurnTolerance = 500.0;
 	public static final double _dLiftTolerance = 500.0;
 
 	public double _dTimerEnd_sec;
@@ -266,7 +266,8 @@ public class Robot extends IterativeRobot {
 	
 	public boolean IsTurnCloseEnough() {
 		double dTurnLError = Math.abs(_TargetLeftEncoderPosition - _CurrentLeftEncoderPosition);
-		double dTurnRError = Math.abs(_TargetRightEncoderPosition - _CurrentLeftEncoderPosition);
+		double dTurnRError = Math.abs(_TargetRightEncoderPosition - _CurrentRightEncoderPosition);
+		System.out.print("Is Turn Close Enough:" + "dTurnLError: " + dTurnLError + "dTurnRError: " + dTurnRError);
 		return (dTurnLError < _dTurnTolerance && dTurnRError < _dTurnTolerance);
 	}
 
@@ -386,11 +387,12 @@ public class Robot extends IterativeRobot {
 			break; 
 			case eChained_TurnWait: 
 			{
-				if (IsCloseEnough()) {
+				if (IsTurnCloseEnough()) {
 					_Pose.RelativeTurn(_CurrentMotionItem.dParam1);
 					MoveToNextMotionItemInSelectedRecipe();
 				}
 			}
+			break;
 			case eStopMotors:  
 			{
 				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
