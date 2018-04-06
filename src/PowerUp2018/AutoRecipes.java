@@ -1,12 +1,13 @@
 package PowerUp2018;
 
 import PowerUp2018.AutoStates.EAutoStates;
+import redcore.WayPoint;
 
 public class AutoRecipes {
 
 	public static MotionItem[] _Baseline_ = {	
-			new MotionItem(EAutoStates.eDriveForward, 100.0),
-			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(12, 36)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(12, 36)),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 

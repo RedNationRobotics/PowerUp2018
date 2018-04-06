@@ -3,7 +3,6 @@ package org.usfirst.frc.team4576.robot.subsystems;
 import org.usfirst.frc.team4576.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Counter;
@@ -26,7 +25,7 @@ public class Elevator extends Subsystem {
 
 
     public Elevator() {
-        tsrxE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, RobotMap.kTimeoutMs);
+       //tsrxE.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, RobotMap.kTimeoutMs);
     }
     public void initCounter() {
         counter1.reset();
