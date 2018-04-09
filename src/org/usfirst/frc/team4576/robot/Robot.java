@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
+import redcore.BNO055.reg_t;
 import redcore.Pose;
 import PowerUp2018.AutoStates.EAutoStates;
 import PowerUp2018.MotionItem;
@@ -104,6 +105,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// For Testing purposes
 		//game data
+		imu = BNO055.getInstance(BNO055.opmode_t.OPERATION_MODE_IMUPLUS, BNO055.vector_type_t.VECTOR_EULER);
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		CameraServer.getInstance().startAutomaticCapture("cam1", 1);
 		/* choose the sensor and sensor direction */
@@ -321,7 +323,7 @@ public class Robot extends IterativeRobot {
 			{
 				double dWheelDrive_in = _CurrentMotionItem.dParam1 * FieldDimensions.dInchesPerDegree;
 				SetTargetEncoderPositionsByInches(dWheelDrive_in, -dWheelDrive_in);
-				_CurrentHeading = Robot.imu.Heading();
+				_CurrentHeading = Robot.imu.getHeading();
 				DriveToTargetEncoderPositions();
 				_eCurrentAutoState = EAutoStates.eChained_MoveWait; // chained event, first to move, then check
 			}
@@ -344,7 +346,7 @@ public class Robot extends IterativeRobot {
 				if (IsCloseEnough()) {
 					_CurrentLeftEncoderAfterMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 					_CurrentRightEncoderAfterMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-					_EndHeading = Robot.imu.Heading();
+					_EndHeading = Robot.imu.getHeading();
 					_PoseHeading = _EndHeading - _CurrentHeading;
 					_Pose.RelativeTurn(_PoseHeading);
 					System.out.println("Starting Heading: "+ _CurrentHeading + " End heading: " + _EndHeading + " Pose Heading: " + _PoseHeading); 
@@ -406,13 +408,13 @@ public class Robot extends IterativeRobot {
 			case eBNOTurn:
 			{
 				double targetHeading = _CurrentMotionItem.dParam1;
-				if (Robot.imu.Heading() + targetHeading > targetHeading){
+				if (Robot.imu.getHeading() + targetHeading > targetHeading){
 						Robot.chassis.setLeftRight(-.25, .25);
 				}
-				if (Robot.imu.Heading() + targetHeading < targetHeading){
+				if (Robot.imu.getHeading() + targetHeading < targetHeading){
 						Robot.chassis.setLeftRight(.25, -.25);
 				}
-				else if (Robot.imu.Heading() == targetHeading){
+				else if (Robot.imu.getHeading() == targetHeading){
 					_eCurrentAutoState = EAutoStates.eChained_MoveWait;
 				}
 			}
@@ -550,7 +552,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("X", _Pose._x);
 		SmartDashboard.putNumber("Y", _Pose._y);
 		SmartDashboard.putNumber("Heading", _Pose._heading_deg);
-		SmartDashboard.putNumber("Heading BNO", Robot.imu.Heading());
+		SmartDashboard.putNumber("Heading BNO", Robot.imu.getHeading());
 
 	}
 	// *************** End Auto zone
@@ -579,10 +581,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
 		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
 		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
-		SmartDashboard.putNumber("Heading", _CurrentHeading);
+		SmartDashboard.putNumber("Heading", imu.getHeading());
 		SmartDashboard.putBoolean("Calibration", imu.isCalibrated());
-		SmartDashboard.putNumber("Pitch", imu.Picth());
-		SmartDashboard.putNumber("Roll", imu.Roll());
+		//SmartDashboard.putNumber("Pitch", imu.Picth());
+		//SmartDashboard.putNumber("Roll", imu.Roll());
 
 		SmartDashboard.putNumber("Lift Encoder", _CurrentLiftEncoderPosition);
 
