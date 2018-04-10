@@ -20,14 +20,14 @@ public class Intaker extends Subsystem {
 	}
 
 	public void intake() {
-
-		intakeL.set(-.90);
+	//-.9
+		intakeL.set(RobotMap.INTAKE_IN_SPEED);
 
 	}
 
 	public void release() {
-
-		intakeL.set(.40);
+	// .4
+		intakeL.set(RobotMap.INTAKE_OUT_SPEED);
 
 	}
 	/*

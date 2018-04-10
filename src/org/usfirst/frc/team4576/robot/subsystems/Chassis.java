@@ -95,8 +95,8 @@ public class Chassis extends Subsystem {
 	}
 
 	public double averageEncoders() {
-		return (Math.abs(Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.CHASSIS_PID))
-				+ Math.abs(Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.CHASSIS_PID))) / 2;
+		return (Math.abs(Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx))
+				+ Math.abs(Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx))) / 2;
 	}
 
 	public double getLeftSpeed() {
