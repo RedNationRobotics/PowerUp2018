@@ -61,10 +61,9 @@ public class Robot extends IterativeRobot {
 	private double _FinalPoseClicks;
 	private double _FinalPoseInchs;
 
-	public double _CurrentHeading;
-	private double _EndHeading;
-	private double _PoseHeading;
-
+	public double _FieldHeadingOffset_deg;
+	public double _BnoHeading = imu.Heading();
+	
 	Command teleopCommand;
 	Command autonomousCommand;
 	//sets the starting pose for the grid of the field 
@@ -91,20 +90,18 @@ public class Robot extends IterativeRobot {
 	SendableChooser<String> chooser = new SendableChooser<>();
 	
 	public double _kF = 0.0;
-	public double _kP = 0.0;
+	public double _kP = 1.0;
 	public double _kI = 0.0;
 	public double _kD = 0.0;
 
 	public void SetDrivePID() {
 		//pid values that will be moved post SMR 2018
-		_kP = SmartDashboard.getNumber("kP", 0.0);
+		_kP = SmartDashboard.getNumber("kP", 1.0);
 		_kI = SmartDashboard.getNumber("kI", 0.0);
 		_kD = SmartDashboard.getNumber("kD", 0.0);
-		System.out.println("kP = " + _kP + " kI = " + _kI + " kD = " + _kD);
+		//System.out.println("kP = " + _kP + " kI = " + _kI + " kD = " + _kD);
 	}
 	public void robotInit() {
-		// For Testing purposes
-		//game data
 		byte[] calibrationData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte)0xe0, 1};
 		imu.SetCalibrationData(calibrationData);
 		
@@ -184,7 +181,6 @@ public class Robot extends IterativeRobot {
 		chooser1.addObject("Right Pose", startingPoseRight);
 		chooser1.addObject("Left Pose", startingPoseLeft);
 		chooser1.addDefault("Middle Pose", startingPoseMiddle);
-
 
 		SmartDashboard.putData("Set starting pose", chooser1);
 		SmartDashboard.putData("Auto Choices", chooser);
@@ -390,8 +386,8 @@ public class Robot extends IterativeRobot {
 			case eChained_TurnWait: 
 			{
 				if (IsTurnCloseEnough()) {
-					_Pose.RelativeTurn(_CurrentMotionItem.dParam1);
-					System.out.print("Heading: " + _Pose._heading_deg);
+					_Pose.RelativeRangeCheckHeading(_BnoHeading - _FieldHeadingOffset_deg);
+					System.out.println("Heading: " + _Pose._heading_deg);
 					MoveToNextMotionItemInSelectedRecipe();
 				}
 			}
@@ -477,15 +473,16 @@ public class Robot extends IterativeRobot {
 	// **********************************************************
 	public void autonomousInit() {		
 		System.out.println("Hit Auto Init");
+		_FieldHeadingOffset_deg = _BnoHeading;
 		SetDrivePID();
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, _kP, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, _kI, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, _kD, RobotMap.kTimeoutMs);
 
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
+		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, _kP, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, _kI, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, _kD, RobotMap.kTimeoutMs);
 
@@ -601,7 +598,7 @@ public class Robot extends IterativeRobot {
 		UpdateFSM();
 		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
-		SmartDashboard.putString("Bob", autoLeftScale);
+		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
 		SmartDashboard.putNumber("X", _Pose._x_in);
 		SmartDashboard.putNumber("Y", _Pose._y_in);
 		SmartDashboard.putNumber("Heading", _Pose._heading_deg);
@@ -636,6 +633,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Heading", imu.Heading());
 		SmartDashboard.putNumber("Pitch", imu.Pitch());
 		SmartDashboard.putNumber("Roll", imu.Roll());
+		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
 		//SmartDashboard.putBoolean("BNO STATUS", imu.isInitialized());
 		//SmartDashboard.putBoolean("BNO PRESENT", imu.isSensorPresent());
 		//SmartDashboard.putString("Calibration", imu.getCalibrationStatusString());

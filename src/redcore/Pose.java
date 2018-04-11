@@ -21,6 +21,9 @@ public class Pose {
 		_y_in = y_in;
 		_heading_deg = heading_deg;
 	} 
+	public void SetAbsoluteHeading(double _NewHeading_deg) {
+		_heading_deg = RangeCheckHeading(_NewHeading_deg);
+	}
 	
 	public Vector GetAbsoluteVector(WayPoint NewWayPoint) {
 		double difX_in = NewWayPoint._x_in - _x_in;
