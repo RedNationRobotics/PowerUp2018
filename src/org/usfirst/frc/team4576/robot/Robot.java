@@ -105,6 +105,8 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		// For Testing purposes
 		//game data
+		byte[] calibrationData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte)0xe0, 1};
+		imu.SetCalibrationData(calibrationData);
 		
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		CameraServer.getInstance().startAutomaticCapture("cam1", 1);
@@ -599,6 +601,7 @@ public class Robot extends IterativeRobot {
 		UpdateFSM();
 		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
+		SmartDashboard.putString("Bob", autoLeftScale);
 		SmartDashboard.putNumber("X", _Pose._x_in);
 		SmartDashboard.putNumber("Y", _Pose._y_in);
 		SmartDashboard.putNumber("Heading", _Pose._heading_deg);
@@ -630,20 +633,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
 		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
 		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
-		//SmartDashboard.putNumber("Heading", imu.Heading());
-		//SmartDashboard.putNumber("Pitch", imu.Picth());
-		//SmartDashboard.putNumber("Roll", imu.Roll());
+		SmartDashboard.putNumber("Heading", imu.Heading());
+		SmartDashboard.putNumber("Pitch", imu.Pitch());
+		SmartDashboard.putNumber("Roll", imu.Roll());
 		//SmartDashboard.putBoolean("BNO STATUS", imu.isInitialized());
 		//SmartDashboard.putBoolean("BNO PRESENT", imu.isSensorPresent());
 		//SmartDashboard.putString("Calibration", imu.getCalibrationStatusString());
-
-		// SmartDashboard.putNumber("Amperage", );
-		// SmartDashboard.putNumber("Accelerometer",
-		// reg_t.BNO055_ACCEL_DATA_X_LSB_ADDR.getVal());
-		// SmartDashboard.putNumber("Magnometer",
-		// reg_t.BNO055_MAG_DATA_X_LSB_ADDR.getVal());
-		// SmartDashboard.putNumber("Gyro",
-		// reg_t.BNO055_GYRO_DATA_X_LSB_ADDR.getVal());
 		// SmartDashboard.putNumber("Psensor RawVolts", pneumatics.rawVolts());
 	}
 
