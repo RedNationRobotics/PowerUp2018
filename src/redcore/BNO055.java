@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
-
 /**
  * BNO055 IMU for the FIRST Robotics Competition.
  * 
@@ -55,8 +54,6 @@ public class BNO055 {
 	private volatile boolean _HaveNewCalibrationData = false;
 	private volatile boolean _IsPendingCalibrationDisplay = true;
 	private CalibrationStatus _CalibrationStatus;
-	
-
 	
 	/* Page id register definition */
 	private static final byte BNO055_PAGE_ID_ADDR = 0X07;
@@ -319,6 +316,7 @@ public class BNO055 {
 					_dExpirationTime_sec = _dCurrentTime_sec + 0.050;
 					if((0xFF & read8(BNO055_CHIP_ID_ADDR)) == BNO055_ID) {
 						_CurrentState = EBMOStates.eEnterConfigModeAfterReset;
+
 					}
 				}
 				break;
@@ -363,7 +361,6 @@ public class BNO055 {
 				break;
 			case eWaitingForCalibration:
 				GetEulerValues();
-
 				if (_dCurrentTime_sec >= _dExpirationTime_sec) {
 					_dExpirationTime_sec = _dCurrentTime_sec + 0.100;
 
@@ -529,6 +526,7 @@ public class BNO055 {
 	
 	private boolean write8(byte reg, byte value) {
 		//System.out.println("I2C write8(" + String.format("0x%02X ", reg) + ", " + String.format("0x%02X ", value) + ")");
+
 		return _imu.write(reg, value);
 	}
 
@@ -537,7 +535,6 @@ public class BNO055 {
 	private byte read8(byte reg) {
 		byte[] vals = new byte[1];
 		readLen(reg, vals);
-		
 		return vals[0];
 	}
 
@@ -559,7 +556,6 @@ public class BNO055 {
 		if (buffer == null || buffer.length < 1)
 			return false;
 		boolean RetVal = !_imu.read(reg, buffer.length, buffer);
-		
 		//System.out.println("I2C readLen(" + String.format("0x%02X ", reg) + ", " + byteArrayToString(buffer) + ")");
 		return RetVal;
 	}
@@ -581,6 +577,4 @@ public class BNO055 {
 		}
 	}
 	
-	
-	
-}
+	}

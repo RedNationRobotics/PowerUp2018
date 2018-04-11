@@ -112,15 +112,16 @@ public class OI {
 		ssRB.whileHeld(new ElevUp(true));
 		ssRB.whenReleased(new ElevUp(false));
 		ssY.whileHeld(new Release(true));
-		ssY.whenReleased(new Release(false));		
-
-		ssA.whenPressed(new LEDMode(45));
-		ssB.whenPressed(new LEDMode(35));
-		ssX.whenPressed(new LEDMode(6));	
-		ssBACK.whenPressed(new LEDMode(25));
-		ssSTART.whenPressed(new LEDMode(21));
-		ssLSTICK.whenPressed(new LEDMode(17));
-		ssRSTICK.whenPressed(new LEDMode(7));
+		ssY.whenReleased(new Release(false));	
+		
+		//LED Modes, See http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf for color table/documentation
+		ssA.whenPressed(new LEDMode(45));//Strobe, Red
+		ssB.whenPressed(new LEDMode(35));//Light Chase, Red
+		ssX.whenPressed(new LEDMode(6));//Rainbow w/ Glitter	
+		ssBACK.whenPressed(new LEDMode(25));//Twinkles, Ocean Pallete
+		ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
+		ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
+		ssRSTICK.whenPressed(new LEDMode(7));//Confetti
 		
 		
 

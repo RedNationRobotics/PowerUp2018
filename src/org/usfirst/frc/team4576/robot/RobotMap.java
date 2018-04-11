@@ -45,34 +45,19 @@ public class RobotMap {
 	// Solenoid IDs:
 	public static final int SHIFT_SOLENOID = 7;
 	public static final int INTAKE_ARM = 0;
-
-	// Which PID slot to pull gains from: Starting 2018, you can choose
-	// from 0,1,2 or 3. Only the first two (0,1) are visible in web-based
-	// configuration.
-	public static final int CHASSIS_PID = 0;
-	public static final int ELEVATOR_PID = 1;
-	//Throttle Values
+	// Throttle Values:
+	//Elevator
 	public static final double ELEVSPEEDUP = 1;
 	public static final double ELEVSPEEDDOWN = -1;
-	/*PID Values*/
-	//Chassis
-	public static final double kF0 = 0.2;
-	public static final double kP0 = 0.2;
-	public static final double kI0 = 0.0;
-	public static final double kD0 = 0.0;
-	
-	//ELevator 
-	public static final double kF1 = 0.1097;
-	public static final double kP1 = 0.1;
-	public static final double kI1 = 0.0;
-	public static final double kD1 = 0.0;
-	//PDP Channels (for reading amperage)
-	public static final int LEFT_PDPCHANNEL = 1;//2 on practice, 1 on competition
-	public static final int RIGHT_PDPCHANNEL = 12;//12 on practice, 12 on competition
+	//Intaker
+	public static final double INTAKE_IN_SPEED = -.9;
+	public static final double INTAKE_OUT_SPEED = .4;
+
 	//DIO Channels
 	public static final int TOPDIO = 1;
 	public static final int BOTDIO = 2;	
-	// These lines declare the axes for turning
+	
+	// These lines declare the axes for driving
 	public static final int FORWARD_AXIS = 1;
 	public static final int TURN_AXIS = 4;
 
@@ -85,12 +70,6 @@ public class RobotMap {
 	 */
 	public static boolean kMotorInvert = false;
 		
-	/**
-	 * Which PID slot to pull gains from.  Starting 2018, you can choose 
-	 * from 0,1,2 or 3.  Only the first two (0,1) are visible in web-based configuration.
-	 */
-	public static final int kSlotIdx = 0;
-	
 	/* Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops.  
 	 * For now we just want the primary one.
 	 */
@@ -102,4 +81,23 @@ public class RobotMap {
 	 */
 	public static final int kTimeoutMs = 10;
 
+	/*PID Values
+	// Which PID slot to pull gains from: Starting 2018, you can choose
+	// from 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	// configuration.
+	public static final int CHASSIS_PID = 0;
+	public static final int ELEVATOR_PID = 1;
+	//Chassis
+	public static final double kF0 = 0.2;
+	public static final double kP0 = 0.2;
+	public static final double kI0 = 0.0;
+	public static final double kD0 = 0.0;
+	
+	//ELevator 
+	public static final double kF1 = 0.1097;
+	public static final double kP1 = 0.1;
+	public static final double kI1 = 0.0;
+	public static final double kD1 = 0.0;
+	*/
+	
 }

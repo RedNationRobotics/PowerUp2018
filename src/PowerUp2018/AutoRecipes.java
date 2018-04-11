@@ -21,20 +21,6 @@ public class AutoRecipes {
 
 			
 	};
-	public static MotionItem[] _ElevatorDown_Recipe_ = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, -20.0),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle) 
-
-	};
-	public static MotionItem[] _ElevatorUp_Recipe_ = {	
-			new MotionItem(EAutoStates.eSetLiftHeight, 20.0),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle) 
-
-	};
-	
-
 	public static MotionItem[] _LeftSide_LeftSwitch_1cube = {	/*Finalized working used*/
 			new MotionItem(EAutoStates.eDriveForward, 75), 
 			new MotionItem(EAutoStates.eDriveForward, 75), 
