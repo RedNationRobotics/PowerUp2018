@@ -62,7 +62,6 @@ public class Robot extends IterativeRobot {
 	private double _FinalPoseInchs;
 
 	public double _FieldHeadingOffset_deg;
-	public double _BnoHeading = imu.Heading();
 	
 	Command teleopCommand;
 	Command autonomousCommand;
@@ -386,7 +385,7 @@ public class Robot extends IterativeRobot {
 			case eChained_TurnWait: 
 			{
 				if (IsTurnCloseEnough()) {
-					_Pose.RelativeRangeCheckHeading(_BnoHeading - _FieldHeadingOffset_deg);
+					_Pose.SetAbsoluteHeading(imu.Heading() - _FieldHeadingOffset_deg);
 					System.out.println("Heading: " + _Pose._heading_deg);
 					MoveToNextMotionItemInSelectedRecipe();
 				}
@@ -473,7 +472,7 @@ public class Robot extends IterativeRobot {
 	// **********************************************************
 	public void autonomousInit() {		
 		System.out.println("Hit Auto Init");
-		_FieldHeadingOffset_deg = _BnoHeading;
+		_FieldHeadingOffset_deg = imu.Heading();
 		SetDrivePID();
 		/* set closed loop gains in slot0 */
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
@@ -634,10 +633,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Pitch", imu.Pitch());
 		SmartDashboard.putNumber("Roll", imu.Roll());
 		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
-		//SmartDashboard.putBoolean("BNO STATUS", imu.isInitialized());
-		//SmartDashboard.putBoolean("BNO PRESENT", imu.isSensorPresent());
-		//SmartDashboard.putString("Calibration", imu.getCalibrationStatusString());
-		// SmartDashboard.putNumber("Psensor RawVolts", pneumatics.rawVolts());
+		System.out.println("Bno Heading: " + imu.Heading());
 	}
 
 	public void testPeriodic() {

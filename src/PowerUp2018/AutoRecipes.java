@@ -7,8 +7,8 @@ public class AutoRecipes {
 
 	public static MotionItem[] _Baseline_ = {	
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(12, 36)),
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-12, 84)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-12, 72)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-12, 84)),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle) 
