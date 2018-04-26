@@ -21,7 +21,7 @@ public class AutoCrossBaseline extends Command {
 		Timer.delay(1.85);
 		Robot.chassis.setLeftRight(-.5, .5);
 		Timer.delay(1.5);
-		new Release(true);
+		new SlowRelease(true);
 		Timer.delay(2);
 	}
 

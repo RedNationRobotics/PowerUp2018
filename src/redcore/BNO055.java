@@ -556,7 +556,7 @@ public class BNO055 {
 		if (buffer == null || buffer.length < 1)
 			return false;
 		boolean RetVal = !_imu.read(reg, buffer.length, buffer);
-		//System.out.println("I2C readLen(" + String.format("0x%02X ", reg) + ", " + byteArrayToString(buffer) + ")");
+	//System.out.println("I2C readLen(" + String.format("0x%02X ", reg) + ", " + byteArrayToString(buffer) + ")");
 		return RetVal;
 	}
 	

@@ -25,9 +25,15 @@ public class Intaker extends Subsystem {
 
 	}
 
-	public void release() {
+	public void Slowrelease() {
+		
+		intakeL.set(RobotMap.INTAKE_OUT_SPEED_SLOW);
+		
+	}
+		
+	public void Fastrelease() {
 	// .4
-		intakeL.set(RobotMap.INTAKE_OUT_SPEED);
+		intakeL.set(RobotMap.INTAKE_OUT_SPEED_FAST);
 
 	}
 	/*

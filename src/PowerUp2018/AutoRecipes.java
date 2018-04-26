@@ -5,13 +5,34 @@ import redcore.WayPoint;
 
 public class AutoRecipes {
 
+	public static MotionItem[] _Baseline_drop = { 
+			new MotionItem(EAutoStates.eStartTimer, 10.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(0, 100)),
+	        new MotionItem(EAutoStates.eStopMotors),
+	        new MotionItem(EAutoStates.eStopElevator),
+	        new MotionItem(EAutoStates.eIdle)
+	};
 	public static MotionItem[] _Baseline_ = {	
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(12, 36)),
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-12, 72)),
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-12, 84)),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(63, 100)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(63, 120)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 0),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, .5),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(40, 53)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 180),
+			new MotionItem(EAutoStates.eGripper_SetArm, 1.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(40, 45)),
+			new MotionItem(EAutoStates.eGripper_SetArm, 0.0),
+			new MotionItem(EAutoStates.eGripper_Intake),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle) 
+			new MotionItem(EAutoStates.eIdle)
 			
 	};
 	public static MotionItem[] _Test_1 = {	
@@ -22,40 +43,39 @@ public class AutoRecipes {
 
 			
 	};
-	public static MotionItem[] _LeftSide_LeftSwitch_1cube = {	/*Finalized working used*/
-			new MotionItem(EAutoStates.eDriveForward, 75), 
-			new MotionItem(EAutoStates.eDriveForward, 75), 
-			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
-			new MotionItem(EAutoStates.eDriveForward, 15.0), 
-			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
-			new MotionItem(EAutoStates.eDriveForward, -8.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
-			new MotionItem(EAutoStates.eStopMotors),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle) 
-			
+	public static MotionItem[] _LeftSide_LeftSwitch_1cube = {
+			  new MotionItem(EAutoStates.eDriveForward, 75),
+			  new MotionItem(EAutoStates.eDriveForward, 75),
+	          new MotionItem(EAutoStates.eStoppedTurn, 90),
+			  new MotionItem(EAutoStates.eDriveForward, 28.0),
+			  new MotionItem(EAutoStates.eStartLift),
+		   	  new MotionItem(EAutoStates.eStartTimer, 1.0),
+			  new MotionItem(EAutoStates.eStopLift),		      
+			  new MotionItem(EAutoStates.eGripper_Release),
+		      new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+	          new MotionItem(EAutoStates.eGripper_Stop),
+	          new MotionItem(EAutoStates.eStopMotors),
+	          new MotionItem(EAutoStates.eStopElevator),
+	          new MotionItem(EAutoStates.eIdle)
 	};
 	
-	public static MotionItem[] _LeftSide_RightSwitch_1cube = { /*Finalized working used*/
-			new MotionItem(EAutoStates.eDriveForward, 77.0), 
-			new MotionItem(EAutoStates.eDriveForward, 77.0),
-			new MotionItem(EAutoStates.eDriveForward, 77.0),
-			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			new MotionItem(EAutoStates.eDriveForward, 58),
-			new MotionItem(EAutoStates.eDriveForward, 58),
-			new MotionItem(EAutoStates.eDriveForward, 58),
-			new MotionItem(EAutoStates.eStoppedTurn, 90.0), 
-			new MotionItem(EAutoStates.eDriveForward, 12.0), 
-			new MotionItem(EAutoStates.eSetLiftHeight, 45.0),
+	public static MotionItem[] _LeftSide_RightSwitch_1cube = {  /*Finalized working used*/
+			new MotionItem(EAutoStates.eDriveForward, 115),
+			new MotionItem(EAutoStates.eDriveForward, 115),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eDriveForward, 87.5),
+			new MotionItem(EAutoStates.eDriveForward, 87.5),
+			new MotionItem(EAutoStates.eStoppedTurn, 90),
+			new MotionItem(EAutoStates.eDriveForward, 10),
+			new MotionItem(EAutoStates.eStartLift),
+		    new MotionItem(EAutoStates.eStartTimer, 1.0),
+			new MotionItem(EAutoStates.eStopLift),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle) 
+			new MotionItem(EAutoStates.eIdle)
 
 		};
 	public static MotionItem[] _LeftSide_RightSwitch_2cubes = { /*Finalized working used*/
@@ -118,42 +138,60 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 			
 	};
-	
+	public static MotionItem[] _MiddleSide_LeftSwitch_1cube_delay  = { 
+			new MotionItem(EAutoStates.eStartDelay, 3.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(60, 100)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+
+	};
 	public static MotionItem[] _MiddleSide_LeftSwitch_1cube  = { 
-			new MotionItem(EAutoStates.eDriveForward, 83.5),
-			new MotionItem(EAutoStates.eStoppedTurn, -90), 
-			new MotionItem(EAutoStates.eDriveForward, 40.0),
-			new MotionItem(EAutoStates.eStoppedTurn, 90.0),
-			new MotionItem(EAutoStates.eDriveForward, 22.5),
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(60, 100)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eDriveForward, -22.5),
+			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
+			new MotionItem(EAutoStates.eStopMotors),
+			new MotionItem(EAutoStates.eStopElevator),
+			new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _MiddleSide_RightSwitch_1cube_delay = { 
+			new MotionItem(EAutoStates.eStartDelay, 3.0),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-60, 100)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
+			new MotionItem(EAutoStates.eGripper_Release),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+			new MotionItem(EAutoStates.eGripper_Stop),
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-	public static MotionItem[] _MiddleSide_RightSwitch_1cube  = { 
-			new MotionItem(EAutoStates.eDriveForward, 83.5),
-			new MotionItem(EAutoStates.eStoppedTurn, 90), 
-			new MotionItem(EAutoStates.eDriveForward, 40.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 22.5),
-			new MotionItem(EAutoStates.eSetLiftHeight, 35.0),
+	public static MotionItem[] _MiddleSide_RightSwitch_1cube = {
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-60, 100)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 0), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
 			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, 0.4),
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eDriveForward, -22.5),
 			new MotionItem(EAutoStates.eSetLiftHeight, -30.0),
 			new MotionItem(EAutoStates.eStopMotors),
 			new MotionItem(EAutoStates.eStopElevator),
 			new MotionItem(EAutoStates.eIdle)
-
 	};
-	public static MotionItem[] _MiddleSide_LeftScale_1cube  = {
+
+	/*public static MotionItem[] _MiddleSide_LeftScale_1cube  = {
 			new MotionItem(EAutoStates.eDriveForward, 81.0),
 			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
 			new MotionItem(EAutoStates.eDriveForward, 104.53),
@@ -189,17 +227,18 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eIdle)
 
 	};
-
-	public static MotionItem[] _RightSide_LeftSwitch_1cube  = { /*Finalized working*/
-			new MotionItem(EAutoStates.eDriveForward, 77.0), 
-			new MotionItem(EAutoStates.eDriveForward, 77.0),
-			new MotionItem(EAutoStates.eDriveForward, 77.0), 
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 90.0),
-			new MotionItem(EAutoStates.eDriveForward, 90.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0), 
-			new MotionItem(EAutoStates.eDriveForward, 10.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, 45.0),
+*/
+	public static MotionItem[] _RightSide_LeftSwitch_1cube = { /*Finalized working*/
+			new MotionItem(EAutoStates.eDriveForward, 115),
+			new MotionItem(EAutoStates.eDriveForward, 115),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eDriveForward, 87.5),
+			new MotionItem(EAutoStates.eDriveForward, 87.5),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
+			new MotionItem(EAutoStates.eDriveForward, 10),
+			new MotionItem(EAutoStates.eStartLift),
+		    new MotionItem(EAutoStates.eStartTimer, 1.0),
+			new MotionItem(EAutoStates.eStopLift),
 			new MotionItem(EAutoStates.eGripper_Release),
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
 			new MotionItem(EAutoStates.eGripper_Stop),
@@ -282,19 +321,21 @@ public class AutoRecipes {
 			
 	};
 	
-	public static MotionItem[] _RightSide_RightSwitch_1cube  = { /*Finalized working*/
-			new MotionItem(EAutoStates.eDriveForward, 75.0),
-			new MotionItem(EAutoStates.eDriveForward, 75.0),
-			new MotionItem(EAutoStates.eStoppedTurn, -90.0),
-			new MotionItem(EAutoStates.eDriveForward, 15.0),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch),
-			new MotionItem(EAutoStates.eGripper_Release),
-			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
-			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch),
-			new MotionItem(EAutoStates.eStopMotors),
-			new MotionItem(EAutoStates.eStopElevator),
-			new MotionItem(EAutoStates.eIdle)
+	public static MotionItem[] _RightSide_RightSwitch_1cube = { /*Finalized working*/
+			 new MotionItem(EAutoStates.eDriveForward, 75),
+			  new MotionItem(EAutoStates.eDriveForward, 75),
+	          new MotionItem(EAutoStates.eStoppedTurn, -90),
+			  new MotionItem(EAutoStates.eDriveForward, 28.0),
+			  new MotionItem(EAutoStates.eStartLift),
+		   	  new MotionItem(EAutoStates.eStartTimer, 1.0),
+			  new MotionItem(EAutoStates.eStopLift),		      
+			  new MotionItem(EAutoStates.eGripper_Release),
+		      new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake),
+	          new MotionItem(EAutoStates.eGripper_Stop),
+	          new MotionItem(EAutoStates.eSetLiftHeight, -30.0),	         
+	          new MotionItem(EAutoStates.eStopMotors),
+	          new MotionItem(EAutoStates.eStopElevator),
+	          new MotionItem(EAutoStates.eIdle)
 			
 	};
 	

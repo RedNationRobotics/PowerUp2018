@@ -8,21 +8,21 @@ import edu.wpi.first.wpilibj.command.Command;
 //								Last Edited: 2/12/2018 by RL
 //This command Runs the intaker forward in order to spit out power cubes.
 //*******************************************************************
-public class Release extends Command {
+public class SlowRelease extends Command {
 	private boolean in = true;
 
-	public Release(boolean in) {
+	public SlowRelease(boolean in) {
 		this.in = in;
 		requires(Robot.intaker);
 	}
 
-	public Release() {
+	public SlowRelease() {
 	
 	}
 	@Override
 	protected void initialize() {
 		if (in) {
-			Robot.intaker.release();
+			Robot.intaker.Slowrelease();
 		} else {
 			Robot.intaker.stop();
 		}

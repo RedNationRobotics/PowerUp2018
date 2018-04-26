@@ -22,6 +22,10 @@ public class AutoStates {
 		eIdle,
 		eBNOTurn,
 		eleftSide,
+		eAbsoluteTurn,
+		eStartDelay,
+		eStartLift,
+		eStopLift
 /*
 		eGripper,
 		eSlightlyDriftLeft,

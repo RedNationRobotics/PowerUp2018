@@ -5,11 +5,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
+import org.usfirst.frc.team4576.robot.commands.FastRelease;
 import org.usfirst.frc.team4576.robot.commands.Intake;
 import org.usfirst.frc.team4576.robot.commands.IntakeArm;
 import org.usfirst.frc.team4576.robot.commands.LEDMode;
-import org.usfirst.frc.team4576.robot.commands.Release;
 import org.usfirst.frc.team4576.robot.commands.Shift;
+import org.usfirst.frc.team4576.robot.commands.SlowRelease;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 
 //*******************************************************************
@@ -110,9 +111,11 @@ public class OI {
 		ssLB.whileHeld(new ElevDown(true));
 		ssLB.whenReleased(new ElevDown(false));
 		ssRB.whileHeld(new ElevUp(true));
-		ssRB.whenReleased(new ElevUp(false));
-		ssY.whileHeld(new Release(true));
-		ssY.whenReleased(new Release(false));	
+		ssRB.whenReleased(new ElevUp(false)); 
+		ssY.whileHeld(new FastRelease(true));
+		ssY.whenReleased(new FastRelease(false));
+		ssB.whileHeld(new SlowRelease(true));
+		ssB.whenReleased(new SlowRelease(false));
 		
 		//LED Modes, See http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf for color table/documentation
 		ssA.whenPressed(new LEDMode(45));//Strobe, Red
