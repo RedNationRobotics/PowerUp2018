@@ -288,8 +288,7 @@ public class Robot extends IterativeRobot {
 			{
 				
 			}
-				break;
-
+			break;
 			case eSetLiftHeight:
 			{
 				SetTargetLiftPositionByInches(_CurrentMotionItem.dParam1);
@@ -487,8 +486,8 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, _kP, RobotMap.kTimeoutMs);
-		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
+		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.1, RobotMap.kTimeoutMs);
+		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0005, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 	
 		gameData = DriverStation.getInstance().getGameSpecificMessage(); 
@@ -579,22 +578,21 @@ public class Robot extends IterativeRobot {
 			}
 			break;
 		}
-		
 		switch (startingPose) {
 		case startingPoseLeft: {
-			_Pose.SetPose(2.0, 12.0, 0.0);
+			_Pose.SetPose(-110.0, 20.0, 0.0);
 		}
 			break;
 		case startingPoseMiddle:  {
-			_Pose.SetPose(0.0, 0.0, 0.0);
+			_Pose.SetPose(0.0, 20.0, 0.0);
 		}
 			break;
 		case startingPoseRight: {
-			_Pose.SetPose(2.0, -12.0, 0.0);
+			_Pose.SetPose(110.0, 20.0, 0.0);
 		}
 			break;
 		default: {
-			_Pose.SetPose(0.0, 0.0, 0.0);
+			_Pose.SetPose(0.0, 20.0, 0.0);
 		}
 		break;
 	}
