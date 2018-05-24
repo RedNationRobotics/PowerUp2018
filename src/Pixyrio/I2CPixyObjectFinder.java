@@ -26,7 +26,7 @@ public class I2CPixyObjectFinder {
     // This method gathers data, then parses that data, and assigns the ints to
     // global variables
     // The
-    // signature
+    // _Signature
     // should
     // be
     // which
@@ -34,7 +34,7 @@ public class I2CPixyObjectFinder {
     // object
     // in
     // pixymon you are trying to get data for
-    public PixyPacket readPacket(int Signature) throws PixyException {
+    public PixyPacket readPacket(int _Signature) throws PixyException {
         int Checksum;
         int Sig;
         byte[] rawData = new byte[32];
@@ -70,14 +70,14 @@ public class I2CPixyObjectFinder {
                     break;
                 }
                 packets[Sig - 1] = new PixyPacket();
-                packets[Sig - 1].X = cvt(rawData[i + 9], rawData[i + 8]);
-                packets[Sig - 1].Y = cvt(rawData[i + 11], rawData[i + 10]);
-                packets[Sig - 1].Width = cvt(rawData[i + 13], rawData[i + 12]);
-                packets[Sig - 1].Height = cvt(rawData[i + 15], rawData[i + 14]);
+                packets[Sig - 1]._X = cvt(rawData[i + 9], rawData[i + 8]);
+                packets[Sig - 1]._Y = cvt(rawData[i + 11], rawData[i + 10]);
+                packets[Sig - 1]._Width = cvt(rawData[i + 13], rawData[i + 12]);
+                packets[Sig - 1]._Height = cvt(rawData[i + 15], rawData[i + 14]);
                 // Checks whether the data is valid using the checksum *This if
                 // block should never be entered*
-                if (Checksum != Sig + packets[Sig - 1].X + packets[Sig - 1].Y + packets[Sig - 1].Width
-                        + packets[Sig - 1].Height) {
+                if (Checksum != Sig + packets[Sig - 1]._X + packets[Sig - 1]._Y + packets[Sig - 1]._Width
+                        + packets[Sig - 1]._Height) {
                     packets[Sig - 1] = null;
                     throw pExc;
                 }
@@ -88,8 +88,8 @@ public class I2CPixyObjectFinder {
         }
         // Assigns our packet to a temp packet, then deletes data so that we
         // dont return old data
-        PixyPacket pkt = packets[Signature - 1];
-        packets[Signature - 1] = null;
+        PixyPacket pkt = packets[_Signature - 1];
+        packets[_Signature - 1] = null;
         return pkt;
     }
     private byte[] readData(int len) {
@@ -124,21 +124,21 @@ public class I2CPixyObjectFinder {
             return null;
         }
         PixyPacket block = new PixyPacket();
-        block.Signature = cvt(data[1], data[0]);
-        if (block.Signature <= 0 || block.Signature > 7) {
+        block._Signature = cvt(data[1], data[0]);
+        if (block._Signature <= 0 || block._Signature > 7) {
             return null;
         }
-        block.X = cvt(data[3], data[2]);
-        block.Y = cvt(data[5], data[4]);
-        block.Width = cvt(data[7], data[6]);
-        block.Height = cvt(data[9], data[8]);
-        int sum = block.Signature + block.X + block.Y + block.Width + block.Height;
+        block._X = cvt(data[3], data[2]);
+        block._Y = cvt(data[5], data[4]);
+        block._Width = cvt(data[7], data[6]);
+        block._Height = cvt(data[9], data[8]);
+        int sum = block._Signature + block._X + block._Y + block._Width + block._Height;
         if (sum != checksum) {
             return null;
         }
         return block;
     }
-    private final int MAX_SIGNATURES = 7;
+    private final int MAX__SignatureS = 7;
     private final int OBJECT_SIZE = 14;
     private final int START_WORD = 0xaa55;
     private final int START_WORD_CC = 0xaa5;
@@ -150,9 +150,9 @@ public class I2CPixyObjectFinder {
         // something goes wrong robot will be stuck in this loop forever. So
         // let's read some number of bytes and give up so other stuff on robot
         // can have a chance to run. What number of bytes to choose? Maybe size
-        // of a block * max number of signatures that can be detected? Or how
+        // of a block * max number of _Signatures that can be detected? Or how
         // about size of block and max number of blocks we are looking for?
-        while (numBytesRead < (OBJECT_SIZE * MAX_SIGNATURES)) {
+        while (numBytesRead < (OBJECT_SIZE * MAX__SignatureS)) {
             int word = readWord();
             numBytesRead += 2;
             if (word == 0 && lastWord == 0) {
