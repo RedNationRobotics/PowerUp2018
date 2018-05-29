@@ -200,5 +200,6 @@ public class I2CPixyObjectFinder {
             blocks[i] = readBlock(checksum);
         }
         return blocks;
+       
     }
 }

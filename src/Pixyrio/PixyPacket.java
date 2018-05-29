@@ -1,7 +1,6 @@
 package Pixyrio;
 
 public class PixyPacket {
-	protected static final double _DegPerPixel = 1.0/4.2333;
 	
 	public int _Checksum;
 	public int _Signature;
@@ -9,17 +8,12 @@ public class PixyPacket {
 	public int _Y;
 	public int _Width;
 	public int _Height;
-	public double _Distance;
-	
-	public double GetObjectCourse() {
-		return (_X - 160.0) * _DegPerPixel; 
-	}
 	
 	
 	public String GetObjectType() {
 		switch(_Signature) {
 		case 1:
-			return "Cube";
+			return " Power Cube";
 		case 2:
 			return "Red Portal";
 		case 3:
@@ -27,6 +21,7 @@ public class PixyPacket {
 		default:
 			return "Unkown";
 		}
+		
 	}
 	
 }
