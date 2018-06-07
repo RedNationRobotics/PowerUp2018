@@ -69,19 +69,12 @@ public class Robot extends IterativeRobot {
 	final String startingPoseMiddle = "Middle";
 	final String startingPoseLeft = "Left";
 	//auto recipes 
-	final String autoLeftScale = "LeftScale";
+	final String autoRightSwitchScale = "RightSwitchScale";
 	final String autoLeftSwitch = "LeftSwitch";
-	final String autoMiddleSwitch = "MiddleSwitch";
-	final String autoMiddleSwitchDelay = "MiddleSwitchDelay";
-	final String autoMiddleScale = "MiddleScale";
-	final String autoRightSwitch = "RightSwitch";
-	final String autoRightScale = "RightScale";
-	final String autoLeftScale2cubes = "LeftSwitch2cubes";
-	final String autoRightScale2cubes = "RightSwitch2cubes";
-	final String autoLeftSwitch2cubes = "autoLeftSwitch2cubes";
-	final String autoRightSwitch2cubes = "autoRightSwitch2cubes";
-	final String autoRightSwitch2cubestest = "autoRightSwitch2cubestest";
-	final String autoTest = "AutoTest";
+	final String autoMiddleSwitch = "Middle switch";
+	final String autoRightSwitch = "Right switch";
+	
+	
 	
 	String startingPose;
 	String autoSelected;
@@ -155,14 +148,11 @@ public class Robot extends IterativeRobot {
 		teleopCommand = new DriveWithJoysticks();
 
 		//Auto selection
-		chooser.addObject("LeftSide Scale 2 Cubes", autoLeftScale2cubes);
-		chooser.addObject("RightSide Scale 2 Cubes", autoRightScale2cubes);
+		chooser.addObject("Right Switch Scale", autoRightSwitchScale);
 		chooser.addObject("Left Switch", autoLeftSwitch);
-		chooser.addObject("Right Switch", autoRightSwitch);
-		chooser.addObject("Right Switch 2 cubes", autoRightSwitch2cubes);
-		chooser.addObject("Left Switch 2 cubes", autoLeftSwitch2cubes);
-		chooser.addObject("Left Switch 1 Cube test", autoRightSwitch2cubestest);
-		chooser.addDefault("Default", autoTest);
+		chooser.addObject("Middle Switch", autoMiddleSwitch);
+		chooser.addObject("Right switch", autoRightSwitch);
+		
 		//Pose selection
 		chooser1.addObject("Right Pose", startingPoseRight);
 		chooser1.addObject("Left Pose", startingPoseLeft);
@@ -499,82 +489,52 @@ public class Robot extends IterativeRobot {
 		autoSelected = chooser.getSelected();
 
 		switch (autoSelected) {
-		case autoMiddleSwitchDelay: 
+		case autoRightSwitchScale: 
 		{
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch_1cube_delay);
+			if (Robot.gameData.charAt(0) == 'R' && Robot.gameData.charAt(1) == 'L') {
+				InitializeAutoRecipe(AutoRecipes._RightSwitchLeftScale_RightSide);
 			}
-			else if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._MiddleSide_LeftSwitch_1cube_delay);
+			else if (Robot.gameData.charAt(0) == 'L' && Robot.gameData.charAt(1) == 'L') {
+			}
+			else if (Robot.gameData.charAt(0) == 'R' && Robot.gameData.charAt(1) == 'R') {
+			}
+			else if (Robot.gameData.charAt(0) == 'L' && Robot.gameData.charAt(1) == 'R') {
 			}
 		}
 		break;
-		case autoLeftSwitch2cubes: /*new*/
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch_2cubes);
-			}
-			else if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_2cube);
-			}
-			break;
-			
-		case autoRightSwitch2cubes: /*new*/
+		case autoMiddleSwitch: 
+		{
 			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch_2cube);
+				InitializeAutoRecipe(AutoRecipes._LeftSwitch_MiddleSide);
 			}
 			else if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch_2cube);
+				InitializeAutoRecipe(AutoRecipes._RightSwitch_MiddleSide);
 			}
-			break;
-			
-		case autoLeftScale2cubes:
-			if (gameData.charAt(1) == 'L' && Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScale_2cubes);
-			}
-			else if  (Robot.gameData.charAt(0) == 'L' && gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftScaleLeftSwitch_2cubes);
-			}
-			break;
-			
-		case autoRightScale2cubes:
-			if (gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightScale_2cubes);
-			}
-			else if (gameData.charAt(1) == 'R' && Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightScaleRightSwitch_2cubes);
-			}
-			break;
-			
-		case autoRightSwitch:
-			if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_RightSwitch_1cube);
-			}
-			else if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSide_LeftSwitch_1cube);
-			}
-			break;
-			
-		case autoLeftSwitch:
+		}
+		break;
+		case autoRightSwitch: 
+		{
 			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_LeftSwitch_1cube);
+				InitializeAutoRecipe(AutoRecipes._LeftSwitch_RightSide);
 			}
 			else if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._LeftSide_RightSwitch_1cube);
+				InitializeAutoRecipe(AutoRecipes._RightSwitch_RightSide);
 			}
-			break;
-		case autoRightSwitch2cubestest: 
-			{
-				InitializeAutoRecipe(AutoRecipes._Baseline_drop);	
+		}
+		break;
+		case autoLeftSwitch: 
+		{
+			if (Robot.gameData.charAt(0) == 'L') {
+				InitializeAutoRecipe(AutoRecipes._LeftSwitch_LeftSide);
 			}
-			break;
-		case autoTest:
-			{
-				InitializeAutoRecipe(AutoRecipes._Baseline_);
+			else if (Robot.gameData.charAt(0) == 'R') {
+				InitializeAutoRecipe(AutoRecipes._RightSwitch_LeftSide);
 			}
-			break;
+		}
+		break;
 		default:
 			{
-				InitializeAutoRecipe(AutoRecipes._Baseline_);
+				InitializeAutoRecipe(AutoRecipes._Baseline_drop);
 			}
 			break;
 		}
@@ -605,6 +565,7 @@ public class Robot extends IterativeRobot {
 		UpdateDriveCoreComponents();
 		UpdateFSM();
 		
+		System.out.print(_Pose._Deltax + ", " + _Pose._y_in );
 		startingPose = chooser1.getSelected();
 		autoSelected = chooser.getSelected();
 	}

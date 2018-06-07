@@ -52,7 +52,7 @@ public class RobotMap {
 	//Intaker
 	public static final double INTAKE_IN_SPEED = .9;
 	public static final double INTAKE_OUT_SPEED_SLOW = -.55;
-	public static final double INTAKE_OUT_SPEED_FAST = -.90;
+	public static final double INTAKE_OUT_SPEED_FAST = -1.0;
 
 
 	//DIO Channels

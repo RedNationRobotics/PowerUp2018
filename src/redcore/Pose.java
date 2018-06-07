@@ -12,6 +12,8 @@ public class Pose {
 	public double _x_in;
 	public double _y_in;
 	public double _heading_deg;
+	public double _right_distance;
+	public double _left_distance;
 	
 	public Pose() {
 		
@@ -80,6 +82,12 @@ public class Pose {
 	}
 	public void RelativeTurn(double HeadingChange_deg) {
 		_heading_deg += HeadingChange_deg;
+	}
+	public static double angleBetweenTwoPointsWithFixedPoint(double point1X, double point1Y, double point2X, double point2Y, double fixedX, double fixedY){
+		double angle1 = Math.atan2(point1Y - fixedY, point1X - fixedX);
+		double angle2 = Math.atan2(point2Y - fixedY, point2X - fixedX);
+		
+		return angle1 - angle2;
 	}
 	public void ShowSelf() {
 			System.out.print("Pose(" + _x_in + "in, " + _y_in + "in, " + _heading_deg + "deg)\n");
