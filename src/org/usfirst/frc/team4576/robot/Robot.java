@@ -73,6 +73,8 @@ public class Robot extends IterativeRobot {
 	final String autoLeftSwitch = "LeftSwitch";
 	final String autoMiddleSwitch = "Middle switch";
 	final String autoRightSwitch = "Right switch";
+	final String autoRightScale = "RightScale";
+	final String autoLeftScale = "LeftScale";
 	
 	
 	
@@ -148,10 +150,12 @@ public class Robot extends IterativeRobot {
 		teleopCommand = new DriveWithJoysticks();
 
 		//Auto selection
-		chooser.addObject("Right Switch Scale", autoRightSwitchScale);
 		chooser.addObject("Left Switch", autoLeftSwitch);
 		chooser.addObject("Middle Switch", autoMiddleSwitch);
 		chooser.addObject("Right switch", autoRightSwitch);
+		chooser.addObject("Right Scale", autoRightScale);
+		chooser.addObject("Left Scale", autoLeftScale);
+		
 		
 		//Pose selection
 		chooser1.addObject("Right Pose", startingPoseRight);
@@ -532,6 +536,30 @@ public class Robot extends IterativeRobot {
 			}
 		}
 		break;
+		
+		case autoRightScale: 
+		{
+			if (Robot.gameData.charAt(0) == 'L') {
+				InitializeAutoRecipe(AutoRecipes._RightScale_LeftSide);
+			}
+			else if (Robot.gameData.charAt(0) == 'R') {
+				InitializeAutoRecipe(AutoRecipes._RightScale_RightSide);
+			}
+		}
+		break;
+		
+		case autoLeftScale: 
+		{
+			if (Robot.gameData.charAt(0) == 'L') {
+				InitializeAutoRecipe(AutoRecipes._LeftScale_LeftSide);
+			}
+			else if (Robot.gameData.charAt(0) == 'R') {
+				InitializeAutoRecipe(AutoRecipes._LeftScale_RightSide);
+			}
+		}
+		break;
+		
+		
 		default:
 			{
 				InitializeAutoRecipe(AutoRecipes._Baseline_drop);
