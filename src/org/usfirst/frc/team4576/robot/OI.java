@@ -105,10 +105,10 @@ public class OI {
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsRTrigger.whileHeld(new Intake(true));
-		dsRTrigger.whenReleased(new Intake(false));
-		dsLTrigger.whileHeld(new FastRelease(true));
-		dsLTrigger.whenReleased(new FastRelease(false));
+		dsLTrigger.whileHeld(new Intake(true));
+		dsLTrigger.whenReleased(new Intake(false));
+		dsRTrigger.whileHeld(new FastRelease(true));
+		dsRTrigger.whenReleased(new FastRelease(false));
 		dsRSTICK.whenPressed(new IntakeArm());
 
 		ssLB.whileHeld(new ElevDown(true));
@@ -121,6 +121,8 @@ public class OI {
 		ssRTrigger.whenReleased(new Intake(false));
 		ssB.whileHeld(new SlowRelease(true));
 		ssB.whenReleased(new SlowRelease(false));
+		ssRSTICK.whenPressed(new IntakeArm());
+
 		
 		//LED Modes, See http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf for color table/documentation
 		ssA.whenPressed(new LEDMode(45));//Strobe, Red

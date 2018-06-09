@@ -204,6 +204,7 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
+		    
 	};
 	public static MotionItem[] _RightSwitch_RightSide = { //plan written
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
@@ -243,6 +244,16 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
-		    new MotionItem(EAutoStates.eIdle)
+		    new MotionItem(EAutoStates.eIdle),
 	};
+		    
+	public static MotionItem[] _BaselineLeft = {
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-130, 50)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-130, 130)),
+			new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle),
+	 };
+		    
 }
