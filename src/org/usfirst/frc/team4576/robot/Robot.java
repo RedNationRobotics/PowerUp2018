@@ -68,6 +68,7 @@ public class Robot extends IterativeRobot {
 	final String startingPoseRight = "Right";
 	final String startingPoseMiddle = "Middle";
 	final String startingPoseLeft = "Left";
+	
 	// auto recipes
 	final String autoSwitch = "Switch";
 	final String autoScale = "Scale";
@@ -188,10 +189,10 @@ public class Robot extends IterativeRobot {
 		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
 		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
 		double dDistanceLift_inches = FieldDimensions.dLiftInchesPerClicks * _CurrentLiftEncoderPosition;
-
-		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
-		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
-		SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
+		
+		//SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
+		//SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
+		//SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
 	}
 
 	// *************** FSM zone
@@ -574,23 +575,33 @@ public class Robot extends IterativeRobot {
 
 	}
 
-	public void teleopPeriodic() {
+	static int displayCount=0;
+	
+       public void teleopPeriodic()  {
+    	       	
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents(); // shared with auto
 		UpdateFSM();
+		
+		displayCount ++;
+    	if(displayCount > 10) {
+    		displayCount= 0;
+    		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
+    		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
+    		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
+    		SmartDashboard.putNumber("Heading", imu.Heading());
+    		SmartDashboard.putNumber("Pitch", imu.Pitch());
+    		SmartDashboard.putNumber("Roll", imu.Roll());
+    		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
+    		SmartDashboard.putString("Calibration data", imu.getCalibrationStatusString());
+    	}
 
-		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
-		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
-		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
-		SmartDashboard.putNumber("Rpm left", chassis.getLeftSpeed());
-		SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
-		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
-		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
-		SmartDashboard.putNumber("Heading", imu.Heading());
-		SmartDashboard.putNumber("Pitch", imu.Pitch());
-		SmartDashboard.putNumber("Roll", imu.Roll());
-		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
-		SmartDashboard.putString("Calibration data", imu.getCalibrationStatusString());
+		//SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
+		//SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
+		
+		//SmartDashboard.putNumber("Rpm left", chassis.getLeftSpeed());
+		//SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());
+		
 
 	}
 

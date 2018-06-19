@@ -41,7 +41,8 @@ public class Chassis extends Subsystem {
 	// RobotDrive drive = new RobotDrive(tsrxL, tsrxR);
 	DifferentialDrive drive = new DifferentialDrive(tsrxL, tsrxR);
 	
-	public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+	//public static PowerDistributionPanel pdp = new PowerDistributionPanel();
+	
 
 	public int absolutePositionL = tsrxL.getSelectedSensorPosition(0)
 			& 0xFFF; /*
@@ -57,6 +58,7 @@ public class Chassis extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
+		
 	}
 	 // +,+ for forward, -,- for backwards
     // +,- to turn right, -,+ to turn left

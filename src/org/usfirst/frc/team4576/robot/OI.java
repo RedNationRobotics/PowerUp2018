@@ -2,6 +2,7 @@ package org.usfirst.frc.team4576.robot;
 
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import redcore.AxisButton;
 
 import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
@@ -50,8 +51,8 @@ public class OI {
 	Button dsLSTICK = new JoystickButton(Robot.driveStick, 9);
 	Button dsRSTICK = new JoystickButton(Robot.driveStick, 10);
 	
-//	AxisButton dsRTrigger = new AxisButton(Robot.driveStick, 3, 0, 0, false);
-//	AxisButton dsLTrigger = new AxisButton(Robot.driveStick, 2, 0, 0, false);
+	AxisButton dsRTrigger = new AxisButton(Robot.driveStick, 3, 0, 0, false);
+	AxisButton dsLTrigger = new AxisButton(Robot.driveStick, 2, 0, 0, false);
 //	AxisButton dsDPad = new AxisButton(Robot.driveStick, 6, 0, 0, false);
 
 	Button ssA = new JoystickButton(Robot.secondaryStick, 1);
@@ -65,8 +66,9 @@ public class OI {
 	Button ssLSTICK = new JoystickButton(Robot.secondaryStick, 9);
 	Button ssRSTICK = new JoystickButton(Robot.secondaryStick, 10);
 
-//	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
-//	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
+	
+	AxisButton ssRTrigger = new AxisButton(Robot.secondaryStick, 3, 0, 0, false);
+	AxisButton ssLTrigger = new AxisButton(Robot.secondaryStick, 2, 0, 0, false);
 //	AxisButton ssDPad = new AxisButton(Robot.secondaryStick, 6, 0, 0, false);
 
 
@@ -103,18 +105,24 @@ public class OI {
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsY.whileHeld(new Intake(true));
-		dsY.whenReleased(new Intake(false));
+		dsLTrigger.whileHeld(new Intake(true));
+		dsLTrigger.whenReleased(new Intake(false));
+		dsRTrigger.whileHeld(new FastRelease(true));
+		dsRTrigger.whenReleased(new FastRelease(false));
 		dsRSTICK.whenPressed(new IntakeArm());
 
 		ssLB.whileHeld(new ElevDown(true));
 		ssLB.whenReleased(new ElevDown(false));
 		ssRB.whileHeld(new ElevUp(true));
 		ssRB.whenReleased(new ElevUp(false)); 
-		ssY.whileHeld(new FastRelease(true));
-		ssY.whenReleased(new FastRelease(false));
+		ssLTrigger.whileHeld(new FastRelease(true));
+		ssLTrigger.whenReleased(new FastRelease(false));
+		ssRTrigger.whileHeld(new Intake(true));
+		ssRTrigger.whenReleased(new Intake(false));
 		ssB.whileHeld(new SlowRelease(true));
 		ssB.whenReleased(new SlowRelease(false));
+		ssRSTICK.whenPressed(new IntakeArm());
+
 		
 		//LED Modes, See http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf for color table/documentation
 		ssA.whenPressed(new LEDMode(45));//Strobe, Red

@@ -12,7 +12,7 @@ public class AutoRecipes {
 	        new MotionItem(EAutoStates.eStopElevator),
 	        new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _LeftSwitchLeftScale_MiddleSide = { 
+	public static MotionItem[] _LeftSwitchLeftScale_MiddleSide = { //review
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-60, 110)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 0),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
@@ -41,7 +41,7 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _RightSwitchLeftScale_RightSide = {
+	public static MotionItem[] _RightSwitchLeftScale_RightSide = { //review
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 160)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
@@ -70,7 +70,7 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _LeftSwitchRightScale_LeftSide = { // not ready //
+	public static MotionItem[] _LeftSwitchRightScale_LeftSide = { // review
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 160)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
@@ -99,13 +99,25 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _LeftScale_RightSide = { 
-		   
-			
+	public static MotionItem[] _LeftScale_RightSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115, 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-120, 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-120, 315)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 90),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale), 
+			new MotionItem(EAutoStates.eGripper_Release), 
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale), 
+		    new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle)
 			
 	};
-	public static MotionItem[] _LeftScale_LeftSide = {
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-115, 295)),
+	public static MotionItem[] _LeftScale_LeftSide = {//plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-120, 315)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale), 
 			new MotionItem(EAutoStates.eGripper_Release), 
@@ -116,13 +128,11 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _RightScale_LeftSide = {
-
-
-			
-	};
-	public static MotionItem[] _RightScale_RightSide = {
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115, 295)),
+	public static MotionItem[] _RightScale_LeftSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-115, 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(120,235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(120, 315)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale), 
 			new MotionItem(EAutoStates.eGripper_Release), 
@@ -132,40 +142,85 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
+			
 	};
-	public static MotionItem[] _RightSwitch_LeftSide = {
-
+	public static MotionItem[] _RightScale_RightSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(120, 315)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightScale), 
+			new MotionItem(EAutoStates.eGripper_Release), 
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale), 
+		    new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle)
+		    
+		    
 	};
-	public static MotionItem[] _LeftSwitch_LeftSide = {
+	public static MotionItem[] _RightSwitch_LeftSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-115  , 75)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-115, 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(100 , 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(100 , 165)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
+			new MotionItem(EAutoStates.eGripper_Release), 
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
+			new MotionItem(EAutoStates.eGripper_Stop), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
+		    new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _LeftSwitch_LeftSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-115, 75)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-100, 145)),
+			new MotionItem(EAutoStates.eAbsoluteTurn, 75.7),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
+			new MotionItem(EAutoStates.eGripper_Release), 
+			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
+			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
+		    new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle)
+	};
+	public static MotionItem[] _LeftSwitch_RightSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115  , 75)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115, 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-100 , 235)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-100 , 165)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
 			new MotionItem(EAutoStates.eGripper_Release), 
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
-			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eGripper_Stop), 
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
+		    
 	};
-	public static MotionItem[] _LeftSwitch_RightSide = {
-
-	};
-	public static MotionItem[] _RightSwitch_RightSide = {
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115, 75)),
+	public static MotionItem[] _RightSwitch_RightSide = { //plan written
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115  , 75)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(100, 145)),
-			new MotionItem(EAutoStates.eAbsoluteTurn, -90),
+			new MotionItem(EAutoStates.eAbsoluteTurn, -75.7),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
 			new MotionItem(EAutoStates.eGripper_Release), 
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
-			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eGripper_Stop), 
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _RightSwitch_MiddleSide = {
+	public static MotionItem[] _RightSwitch_MiddleSide = { //certified
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(0, 60)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(60, 110)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 0),
@@ -178,7 +233,7 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _LeftSwitch_MiddleSide = {
+	public static MotionItem[] _LeftSwitch_MiddleSide = { //certified
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(0, 40)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-60, 110)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 0),
@@ -189,7 +244,7 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
-		    new MotionItem(EAutoStates.eIdle)
+		    new MotionItem(EAutoStates.eIdle),
 	};
 	public static MotionItem[] _LeftScale_MiddleSide = {
 			 
@@ -197,4 +252,13 @@ public class AutoRecipes {
 	public static MotionItem[] _RightScale_MiddleSide = {
 			
 	};
+		    
+	public static MotionItem[] _BaselineLeft = {
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-110, 25)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-130, 50)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(-130, 130)),
+			new MotionItem(EAutoStates.eStopMotors),
+		    new MotionItem(EAutoStates.eStopElevator),
+		    new MotionItem(EAutoStates.eIdle),
+	 };		    
 }
