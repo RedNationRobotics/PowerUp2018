@@ -61,26 +61,22 @@ public class Robot extends IterativeRobot {
 	private double _FinalPoseClicks;
 	private double _FinalPoseInchs;
 	public double _FieldHeadingOffset_deg;
-	
+
 	Command teleopCommand;
 	Command autonomousCommand;
-	//sets the starting pose for the grid of the field 
+	// sets the starting pose for the grid of the field
 	final String startingPoseRight = "Right";
 	final String startingPoseMiddle = "Middle";
 	final String startingPoseLeft = "Left";
-	//auto recipes 
-	final String autoRightSwitchScale = "RightSwitchScale";
-	final String autoLeftSwitch = "LeftSwitch";
-	final String autoMiddleSwitch = "Middle switch";
-	final String autoRightSwitch = "Right switch";
-	
-	
-	
+	// auto recipes
+	final String autoSwitch = "Switch";
+	final String autoScale = "Scale";
+
 	String startingPose;
 	String autoSelected;
-	SendableChooser<String> chooser1 = new SendableChooser<>();
-	SendableChooser<String> chooser = new SendableChooser<>();
-	
+	SendableChooser<String> Pose_chooser = new SendableChooser<>();
+	SendableChooser<String> Auto_chooser = new SendableChooser<>();
+
 	public double _kF = 0.0;
 	public double _kP = 1.030;
 	public double _kI = 0.000025;
@@ -91,10 +87,13 @@ public class Robot extends IterativeRobot {
 		_kI = SmartDashboard.getNumber("kI", 0.000025);
 		_kD = SmartDashboard.getNumber("kD", 0.00008);
 	}
+
 	public void robotInit() {
-		//byte[] calibrationData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, (byte)0xe0, 1};
-		//imu.SetCalibrationData(calibrationData);
-		
+		// setting the calibration data for the BNO055 sensor
+		// byte[] calibrationData = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		// 0, 0, 0, 0, 0, 0, (byte)0xe0, 1};
+		// imu.SetCalibrationData(calibrationData);
+
 		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
 		CameraServer.getInstance().startAutomaticCapture("cam1", 1);
 
@@ -110,17 +109,17 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxL.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.configPeakOutputForward(1, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
-		
+
 		Robot.chassis.tsrxR.configNominalOutputForward(0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.configPeakOutputForward(1, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
-		
+
 		Robot.elevator.tsrxE.configNominalOutputForward(0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.configNominalOutputReverse(0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.configPeakOutputForward(1, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.configPeakOutputReverse(-1, RobotMap.kTimeoutMs);
-		
+
 		Robot.chassis.tsrxL.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx,
 				RobotMap.kTimeoutMs); /* always servo */
 		Robot.chassis.tsrxR.configAllowableClosedloopError(0, RobotMap.kPIDLoopIdx,
@@ -147,22 +146,20 @@ public class Robot extends IterativeRobot {
 
 		teleopCommand = new DriveWithJoysticks();
 
-		//Auto selection
-		chooser.addObject("Right Switch Scale", autoRightSwitchScale);
-		chooser.addObject("Left Switch", autoLeftSwitch);
-		chooser.addObject("Middle Switch", autoMiddleSwitch);
-		chooser.addObject("Right switch", autoRightSwitch);
-		
-		//Pose selection
-		chooser1.addObject("Right Pose", startingPoseRight);
-		chooser1.addObject("Left Pose", startingPoseLeft);
-		chooser1.addDefault("Middle Pose", startingPoseMiddle);
+		// Pose selection
+		Pose_chooser.addObject("Right Pose", startingPoseRight);
+		Pose_chooser.addObject("Left Pose", startingPoseLeft);
+		Pose_chooser.addDefault("Middle Pose", startingPoseMiddle);
 
-		SmartDashboard.putData("Set starting pose", chooser1);
-		SmartDashboard.putData("Auto Choices", chooser);
+		// Auto selection
+		Auto_chooser.addObject("Switch", autoSwitch);
+		Auto_chooser.addObject("Scale", autoScale);
 
-		startingPose = chooser1.getSelected();
-		autoSelected = chooser.getSelected();
+		SmartDashboard.putData("Set starting pose", Pose_chooser);
+		SmartDashboard.putData("Auto Choices", Auto_chooser);
+
+		startingPose = Pose_chooser.getSelected();
+		autoSelected = Auto_chooser.getSelected();
 
 	}
 
@@ -179,8 +176,8 @@ public class Robot extends IterativeRobot {
 		Robot.chassis.tsrxR.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.setSelectedSensorPosition(0, 0, RobotMap.kTimeoutMs);
 
-		autoSelected = chooser.getSelected();
-		startingPose = chooser1.getSelected();
+		startingPose = Pose_chooser.getSelected();
+		autoSelected = Auto_chooser.getSelected();
 	}
 
 	public void UpdateDriveCoreComponents() {
@@ -189,9 +186,9 @@ public class Robot extends IterativeRobot {
 		_CurrentLiftEncoderPosition = Robot.elevator.tsrxE.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 
 		double dDistanceLeft_inches = FieldDimensions.dInchesPerClicks * _CurrentLeftEncoderPosition;
-	    double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
+		double dDistanceRight_inches = FieldDimensions.dInchesPerClicks * _CurrentRightEncoderPosition;
 		double dDistanceLift_inches = FieldDimensions.dLiftInchesPerClicks * _CurrentLiftEncoderPosition;
-		
+
 		SmartDashboard.putNumber("Left Inches", dDistanceLeft_inches);
 		SmartDashboard.putNumber("Right Inches", dDistanceRight_inches);
 		SmartDashboard.putNumber("Lift Inches", dDistanceLift_inches);
@@ -199,13 +196,16 @@ public class Robot extends IterativeRobot {
 
 	// *************** FSM zone
 	// **********************************************************
-	public static EAutoStates _eCurrentAutoState; 
-	public EAutoStates _ePreviousAutoState; 
+	public static EAutoStates _eCurrentAutoState;
+	public EAutoStates _ePreviousAutoState;
 	public double _TargetLiftEncoderPosition;
 	public double _TargetLeftEncoderPosition;
 	public double _TargetRightEncoderPosition;
-	public static MotionItem[] _Selected_AutoRecipe; // the current array of motion items selected at start of autoInit
-	public static MotionItem _CurrentMotionItem; // current position in the array
+	public static MotionItem[] _Selected_AutoRecipe; // the current array of
+														// motion items selected
+														// at start of autoInit
+	public static MotionItem _CurrentMotionItem; // current position in the
+													// array
 	static int _iCurrentMotionItemIndex; // current position in the drive recipe
 	public static final double _dMoveTolerance = 150.0;
 	public static final double _dTurnTolerance = 150.0;
@@ -214,14 +214,14 @@ public class Robot extends IterativeRobot {
 	public double _dTimerEnd_sec;
 
 	private static MotionItem[] insertMotionItem(MotionItem original[], MotionItem element, int index) {
-        int length = original.length;
-        MotionItem[] destination = new MotionItem[length + 1];
-        System.arraycopy(original, 0, destination, 0, index);
-        destination[index] = element;
-        System.arraycopy(original, index, destination, index + 1, length - index);
-        return destination;
-    }
-	
+		int length = original.length;
+		MotionItem[] destination = new MotionItem[length + 1];
+		System.arraycopy(original, 0, destination, 0, index);
+		destination[index] = element;
+		System.arraycopy(original, index, destination, index + 1, length - index);
+		return destination;
+	}
+
 	public void MoveToNextMotionItemInSelectedRecipe() {
 		_iCurrentMotionItemIndex++; // move to the next motion item in the auto
 									// recipe
@@ -234,7 +234,7 @@ public class Robot extends IterativeRobot {
 		double dRightError = Math.abs(_TargetRightEncoderPosition - _CurrentRightEncoderPosition);
 		return (dLeftError < _dMoveTolerance && dRightError < _dMoveTolerance);
 	}
-	
+
 	public boolean IsTurnCloseEnough() {
 		double dTurnLError = Math.abs(_TargetLeftEncoderPosition - _CurrentLeftEncoderPosition);
 		double dTurnRError = Math.abs(_TargetRightEncoderPosition - _CurrentRightEncoderPosition);
@@ -263,189 +263,181 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void SetTargetLiftPositionByInches(double dLift_Height_inch) {
-		_TargetLiftEncoderPosition = _CurrentLiftEncoderPosition + (dLift_Height_inch * FieldDimensions.dLiftClicksPerInch);
+		_TargetLiftEncoderPosition = _CurrentLiftEncoderPosition
+				+ (dLift_Height_inch * FieldDimensions.dLiftClicksPerInch);
 		System.out.println("Target Lift Encoder" + _TargetLiftEncoderPosition);
 	}
 
 	public void UpdateFSM() {
 		if (_ePreviousAutoState != _eCurrentAutoState)
 			_ePreviousAutoState = _eCurrentAutoState;
-			//System.out.println(_eCurrentAutoState.name());
-		
-		switch(_eCurrentAutoState){
+		// System.out.println(_eCurrentAutoState.name());
 
-			case eIdle: 
-			{
-				
-			}
+		switch (_eCurrentAutoState) {
+
+		case eIdle: {
+
+		}
 			break;
-			case eSetLiftHeight:
-			{
-				SetTargetLiftPositionByInches(_CurrentMotionItem.dParam1);
-				MoveLiftToTargetLiftPosition();
-				_eCurrentAutoState = EAutoStates.eChained_WaitLift;
-			}
+		case eSetLiftHeight: {
+			SetTargetLiftPositionByInches(_CurrentMotionItem.dParam1);
+			MoveLiftToTargetLiftPosition();
+			_eCurrentAutoState = EAutoStates.eChained_WaitLift;
+		}
 			break;
-			case eChained_WaitLift:
-			{
-				if (IsLiftCloseEnough()) {
-					Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
-					MoveToNextMotionItemInSelectedRecipe();
-				}
-			}
-			break;
-			case eDriveToWayPoint: 
-			{
-				System.out.print("Pose(" + _Pose._x_in + "in, " + _Pose._y_in + "in, " + _Pose._heading_deg + "deg)\n");				
-				Vector MagicArrow = _Pose.GetRelativeVector(_CurrentMotionItem._WayPoint);
-				MagicArrow.ShowSelf();
-				MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, MagicArrow._heading_deg);
-				MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._distance_in);
-				_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
-				_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, drive, _iCurrentMotionItemIndex + 2);
+		case eChained_WaitLift: {
+			if (IsLiftCloseEnough()) {
+				Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
 				MoveToNextMotionItemInSelectedRecipe();
 			}
+		}
 			break;
-			case eAbsoluteTurn: 
-			{
-				double RelativeAmount = _CurrentMotionItem.dParam1 - _Pose._heading_deg;
-				System.out.println("RelativeAmount = " + _CurrentMotionItem.dParam1 + " - " + _Pose._heading_deg + " = " + RelativeAmount);
-				MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, RelativeAmount);
-				RelativeAmount = _Pose.RelativeRangeCheckHeading(RelativeAmount);
-				_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
+		case eDriveToWayPoint: {
+			System.out.print("Pose(" + _Pose._x_in + "in, " + _Pose._y_in + "in, " + _Pose._heading_deg + "deg)\n");
+			Vector MagicArrow = _Pose.GetRelativeVector(_CurrentMotionItem._WayPoint);
+			MagicArrow.ShowSelf();
+			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, MagicArrow._heading_deg);
+			MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._distance_in);
+			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
+			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, drive, _iCurrentMotionItemIndex + 2);
+			MoveToNextMotionItemInSelectedRecipe();
+		}
+			break;
+		case eAbsoluteTurn: {
+			double RelativeAmount = _CurrentMotionItem.dParam1 - _Pose._heading_deg;
+			System.out.println("RelativeAmount = " + _CurrentMotionItem.dParam1 + " - " + _Pose._heading_deg + " = "
+					+ RelativeAmount);
+			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, RelativeAmount);
+			RelativeAmount = _Pose.RelativeRangeCheckHeading(RelativeAmount);
+			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
+			MoveToNextMotionItemInSelectedRecipe();
+		}
+			break;
+		case eDriveForward: {
+			_CurrentLeftEncoderBeforeMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
+			_CurrentRightEncoderBeforeMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
+			SetTargetEncoderPositionsByInches(_CurrentMotionItem.dParam1, _CurrentMotionItem.dParam1);
+			DriveToTargetPosition();
+			_eCurrentAutoState = EAutoStates.eChained_DriveWait; // chained
+																	// event,
+																	// first to
+																	// move,
+																	// then
+																	// check
+			System.out.println(
+					"Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
+		}
+			break;
+		case eStoppedTurn: {
+			double dWheelDrive_in = _CurrentMotionItem.dParam1 * FieldDimensions.dInchesPerDegree;
+			SetTargetEncoderPositionsByInches(dWheelDrive_in, -dWheelDrive_in);
+			DriveToTargetPosition();
+			_eCurrentAutoState = EAutoStates.eChained_TurnWait; // chained
+																// event, first
+																// to move, then
+																// check
+		}
+			break;
+		case eStartTimer: {
+			_dTimerEnd_sec = _CurrentMotionItem.dParam1 + Timer.getFPGATimestamp();
+			_eCurrentAutoState = EAutoStates.eChained_WaitTimer;
+		}
+			break;
+		case eChained_WaitTimer: {
+			if (Timer.getFPGATimestamp() >= _dTimerEnd_sec) {
 				MoveToNextMotionItemInSelectedRecipe();
 			}
+		}
 			break;
-			case eDriveForward:
-			{
-				_CurrentLeftEncoderBeforeMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-				_CurrentRightEncoderBeforeMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);				
-				SetTargetEncoderPositionsByInches(_CurrentMotionItem.dParam1, _CurrentMotionItem.dParam1);
-				DriveToTargetPosition();
-				_eCurrentAutoState = EAutoStates.eChained_DriveWait; // chained event, first to move, then check
-				System.out.println("Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
-			}
-			break;
-			case eStoppedTurn:
-			{
-				double dWheelDrive_in = _CurrentMotionItem.dParam1 * FieldDimensions.dInchesPerDegree;
-				SetTargetEncoderPositionsByInches(dWheelDrive_in, -dWheelDrive_in);
-				DriveToTargetPosition();
-				_eCurrentAutoState = EAutoStates.eChained_TurnWait; // chained event, first to move, then check
-			}
-			break;		
-			case eStartTimer: 
-			{
-				_dTimerEnd_sec = _CurrentMotionItem.dParam1 + Timer.getFPGATimestamp();
-				_eCurrentAutoState = EAutoStates.eChained_WaitTimer;
-			}
-			break;
-			case eChained_WaitTimer: 
-			{
-				if (Timer.getFPGATimestamp() >= _dTimerEnd_sec) {
-					MoveToNextMotionItemInSelectedRecipe();
-				}
-			}
-			break;
-			case eChained_DriveWait:
-			{
-				if (IsCloseEnough()) {
+		case eChained_DriveWait: {
+			if (IsCloseEnough()) {
 				_CurrentLeftEncoderAfterMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 				_CurrentRightEncoderAfterMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-				_ActualDistancetraveledAveragedBefore = (_CurrentLeftEncoderBeforeMove + _CurrentRightEncoderBeforeMove) * 0.5;
-				_ActualDistancetraveledAveragedAfter = (_CurrentLeftEncoderAfterMove + _CurrentRightEncoderAfterMove) * 0.5;
+				_ActualDistancetraveledAveragedBefore = (_CurrentLeftEncoderBeforeMove + _CurrentRightEncoderBeforeMove)
+						* 0.5;
+				_ActualDistancetraveledAveragedAfter = (_CurrentLeftEncoderAfterMove + _CurrentRightEncoderAfterMove)
+						* 0.5;
 				_FinalPoseClicks = _ActualDistancetraveledAveragedAfter - _ActualDistancetraveledAveragedBefore;
 				_FinalPoseInchs = _FinalPoseClicks / FieldDimensions.dClicksPerInch;
 				_Pose.DriveForward(_FinalPoseInchs);
 				MoveToNextMotionItemInSelectedRecipe();
-				}
 			}
-			break; 
-			case eChained_TurnWait: 
-			{
-				if (IsTurnCloseEnough()) {
-					_Pose.SetAbsoluteHeading(imu.Heading() - _FieldHeadingOffset_deg);
-					System.out.println("Heading: " + _Pose._heading_deg);
-					MoveToNextMotionItemInSelectedRecipe();
-				}
-			}
+		}
 			break;
-			case eStopMotors:  
-			{
-				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
-				Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
+		case eChained_TurnWait: {
+			if (IsTurnCloseEnough()) {
+				_Pose.SetAbsoluteHeading(imu.Heading() - _FieldHeadingOffset_deg);
+				System.out.println("Heading: " + _Pose._heading_deg);
+				MoveToNextMotionItemInSelectedRecipe();
+			}
+		}
+			break;
+		case eStopMotors: {
+			Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
+			Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
 
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eStopElevator:  
-			{
-				Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+		case eStopElevator: {
+			Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eGripper_Stop:
-			{
-				Robot.intaker.stop();
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+		case eGripper_Stop: {
+			Robot.intaker.stop();
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eGripper_Intake:
-			{
-				Robot.intaker.intake();
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+		case eGripper_Intake: {
+			Robot.intaker.intake();
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eGripper_Release:
-			{
-				Robot.intaker.Fastrelease();
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+		case eGripper_Release: {
+			Robot.intaker.Fastrelease();
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eStartLift: 
-			{
-				Robot.elevator.tsrxE.set(1);
-				MoveToNextMotionItemInSelectedRecipe();
+		case eStartLift: {
+			Robot.elevator.tsrxE.set(1);
+			MoveToNextMotionItemInSelectedRecipe();
 
-			}
+		}
 			break;
-			case eStopLift: 
-			{
-				Robot.elevator.tsrxE.set(0);
-				MoveToNextMotionItemInSelectedRecipe();
+		case eStopLift: {
+			Robot.elevator.tsrxE.set(0);
+			MoveToNextMotionItemInSelectedRecipe();
 
-			}
+		}
 			break;
-			case eGripper_SetArm:
-			{
-				Robot.pneumatics.setPositionIntakeArm(_CurrentMotionItem.dParam1 >= 1.0);
-				MoveToNextMotionItemInSelectedRecipe();
-			}
+		case eGripper_SetArm: {
+			Robot.pneumatics.setPositionIntakeArm(_CurrentMotionItem.dParam1 >= 1.0);
+			MoveToNextMotionItemInSelectedRecipe();
+		}
 			break;
-			case eBNOTurn:
-			{
-				double targetHeading = _CurrentMotionItem.dParam1;
-				if (Robot.imu.Heading() + targetHeading > targetHeading){
-						Robot.chassis.setLeftRight(-.25, .25);
-				}
-				if (Robot.imu.Heading() + targetHeading < targetHeading){
-						Robot.chassis.setLeftRight(.25, -.25);
-				}
-				else if (Robot.imu.Heading() == targetHeading){
-					_eCurrentAutoState = EAutoStates.eChained_DriveWait;
-				}
+		case eBNOTurn: {
+			double targetHeading = _CurrentMotionItem.dParam1;
+			if (Robot.imu.Heading() + targetHeading > targetHeading) {
+				Robot.chassis.setLeftRight(-.25, .25);
 			}
+			if (Robot.imu.Heading() + targetHeading < targetHeading) {
+				Robot.chassis.setLeftRight(.25, -.25);
+			} else if (Robot.imu.Heading() == targetHeading) {
+				_eCurrentAutoState = EAutoStates.eChained_DriveWait;
+			}
+		}
 			break;
-			case eEmergencyStop:
-			default: 
-				System.out.print(_eCurrentAutoState.name());
-				Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
-				Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
-				Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
-				_eCurrentAutoState = EAutoStates.eIdle;
-				break;
+		case eEmergencyStop:
+		default:
+			System.out.print(_eCurrentAutoState.name());
+			Robot.elevator.tsrxE.set(ControlMode.PercentOutput, 0);
+			Robot.chassis.tsrxL.set(ControlMode.PercentOutput, 0);
+			Robot.chassis.tsrxR.set(ControlMode.PercentOutput, 0);
+			_eCurrentAutoState = EAutoStates.eIdle;
+			break;
+		}
 	}
-}
 
 	public static void InitializeAutoRecipe(MotionItem[] AutoRecipe) {
 		System.out.println("Hit InitializeAutoRecipe");
@@ -460,90 +452,40 @@ public class Robot extends IterativeRobot {
 	// *************** End FSM zone *************** //
 
 	// *************** Start Auto zone *************** //
-	
-	public void autonomousInit() {		
+
+	public void autonomousInit() {
 		_FieldHeadingOffset_deg = imu.Heading();
 		SetDrivePID();
-		
+
 		Robot.chassis.tsrxL.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kP(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxL.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		
+
 		Robot.chassis.tsrxR.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kP(RobotMap.kPIDLoopIdx, 1.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kI(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.chassis.tsrxR.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-		
+
 		Robot.elevator.tsrxE.config_kF(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kP(RobotMap.kPIDLoopIdx, 0.1, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kI(RobotMap.kPIDLoopIdx, 0.0005, RobotMap.kTimeoutMs);
 		Robot.elevator.tsrxE.config_kD(RobotMap.kPIDLoopIdx, 0.0, RobotMap.kTimeoutMs);
-	
-		gameData = DriverStation.getInstance().getGameSpecificMessage(); 
-		 
-		_eCurrentAutoState = EAutoStates.eEmergencyStop; 
-		UpdateFSM();
-		
-		startingPose = chooser1.getSelected();
-		autoSelected = chooser.getSelected();
 
-		switch (autoSelected) {
-		case autoRightSwitchScale: 
-		{
-			if (Robot.gameData.charAt(0) == 'R' && Robot.gameData.charAt(1) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._RightSwitchLeftScale_RightSide);
-			}
-			else if (Robot.gameData.charAt(0) == 'L' && Robot.gameData.charAt(1) == 'L') {
-			}
-			else if (Robot.gameData.charAt(0) == 'R' && Robot.gameData.charAt(1) == 'R') {
-			}
-			else if (Robot.gameData.charAt(0) == 'L' && Robot.gameData.charAt(1) == 'R') {
-			}
-		}
-		break;
-		case autoMiddleSwitch: 
-		{
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSwitch_MiddleSide);
-			}
-			else if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSwitch_MiddleSide);
-			}
-		}
-		break;
-		case autoRightSwitch: 
-		{
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSwitch_RightSide);
-			}
-			else if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSwitch_RightSide);
-			}
-		}
-		break;
-		case autoLeftSwitch: 
-		{
-			if (Robot.gameData.charAt(0) == 'L') {
-				InitializeAutoRecipe(AutoRecipes._LeftSwitch_LeftSide);
-			}
-			else if (Robot.gameData.charAt(0) == 'R') {
-				InitializeAutoRecipe(AutoRecipes._RightSwitch_LeftSide);
-			}
-		}
-		break;
-		default:
-			{
-				InitializeAutoRecipe(AutoRecipes._Baseline_drop);
-			}
-			break;
-		}
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+		_eCurrentAutoState = EAutoStates.eEmergencyStop;
+		UpdateFSM();
+
+		startingPose = Pose_chooser.getSelected();
+		autoSelected = Auto_chooser.getSelected();
+
 		switch (startingPose) {
 		case startingPoseLeft: {
 			_Pose.SetPose(-110.0, 20.0, 0.0);
 		}
 			break;
-		case startingPoseMiddle:  {
+		case startingPoseMiddle: {
 			_Pose.SetPose(0.0, 20.0, 0.0);
 		}
 			break;
@@ -554,26 +496,74 @@ public class Robot extends IterativeRobot {
 		default: {
 			_Pose.SetPose(0.0, 20.0, 0.0);
 		}
-		break;
-	}
+			break;
+		}
+
+		switch (autoSelected) {
+		case autoSwitch: {
+			if (_Pose._x_in == -110.0) {
+				if (Robot.gameData.charAt(0) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftSwitch_LeftSide);
+				} else if (Robot.gameData.charAt(0) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightSwitch_LeftSide);
+				}
+			} else if (_Pose._x_in == 0.0) {
+				if (Robot.gameData.charAt(0) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftSwitch_MiddleSide);
+				} else if (Robot.gameData.charAt(0) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightSwitch_MiddleSide);
+				}
+			} else if (_Pose._x_in == 110.0) {
+				if (Robot.gameData.charAt(0) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftSwitch_RightSide);
+				} else if (Robot.gameData.charAt(0) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightSwitch_RightSide);
+				}
+			}
+		}
+			break;
+		case autoScale: {
+			if (_Pose._x_in == -110.0) {
+				if (Robot.gameData.charAt(1) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftScale_LeftSide);
+				} else if (Robot.gameData.charAt(1) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightScale_LeftSide);
+				}
+			} else if (_Pose._x_in == 0.0) {
+				if (Robot.gameData.charAt(1) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftScale_MiddleSide);
+				} else if (Robot.gameData.charAt(1) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightScale_MiddleSide);
+				}
+			} else if (_Pose._x_in == 110.0) {
+				if (Robot.gameData.charAt(1) == 'L') {
+					InitializeAutoRecipe(AutoRecipes._LeftScale_RightSide);
+				} else if (Robot.gameData.charAt(1) == 'R') {
+					InitializeAutoRecipe(AutoRecipes._RightScale_RightSide);
+				}
+			}
+		}
+			break;
+		}
 
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
+
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents();
 		UpdateFSM();
-		
-		System.out.print(_Pose._Deltax + ", " + _Pose._y_in );
-		startingPose = chooser1.getSelected();
-		autoSelected = chooser.getSelected();
+
+		System.out.print(_Pose._Deltax + ", " + _Pose._y_in);
+		startingPose = Pose_chooser.getSelected();
+		autoSelected = Auto_chooser.getSelected();
 	}
-	
+
 	// *************** End Auto zone *************** //
 
 	// *************** Start Teleop zone *************** //
-	
+
 	public void teleopInit() {
 		_eCurrentAutoState = EAutoStates.eEmergencyStop;
 		UpdateFSM();
@@ -583,7 +573,8 @@ public class Robot extends IterativeRobot {
 		teleopCommand.start();
 
 	}
-       public void teleopPeriodic()  {
+
+	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		UpdateDriveCoreComponents(); // shared with auto
 		UpdateFSM();
@@ -606,7 +597,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.setEnabled(true);
 	}
-	
+
 	// *************** End Teleop zone *************** //
 
 }

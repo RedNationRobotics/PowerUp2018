@@ -191,4 +191,10 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
+	public static MotionItem[] _LeftScale_MiddleSide = {
+			 
+	};
+	public static MotionItem[] _RightScale_MiddleSide = {
+			
+	};
 }
