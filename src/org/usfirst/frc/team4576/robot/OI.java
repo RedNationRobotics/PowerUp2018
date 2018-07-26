@@ -73,15 +73,17 @@ public class OI {
 
 
 	public OI() {
-		/*Single Operator Control
-		dsX.whenPressed(new Shift(true));
+		//Single Operator Control
+		/*dsX.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsY.whileHeld(new Intake(true));
-		dsY.whenReleased(new Intake(false));
-		dsB.whileHeld(new Release(true));
-		dsB.whenReleased(new Release(false));
+		dsLTrigger.whileHeld(new Intake(true));
+		dsLTrigger.whenReleased(new Intake(false));
+		dsRTrigger.whileHeld(new FastRelease(true));
+		dsRTrigger.whenReleased(new FastRelease(false));
+		dsB.whileHeld(new SlowRelease(true));
+		dsB.whenReleased(new SlowRelease(false));
 		dsLB.whileHeld(new ElevUp(true));
 		dsLB.whenReleased(new ElevUp(false));
 		dsRB.whileHeld(new ElevDown(true));
@@ -131,7 +133,7 @@ public class OI {
 		ssBACK.whenPressed(new LEDMode(25));//Twinkles, Ocean Pallete
 		ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
 		ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
-		ssRSTICK.whenPressed(new LEDMode(7));//Confetti
+		ssRSTICK.whenPressed(new LEDMode(7));//Confetti 
 		
 		
 
