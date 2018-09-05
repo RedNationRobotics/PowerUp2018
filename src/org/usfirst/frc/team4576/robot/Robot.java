@@ -179,6 +179,7 @@ public class Robot extends IterativeRobot {
 
 		startingPose = Pose_chooser.getSelected();
 		autoSelected = Auto_chooser.getSelected();
+		
 	}
 
 	public void UpdateDriveCoreComponents() {
@@ -589,11 +590,11 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
     		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
     		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
-    		SmartDashboard.putNumber("Heading", imu.Heading());
-    		SmartDashboard.putNumber("Pitch", imu.Pitch());
-    		SmartDashboard.putNumber("Roll", imu.Roll());
+    		//SmartDashboard.putNumber("Heading", imu.Heading());
+    		//SmartDashboard.putNumber("Pitch", imu.Pitch());
+    		//SmartDashboard.putNumber("Roll", imu.Roll());
     		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
-    		SmartDashboard.putString("Calibration data", imu.getCalibrationStatusString());
+    		//SmartDashboard.putString("Calibration data", imu.getCalibrationStatusString());
     	}
 
 		//SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
