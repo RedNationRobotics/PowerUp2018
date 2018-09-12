@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import redcore.BNO055;
+import redcore.CerberusNet;
 import redcore.Pose;
 import redcore.Vector;
 import PowerUp2018.AutoStates.EAutoStates;
@@ -30,6 +31,7 @@ import PowerUp2018.FieldDimensions;
 
 public class Robot extends IterativeRobot {
 
+	public CerberusNet _cerberus = new CerberusNet("RoboRio", 4000);
 	public static final Chassis chassis = new Chassis();
 	public static final Pneumatics pneumatics = new Pneumatics();
 	public static final Intaker intaker = new Intaker();
