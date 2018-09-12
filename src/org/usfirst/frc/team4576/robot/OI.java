@@ -88,6 +88,7 @@ public class OI {
 		dsRB.whenReleased(new ElevUp(false));
 		dsRSTICK.whenPressed(new IntakeArm());
 		
+	/*
 		ssA.whenPressed(new LEDMode(16));
 		ssB.whenPressed(new LEDMode(7));
 		ssX.whenPressed(new LEDMode(6));
@@ -98,7 +99,7 @@ public class OI {
 		ssSTART.whenPressed(new LEDMode(36));
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
-		
+	*/
 		/*Dual Operator Control
 		dsA.whenPressed(new Shift(true));
 		dsB.whenPressed(new Shift(false));
@@ -130,9 +131,8 @@ public class OI {
 		ssBACK.whenPressed(new LEDMode(25));//Twinkles, Ocean Pallete
 		ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
 		ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
-		ssRSTICK.whenPressed(new LEDMode(7));//Confetti
+		//ssRSTICK.whenPressed(new LEDMode(7));//Confetti 
 		*/
-		
 
 }
 }
