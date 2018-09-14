@@ -8,6 +8,8 @@ package PowerUp2018;
 public class FieldDimensions 
 {
 	
+	public static final double dDriftOffset = -8.1;
+	
 	public static final double dLiftClicksPerInch = 465.6;
 	public static final double dLiftInchesPerClicks = 1.0/dLiftClicksPerInch;
 	

@@ -6,7 +6,6 @@ import redcore.WayPoint;
 public class AutoRecipes {
 
 	public static MotionItem[] _Baseline_drop = { 
-			new MotionItem(EAutoStates.eStartTimer, 10.0),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(0, 100)),
 	        new MotionItem(EAutoStates.eStopMotors),
 	        new MotionItem(EAutoStates.eStopElevator),
@@ -207,10 +206,9 @@ public class AutoRecipes {
 		    
 	};
 	public static MotionItem[] _RightSwitch_RightSide = { //plan written
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(110, 25)),
-			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115  , 75)),
+			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(115  , 100)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(100, 145)),
-			new MotionItem(EAutoStates.eAbsoluteTurn, -75.7),
+			new MotionItem(EAutoStates.eStoppedTurn, -90),
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
 			new MotionItem(EAutoStates.eGripper_Release), 
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
@@ -220,7 +218,7 @@ public class AutoRecipes {
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
 	};
-	public static MotionItem[] _RightSwitch_MiddleSide = { //certified
+	public static MotionItem[] _RightSwitch_MiddleSide = { 
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(0, 60)),
 			new MotionItem(EAutoStates.eDriveToWayPoint, new WayPoint(60, 110)),
 			new MotionItem(EAutoStates.eAbsoluteTurn, 0),
