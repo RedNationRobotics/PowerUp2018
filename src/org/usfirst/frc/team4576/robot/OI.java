@@ -74,7 +74,7 @@ public class OI {
 
 	public OI() {
 		//Single Operator Control
-		dsX.whenPressed(new Shift(true));
+		/*dsX.whenPressed(new Shift(true));
 		dsA.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
@@ -87,7 +87,7 @@ public class OI {
 		dsRB.whileHeld(new ElevDown(true));
 		dsRB.whenReleased(new ElevUp(false));
 		dsRSTICK.whenPressed(new IntakeArm());
-		
+		*/
 	/*
 		ssA.whenPressed(new LEDMode(16));
 		ssB.whenPressed(new LEDMode(7));
@@ -100,7 +100,7 @@ public class OI {
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
 	*/
-		/*Dual Operator Control
+		//Dual Operator Control
 		dsA.whenPressed(new Shift(true));
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
@@ -125,14 +125,14 @@ public class OI {
 
 		
 		//LED Modes, See http://www.revrobotics.com/content/docs/REV-11-1105-UM.pdf for color table/documentation
-		ssA.whenPressed(new LEDMode(45));//Strobe, Red
-		ssB.whenPressed(new LEDMode(35));//Light Chase, Red
-		ssX.whenPressed(new LEDMode(6));//Rainbow w/ Glitter	
-		ssBACK.whenPressed(new LEDMode(25));//Twinkles, Ocean Pallete
-		ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
-		ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
+		//ssA.whenPressed(new LEDMode(45));//Strobe, Red
+		//ssB.whenPressed(new LEDMode(35));//Light Chase, Red
+		//ssX.whenPressed(new LEDMode(6));//Rainbow w/ Glitter	
+		//ssBACK.whenPressed(new LEDMode(25));//Twinkles, Ocean Pallete
+		//ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
+		//ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
 		//ssRSTICK.whenPressed(new LEDMode(7));//Confetti 
-		*/
+		
 
 }
 }

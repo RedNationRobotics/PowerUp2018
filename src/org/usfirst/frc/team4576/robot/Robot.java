@@ -210,7 +210,7 @@ public class Robot extends IterativeRobot {
 													// array
 	static int _iCurrentMotionItemIndex; // current position in the drive recipe
 	public static final double _dMoveTolerance = 150.0;
-	public static final double _dTurnTolerance = 150.0;
+	public static final double _dTurnTolerance = 300.0;
 	public static final double _dLiftTolerance = 100.0;
 
 	public double _dTimerEnd_sec;
@@ -241,7 +241,7 @@ public class Robot extends IterativeRobot {
 		double dTurnLError = Math.abs(_TargetLeftEncoderPosition - _CurrentLeftEncoderPosition);
 		double dTurnRError = Math.abs(_TargetRightEncoderPosition - _CurrentRightEncoderPosition);
 		System.out.print("Is Turn Close Enough:" + "dTurnLError: " + dTurnLError + "dTurnRError: " + dTurnRError);
-		return (dTurnLError < _dTurnTolerance && dTurnRError < _dTurnTolerance);
+			return (dTurnLError < _dTurnTolerance && dTurnRError < _dTurnTolerance);
 	}
 
 	public void DriveToTargetPosition() {
@@ -309,8 +309,9 @@ public class Robot extends IterativeRobot {
 			double RelativeAmount = _CurrentMotionItem.dParam1 - _Pose._heading_deg;
 			System.out.println("RelativeAmount = " + _CurrentMotionItem.dParam1 + " - " + _Pose._heading_deg + " = "
 					+ RelativeAmount);
-			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, RelativeAmount);
 			RelativeAmount = _Pose.RelativeRangeCheckHeading(RelativeAmount);
+			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, RelativeAmount);
+			
 			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
 			MoveToNextMotionItemInSelectedRecipe();
 		}
