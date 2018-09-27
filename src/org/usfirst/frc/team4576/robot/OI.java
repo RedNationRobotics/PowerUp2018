@@ -74,20 +74,19 @@ public class OI {
 
 	public OI() {
 		//Single Operator Control
-		/*dsX.whenPressed(new Shift(true));
-		dsA.whenPressed(new Shift(false));
+		dsA.whenPressed(new Shift(true));
+		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsY.whileHeld(new Intake(true));
-		dsY.whenReleased(new Intake(false));
-		dsB.whileHeld(new FastRelease(true));
-		dsB.whenReleased(new FastRelease(false));
+		dsLTrigger.whileHeld(new Intake(true));
+		dsLTrigger.whenReleased(new Intake(false));
+		dsRTrigger.whileHeld(new FastRelease(true));
+		dsRTrigger.whenReleased(new FastRelease(false));
 		dsLB.whileHeld(new ElevUp(true));
 		dsLB.whenReleased(new ElevUp(false));
 		dsRB.whileHeld(new ElevDown(true));
 		dsRB.whenReleased(new ElevUp(false));
-		dsRSTICK.whenPressed(new IntakeArm());
-		*/
+		
 	/*
 		ssA.whenPressed(new LEDMode(16));
 		ssB.whenPressed(new LEDMode(7));
@@ -100,7 +99,7 @@ public class OI {
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
 	*/
-		//Dual Operator Control
+	/*//Dual Operator Control
 		dsA.whenPressed(new Shift(true));
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
@@ -132,7 +131,7 @@ public class OI {
 		//ssSTART.whenPressed(new LEDMode(21));//Fire, Medium
 		//ssLSTICK.whenPressed(new LEDMode(17));//BPM, Party Pallete
 		//ssRSTICK.whenPressed(new LEDMode(7));//Confetti 
-		
+		*/
 
 }
 }
