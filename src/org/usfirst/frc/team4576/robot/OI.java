@@ -101,15 +101,18 @@ public class OI {
 		ssRSTICK.whenPressed(new LEDMode(8));
 	*/
 		//Dual Operator Control
+		dsLB.whileHeld(new ElevDown(true));
+		dsLB.whenReleased(new ElevDown(false));
+		dsRB.whileHeld(new ElevUp(true));
+		dsRB.whenReleased(new ElevUp(false));
 		dsA.whenPressed(new Shift(true));
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsLTrigger.whileHeld(new Intake(true));
-		dsLTrigger.whenReleased(new Intake(false));
-		dsRTrigger.whileHeld(new FastRelease(true));
-		dsRTrigger.whenReleased(new FastRelease(false));
-		dsRSTICK.whenPressed(new IntakeArm());
+		dsRTrigger.whileHeld(new Intake(true));
+		dsRTrigger.whenReleased(new Intake(false));
+		dsLTrigger.whileHeld(new FastRelease(true));
+		dsLTrigger.whenReleased(new FastRelease(false));
 
 		ssLB.whileHeld(new ElevDown(true));
 		ssLB.whenReleased(new ElevDown(false));

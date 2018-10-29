@@ -22,10 +22,11 @@ public class FieldDimensions
 	
 	// dimensions of field components (in inches)
 	public static double kLengthfromcenterOfRobotToCornerOfScale = 288.0;
-	public static double kMaxLiftHeightScale = 73.0;
-	public static double kMinLiftHeightScale = -50.0;
-	public static double kMaxLiftHeightSwitch = 31.0;
-	public static double kMinLiftHeightSwitch = -26.0;
+	public static double kStartingLiftHeight = 2.0;
+	public static double kMaxLiftHeightScale = 71.0;
+	public static double kMinLiftHeightScale = -52.0;
+	public static double kMaxLiftHeightSwitch = 29.0;
+	public static double kMinLiftHeightSwitch = -28.0;
 	public static double kCenterToLineInfrontOfBaseLine = 98.0;
 	public static double kCenterToMiddlePartOfSwitchLoading = 151.5;
 	public static double kCornerOfPortalToSwitchSpaceBetweenXWall = 55.56;

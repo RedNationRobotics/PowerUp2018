@@ -72,6 +72,7 @@ public class Robot extends IterativeRobot {
 	// auto recipes
 	final String autoSwitch = "Switch";
 	final String autoScale = "Scale";
+	final String Baseline = "Baseline";
 
 	String startingPose;
 	String autoSelected;
@@ -155,6 +156,7 @@ public class Robot extends IterativeRobot {
 		// Auto selection
 		Auto_chooser.addObject("Switch", autoSwitch);
 		Auto_chooser.addObject("Scale", autoScale);
+		Auto_chooser.addObject("Baseline", Baseline);
 
 		SmartDashboard.putData("Set starting pose", Pose_chooser);
 		SmartDashboard.putData("Auto Choices", Auto_chooser);
@@ -298,7 +300,7 @@ public class Robot extends IterativeRobot {
 			System.out.print("Pose(" + _Pose._x_in + "in, " + _Pose._y_in + "in, " + _Pose._heading_deg + "deg)\n");
 			Vector MagicArrow = _Pose.GetRelativeVector(_CurrentMotionItem._WayPoint);
 			MagicArrow.ShowSelf();
-			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, MagicArrow._heading_deg);
+			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn,_Pose.RelativeRangeCheckHeading(MagicArrow._heading_deg - 1.5));
 			MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._distance_in);
 			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
 			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, drive, _iCurrentMotionItemIndex + 2);
@@ -489,7 +491,7 @@ public class Robot extends IterativeRobot {
 		}
 			break;
 		case startingPoseMiddle: {
-			_Pose.SetPose(0.0, 20.0, 0.0);
+			_Pose.SetPose(20.0, 20.0, 0.0);
 		}
 			break;
 		case startingPoseRight: {
@@ -510,7 +512,7 @@ public class Robot extends IterativeRobot {
 				} else if (Robot.gameData.charAt(0) == 'R') {
 					InitializeAutoRecipe(AutoRecipes._RightSwitch_LeftSide);
 				}
-			} else if (_Pose._x_in == 0.0) {
+			} else if (_Pose._x_in == 20.0) {
 				if (Robot.gameData.charAt(0) == 'L') {
 					InitializeAutoRecipe(AutoRecipes._LeftSwitch_MiddleSide);
 				} else if (Robot.gameData.charAt(0) == 'R') {
@@ -532,7 +534,7 @@ public class Robot extends IterativeRobot {
 				} else if (Robot.gameData.charAt(1) == 'R') {
 					InitializeAutoRecipe(AutoRecipes._RightScale_LeftSide);
 				}
-			} else if (_Pose._x_in == 0.0) {
+			} else if (_Pose._x_in == 20.0) {
 				if (Robot.gameData.charAt(1) == 'L') {
 					InitializeAutoRecipe(AutoRecipes._LeftScale_MiddleSide);
 				} else if (Robot.gameData.charAt(1) == 'R') {
@@ -545,9 +547,13 @@ public class Robot extends IterativeRobot {
 					InitializeAutoRecipe(AutoRecipes._RightScale_RightSide);
 				}
 			}
+				
 		}
 			break;
+		case Baseline: {
+			InitializeAutoRecipe(AutoRecipes._Baseline_drop);
 		}
+	}
 
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -591,15 +597,15 @@ public class Robot extends IterativeRobot {
     		SmartDashboard.putBoolean("Compressor on", pneumatics.c.enabled());
     		SmartDashboard.putNumber("PSI", pneumatics.getPsi());
     		SmartDashboard.putBoolean("High Gear", pneumatics.getShift());
-    		//SmartDashboard.putNumber("Heading", imu.Heading());
+    		SmartDashboard.putNumber("Heading", imu.Heading());
     		//SmartDashboard.putNumber("Pitch", imu.Pitch());
     		//SmartDashboard.putNumber("Roll", imu.Roll());
     		SmartDashboard.putNumber("Pose Heading: ", _Pose._heading_deg);
     		//SmartDashboard.putString("Calibration data", imu.getCalibrationStatusString());
     	}
 
-		//SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
-		//SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
+		SmartDashboard.putNumber("Left Encoder", _CurrentLeftEncoderPosition);
+		SmartDashboard.putNumber("Right Encoder", _CurrentRightEncoderPosition);
 		
 		//SmartDashboard.putNumber("Rpm left", chassis.getLeftSpeed());
 		//SmartDashboard.putNumber("Rpm right", chassis.getRightSpeed());

@@ -50,9 +50,9 @@ public class RobotMap {
 	public static final double ELEVSPEEDUP = 1;
 	public static final double ELEVSPEEDDOWN = -1;
 	//Intaker
-	public static final double INTAKE_IN_SPEED = .9;
-	public static final double INTAKE_OUT_SPEED_SLOW = -.55;
-	public static final double INTAKE_OUT_SPEED_FAST = -1.0;
+	public static final double INTAKE_IN_SPEED = -.65;
+	public static final double INTAKE_OUT_SPEED_SLOW = .65;
+	public static final double INTAKE_OUT_SPEED_FAST = .65;
 
 
 	//DIO Channels
