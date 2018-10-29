@@ -159,7 +159,7 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eGripper_Release), 
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
 			new MotionItem(EAutoStates.eGripper_Stop),
-			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightScale), 
+			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),
 		    new MotionItem(EAutoStates.eIdle)
@@ -192,7 +192,7 @@ public class AutoRecipes {
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMaxLiftHeightSwitch), 
 			new MotionItem(EAutoStates.eGripper_Release), 
 			new MotionItem(EAutoStates.eStartTimer, FieldDimensions.kTimerOuttake), 
-			new MotionItem(EAutoStates.eGripper_Stop),
+			new MotionItem(EAutoStates.eGripper_Stop), 
 			new MotionItem(EAutoStates.eSetLiftHeight, FieldDimensions.kMinLiftHeightSwitch), 
 		    new MotionItem(EAutoStates.eStopMotors),
 		    new MotionItem(EAutoStates.eStopElevator),

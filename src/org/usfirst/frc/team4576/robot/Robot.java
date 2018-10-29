@@ -300,7 +300,10 @@ public class Robot extends IterativeRobot {
 			System.out.print("Pose(" + _Pose._x_in + "in, " + _Pose._y_in + "in, " + _Pose._heading_deg + "deg)\n");
 			Vector MagicArrow = _Pose.GetRelativeVector(_CurrentMotionItem._WayPoint);
 			MagicArrow.ShowSelf();
-			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn,_Pose.RelativeRangeCheckHeading(MagicArrow._heading_deg - 1.5));
+			double newHeading = MagicArrow._heading_deg + -10.0;
+			newHeading = _Pose.RelativeRangeCheckHeading(newHeading);
+			System.out.println("newHeading: " + newHeading);
+			MotionItem turn = new MotionItem(EAutoStates.eStoppedTurn, newHeading);
 			MotionItem drive = new MotionItem(EAutoStates.eDriveForward, MagicArrow._distance_in);
 			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, turn, _iCurrentMotionItemIndex + 1);
 			_Selected_AutoRecipe = insertMotionItem(_Selected_AutoRecipe, drive, _iCurrentMotionItemIndex + 2);
@@ -329,8 +332,7 @@ public class Robot extends IterativeRobot {
 																	// move,
 																	// then
 																	// check
-			System.out.println(
-					"Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
+			System.out.println("Hit eDriveForward (" + _TargetLeftEncoderPosition + ", " + _TargetRightEncoderPosition + ")");
 		}
 			break;
 		case eStoppedTurn: {
@@ -358,13 +360,12 @@ public class Robot extends IterativeRobot {
 			if (IsCloseEnough()) {
 				_CurrentLeftEncoderAfterMove = -Robot.chassis.tsrxL.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
 				_CurrentRightEncoderAfterMove = Robot.chassis.tsrxR.getSelectedSensorPosition(RobotMap.kPIDLoopIdx);
-				_ActualDistancetraveledAveragedBefore = (_CurrentLeftEncoderBeforeMove + _CurrentRightEncoderBeforeMove)
-						* 0.5;
-				_ActualDistancetraveledAveragedAfter = (_CurrentLeftEncoderAfterMove + _CurrentRightEncoderAfterMove)
-						* 0.5;
+				_ActualDistancetraveledAveragedBefore = (_CurrentLeftEncoderBeforeMove + _CurrentRightEncoderBeforeMove)* 0.5;
+				_ActualDistancetraveledAveragedAfter = (_CurrentLeftEncoderAfterMove + _CurrentRightEncoderAfterMove)* 0.5;
 				_FinalPoseClicks = _ActualDistancetraveledAveragedAfter - _ActualDistancetraveledAveragedBefore;
 				_FinalPoseInchs = _FinalPoseClicks / FieldDimensions.dClicksPerInch;
 				_Pose.DriveForward(_FinalPoseInchs);
+				_Pose.SetAbsoluteHeading(imu.Heading() - _FieldHeadingOffset_deg);
 				MoveToNextMotionItemInSelectedRecipe();
 			}
 		}
