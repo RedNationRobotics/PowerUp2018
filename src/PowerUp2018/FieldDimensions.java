@@ -22,7 +22,7 @@ public class FieldDimensions
 	
 	// dimensions of field components (in inches)
 	public static double kLengthfromcenterOfRobotToCornerOfScale = 288.0;
-	public static double kStartingLiftHeight = 2.0;
+	public static double kStartingLiftHeight = 3.25;
 	public static double kMaxLiftHeightScale = 71.0;
 	public static double kMinLiftHeightScale = -52.0;
 	public static double kMaxLiftHeightSwitch = 29.0;
@@ -34,8 +34,8 @@ public class FieldDimensions
 	public static double kCenterToPointA = 208.0;
 	public static double kPointAToScaleSide = 241.66;
 	public static double kStartingCenterToCenterLoadingScale = 303.5;
-	public static double kTimerOuttake = 0.3;
-	public static double kTimerIntake = 0.2;
+	public static double kTimerOuttake = 0.75;
+	public static double kTimerIntake = 0.75;
 	public static double kPointAToCenterBackLoadingSwitch = 174.0;
 
 	public static double kFieldLengthX = 648;

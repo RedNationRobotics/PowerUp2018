@@ -211,9 +211,9 @@ public class Robot extends IterativeRobot {
 	public static MotionItem _CurrentMotionItem; // current position in the
 													// array
 	static int _iCurrentMotionItemIndex; // current position in the drive recipe
-	public static final double _dMoveTolerance = 150.0;
+	public static final double _dMoveTolerance = 200.0;
 	public static final double _dTurnTolerance = 300.0;
-	public static final double _dLiftTolerance = 100.0;
+	public static final double _dLiftTolerance = 200.0;
 
 	public double _dTimerEnd_sec;
 

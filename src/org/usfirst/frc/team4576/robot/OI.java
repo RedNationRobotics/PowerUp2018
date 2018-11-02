@@ -8,10 +8,8 @@ import org.usfirst.frc.team4576.robot.commands.ElevDown;
 import org.usfirst.frc.team4576.robot.commands.ElevUp;
 import org.usfirst.frc.team4576.robot.commands.FastRelease;
 import org.usfirst.frc.team4576.robot.commands.Intake;
-import org.usfirst.frc.team4576.robot.commands.IntakeArm;
 import org.usfirst.frc.team4576.robot.commands.LEDMode;
 import org.usfirst.frc.team4576.robot.commands.Shift;
-import org.usfirst.frc.team4576.robot.commands.SlowRelease;
 import org.usfirst.frc.team4576.robot.commands.ToggleCompressor;
 
 //*******************************************************************
@@ -78,16 +76,15 @@ public class OI {
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
 		dsSTART.whenPressed(new ToggleCompressor(true));
-		dsLTrigger.whileHeld(new Intake(true));
-		dsLTrigger.whenReleased(new Intake(false));
-		dsRTrigger.whileHeld(new FastRelease(true));
-		dsRTrigger.whenReleased(new FastRelease(false));
-		dsLB.whileHeld(new ElevUp(true));
-		dsLB.whenReleased(new ElevUp(false));
-		dsRB.whileHeld(new ElevDown(true));
+		dsRTrigger.whileHeld(new Intake(true));
+		dsRTrigger.whenReleased(new Intake(false));
+		dsLTrigger.whileHeld(new FastRelease(true));
+		dsLTrigger.whenReleased(new FastRelease(false));
+		dsRB.whileHeld(new ElevUp(true));
 		dsRB.whenReleased(new ElevUp(false));
+		dsLB.whileHeld(new ElevDown(true));
+		dsLB.whenReleased(new ElevUp(false));
 		
-	/*
 		ssA.whenPressed(new LEDMode(16));
 		ssB.whenPressed(new LEDMode(7));
 		ssX.whenPressed(new LEDMode(6));
@@ -98,9 +95,8 @@ public class OI {
 		ssSTART.whenPressed(new LEDMode(36));
 		ssLSTICK.whenPressed(new LEDMode(72));
 		ssRSTICK.whenPressed(new LEDMode(8));
-	*/
+		
 	/*//Dual Operator Control
->>>>>>> 57825a457e4b176eae1921b20784dc5f074e3b46
 		dsA.whenPressed(new Shift(true));
 		dsB.whenPressed(new Shift(false));
 		dsBACK.whenPressed(new ToggleCompressor(false));
